@@ -1,44 +1,55 @@
+import java.util.ArrayList;
 
 public class User {
 
+	//Atributos de clase 
 	static private int id;
 	
 	private int userId;
 	private String name = null;
-	private MediaContent userMedia;
+	private ArrayList<UserMediaRegistry> userMediaRegistry;
 
-	public User () {
+	
+	//Constructores
+	public User (int userId) {
+		
+		this.userId = userId;
 		
 	}
 	
 	public User (String name) {
 		
 		id++;
-		this.userId = id;
 		this.name = name;
 		
 	}
-
-	public String getName() {
+	
+	//Setters y Getters
+	public String get_name() {
 		return name;
 	}
 
-	public void setName(String name) {
+	public void set_name(String name) {
 		this.name = name;
 	}
 
-	public int getUserId() {
+	public int get_userId() {
 		return userId;
 	}
 
-	public MediaContent getUserMedia() {
-		return userMedia;
+	public ArrayList<UserMediaRegistry> get_userMedia() {
+		return userMediaRegistry;
 	}
 
-	public void setUserMedia(MediaContent userMedia) {
-		this.userMedia = new MediaContent ();
+	public static int get_id() {
+		return id;
+	}
+	
+	
+	//Logica
+	
+	public void new_registry() {
+		userMediaRegistry.add(new UserMediaRegistry());
 	}
 
-	
-	
 }

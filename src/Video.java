@@ -1,13 +1,17 @@
+import java.util.ArrayList;
 
 public class Video {
-
-	static private int id;
-	private int videoId;
+	//Atributos de la clase
+	static private Float id;
+	
+	private Float videoId;
 	private int position;
 	private String name = null;
 	
+	private ArrayList <VideoURL> videoURL;
 	
-
+	
+	//Constructores
 	public Video () {
 		
 	}
@@ -28,8 +32,8 @@ public class Video {
 	}
 
 	
-	
-	public int getId() {
+	//Setters y Getters
+	public Float getId() {
 		return videoId;
 	}
 
