@@ -6,8 +6,9 @@ import java.util.ArrayList;
 public class UserMediaRegistry {
 
 	//Atributos de clase 
-	private static int id;
-	private int userId;
+	private static Long id;
+	private Long registryId;
+	private Long userId;
 	
 	private boolean fav;
 	private LocalDateTime startDate;
@@ -15,43 +16,45 @@ public class UserMediaRegistry {
 	private String urlRef;
 	private String name;
 	private boolean favorite;
+	private ContentType type;
 	//Status es un enum
 	
 	private ArrayList <MediaContent> mediaContent;
-	
-	public enum ContentType {
-		
-		TEMPORADA(new Temporada()), SERIE(new Serie()), PLAYLIST(new Playlist()), SAGA(new Saga());
-		
-		public final MediaContent type;
-		
-		private ContentType(MediaContent type) {
-			this.type = type;
-		}
-		
-		public MediaContent get_type() {
-			return type;
-		}
-	
-	}
 
 	//Constructores
 	
-	public UserMediaRegistry() {
+	public UserMediaRegistry (Long userId, ContentType type) {
+		
+		this(userId, type, "NO_NAME");
 		
 	}
 	
-	public UserMediaRegistry (ContentType type) {
+	public UserMediaRegistry (Long userId, ContentType type, String name) {
+		this(userId, type, name, false);
+		//this.name = name;
+	}
 	
-		mediaContent.add(type.get_type());
+	public UserMediaRegistry (Long userId, ContentType type, String name, boolean fav) {
+		
+		this(userId, type, name, false, "NO_URL");
 		
 	}
 
-	public UserMediaRegistry(int id, String status, boolean fav, String urlRef) {
-		this.id = id;
-		//this.status = status;
+	public UserMediaRegistry(Long userId, ContentType type, String name, boolean fav, String urlRef) {
+		
+		registryId = ++id;
+		this.userId = userId;
+		this.name = name;
 		this.fav = fav;
 		this.urlRef = urlRef;
+		
+		this.type = type;
+		
+		mediaContent = new ArrayList<MediaContent>();
+		
+		if (this.type != null) {
+            mediaContent.add(this.type.get_type());
+        }
 		
 	}
 	
@@ -89,11 +92,11 @@ public class UserMediaRegistry {
 		this.urlRef = urlRef;
 	}
 	
-	public int getVideoId() {
-		return id;
+	public Long getRegistryId() {
+		return registryId;
 	}
 
-	public int getUserId() {
+	public Long getUserId() {
 		return userId;
 	}
 	

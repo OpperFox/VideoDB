@@ -6,25 +6,25 @@ public class Playlist extends MediaContent{
 	}
 
 	@Override
-	public MediaContent add_mediaContent() {
+	public MediaContent addMediaContent(int numMediaContent) {
+		
+		return null;//reutilizar el constructor de usermediaregistry para poder elegir correctamente el tipo de mediacontent a agregar (a exepcion de playlist)
+	}
+
+	@Override
+	public MediaContent removeMediaContent() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public MediaContent remove_mediaContent() {
+	public MediaContent getMediaContent() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public MediaContent get_mediaContent() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public MediaContent set_mediaContent_name() {
+	public MediaContent setMediaContentName(String newName) {
 		// TODO Auto-generated method stub
 		return null;
 	}

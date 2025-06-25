@@ -6,28 +6,29 @@ public class Serie extends MediaContent {
 	}
 
 	@Override
-	public MediaContent add_mediaContent() {
+	public MediaContent addMediaContent(int numMediaContent) {
+		
+		mediaContent.add(new Temporada());
+		
+		return null;
+	}
+	
+	@Override
+	public MediaContent removeMediaContent() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public MediaContent remove_mediaContent() {
+	public MediaContent getMediaContent() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public MediaContent get_mediaContent() {
+	public MediaContent setMediaContentName(String newName) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	@Override
-	public MediaContent set_mediaContent_name() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 
 }

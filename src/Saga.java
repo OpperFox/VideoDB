@@ -6,26 +6,28 @@ public class Saga extends MediaContent{
 	}
 
 	@Override
-	public MediaContent add_mediaContent() {
+	public MediaContent addMediaContent(int numMediaContent) {
+		
+		return null;
+	}
+
+	@Override
+	public MediaContent removeMediaContent() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public MediaContent remove_mediaContent() {
+	public MediaContent getMediaContent() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public MediaContent get_mediaContent() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public MediaContent set_mediaContent_name() {
-		// TODO Auto-generated method stub
+	public MediaContent setMediaContentName(String newName) {
+		
+		this.name = newName;
+		
 		return null;
 	}
 

@@ -5,16 +5,16 @@ public abstract class MediaContent {
 
 	//Atributos de clase 
 	
-	private static Long idGlob;
-	private Long id_g;
+	protected static Long idGlob;
+	protected Long id_g;
 	
-	private static int idLoc;
-	private int id_l;
+	protected static int idLoc;
+	protected int id_l;
 
-	private ArrayList <MediaContent> mediaContent;
-	private ArrayList <Video> videos;
+	protected ArrayList <MediaContent> mediaContent;
+	protected ArrayList <Video> videos;
 	
-	private String name;
+	protected String name;
 
 	//Constructores
 	
@@ -45,53 +45,53 @@ public abstract class MediaContent {
 	
 	//Setters y Getters
 
-	public Long get_idG() {
+	public Long getIdG() {
 		return id_g;
 	}
 
-	public int get_idL() {
+	public int getIdL() {
 		return id_l;
 	}
 	
-	public String get_name() {
+	public String getName() {
 		return name;
 	}
 	
-	public void set_name(String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 	
 	
 	//Logica
 	
-	public void add_videos() {
+	public void addVideos() {
 	
 	}
 	
-	public void set_video() {
+	public void setVideo() {
 		
 	}
 	
-	public void remove_video() {
+	public void removeVideo() {
 		
 	}
 	
-	public void get_video() {
+	public void getVideo() {
 		
 	}
 	
-	public abstract MediaContent add_mediaContent();
+	public abstract MediaContent addMediaContent(int numMediaContent);
 	//Series debe contener minimo 1 temporada.
 	//Temporada debe contener minimo 1 video.
 	//Saga debe contener minimo 1 video.
 	//Playlist debe contenter minimo 1 video, pero tambien puede añadir otros MediaContents (ya creados) a la reproduccion como Serie, Temporada, Saga y añadir uno o 
 	//varios capitulos (ya creados) de estos.
 	
-	public abstract MediaContent remove_mediaContent();
+	public abstract MediaContent removeMediaContent();
 	
 	//Elimina el media content del array
 	
-	public abstract MediaContent get_mediaContent();
+	public abstract MediaContent getMediaContent();
 	
 	//Para obetener los videos usar el metodo get_video
 	
@@ -99,7 +99,7 @@ public abstract class MediaContent {
 	//Temporada debe obtener todos los videos si no se indica el indice, si se indica debe obtener tambien sus sucesores, devuelve el indice usado
 	//Playlist debe obtener todos los videos o MediaContent si no se indica el indice, si se indica debe obtener tambien sus sucesores, devuelve el indice usado
 	
-	public abstract MediaContent set_mediaContent_name();
+	public abstract MediaContent setMediaContentName(String newName);
 	
 	//Debe permitir cambiar el nombre del media content
 	

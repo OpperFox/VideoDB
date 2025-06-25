@@ -1,15 +1,1 @@
-/UserMediaEntry.class
-/UserMediaRegistry.class
-/Season.class
-/Serie.class
-/Playlist.class
-/Saga.class
-/UserMediaRegistry$contentType.class
-/Temporada.class
-/UserMediaRegistry$ContentType.class
-/UserVideoInfo$Calificacion.class
-/UserVideoInfo$Estado.class
-/Status.class
-/Rating.class
-/main.class
-/Main.class
+/ContentType.class

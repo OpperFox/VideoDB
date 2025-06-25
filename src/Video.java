@@ -2,9 +2,12 @@ import java.util.ArrayList;
 
 public class Video {
 	//Atributos de la clase
-	static private Float id;
+	static private Long id;
 	
-	private Float videoId;
+	private Long sigmaMediaContent;
+	private Long alfaMediaContent;
+	
+	private Long videoId;
 	private int position;
 	private String name = null;
 	
@@ -14,9 +17,11 @@ public class Video {
 	//Constructores
 	public Video () {
 		
+		this("");//rellenar con el nombre del mediacontent sigma + el nombre del mediacontent alfa (si existe)
+		
 	}
 	
-	public Video (int position) {
+	public Video (String name) {
 		
 		id++;
 		this.videoId = id;
@@ -33,7 +38,7 @@ public class Video {
 
 	
 	//Setters y Getters
-	public Float getId() {
+	public Long getId() {
 		return videoId;
 	}
 
