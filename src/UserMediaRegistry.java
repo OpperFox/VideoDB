@@ -19,8 +19,10 @@ public class UserMediaRegistry {
 	private String urlRef;   // Referencia a una URL asociada al contenido (por ejemplo, imagen o enlace)
 	private String name;     // Nombre del contenido registrado
 	private ContentType type; // Tipo de contenido (Serie, Temporada, etc.)
+	private Status status;
+	private Rating rating;
 
-	private ArrayList<MediaContent> mediaContent; // Lista que almacena el contenido multimedia asociado
+	private ArrayList <MediaContent> mediaContent; // Lista que almacena el contenido multimedia asociado
 
 
 	// Constructores
@@ -37,24 +39,33 @@ public class UserMediaRegistry {
 
 		// Constructor que recibe userId, tipo, nombre y fav, asigna URL por defecto
 		public UserMediaRegistry(Long userId, ContentType type, String name, boolean fav) {
-			this(userId, type, name, fav, "NO_URL");
+			this(userId, type, name, fav, "NO_URL", Status.NO_VISTO);
+		}
+		
+		public UserMediaRegistry(Long userId, ContentType type, String name, boolean fav, String urlRef) {
+			this(userId, type, name, fav, "NO_URL", Status.NO_VISTO);
+		}
+		
+		public UserMediaRegistry(Long userId, ContentType type, String name, boolean fav, String urlRef, Status status) {
+			this(userId, type, name, fav, "NO_URL", status, Rating.SIN_CALIFICACION);
 		}
 
 		// Constructor principal que inicializa todos los atributos esenciales
-		public UserMediaRegistry(Long userId, ContentType type, String name, boolean fav, String urlRef) {
+		public UserMediaRegistry(Long userId, ContentType type, String name, boolean fav, String urlRef, Status status, Rating rating) {
 			registryId = ++id; // Asigna un ID único incrementando el contador global
 			this.userId = userId;
 			this.name = name;
 			this.fav = fav;
 			this.urlRef = urlRef;
 			this.type = type;
+			this.status = status;
 
 			// Inicializa la lista de contenidos
 			mediaContent = new ArrayList<>();
 
 			// Si el tipo no es nulo, se agrega su contenido base a la lista
 			if (this.type != null) {
-				mediaContent.add(this.type.get_type());
+				mediaContent.add(this.type.getType());
 			}
 		}
 
@@ -100,8 +111,13 @@ public class UserMediaRegistry {
 			return userId;
 		}
 
-		// public String getStatus() { return status; }
-		// public void setStatus(String status) { this.status = status; }
+		public String getStatus() { return status.toString(); }
+		
+		public void setStatus(Status status) { this.status = status; }
+
+		public float getRating() {	return rating.getRating();	}
+
+		public void setRating(Rating rating) {	this.rating = rating;	}
 
 		// Sección reservada para lógica adicional del registro
 }

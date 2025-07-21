@@ -12,8 +12,10 @@ public class Video {
 	private Long alfaMediaContent;  // ID del contenido contenedor más bajo (por ejemplo Temporada)
 	
 	private Long videoId;     // ID único del video generado a partir del contador
-	private int position;     // Posición del video dentro de su lista o secuencia
+	private int position = 0;     // Posición del video dentro de su lista o secuencia
 	private String name = null; // Nombre del video
+	
+	private Status status;
 	
 	private ArrayList<VideoURL> videoURL; // Lista de URLs asociadas al video
 
@@ -32,7 +34,7 @@ public class Video {
 		
 		id++;                // Incrementa el contador global
 		this.videoId = id;   // Asigna el nuevo ID al video
-		this.position = position;
+		this.position += position;
 	}
 	
 	public Video (int position, String name) {

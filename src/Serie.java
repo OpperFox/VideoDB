@@ -1,6 +1,5 @@
 // Clase Serie que hereda de MediaContent
 public class Serie extends MediaContent {
-	
 	// Constructor por defecto que llama al constructor de la clase padre
 	public Serie() {
 		super();
