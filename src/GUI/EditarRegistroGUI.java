@@ -1,6 +1,6 @@
 package GUI;
 
-// Se importan las clases necesarias para crear interfaces gráficas con Swing y manejar eventos
+// Se importan las clases necesarias para crear interfaces gráficas con Swing y manejar eventos.
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
