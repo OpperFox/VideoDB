@@ -13,9 +13,12 @@ public class User {
 	private ArrayList<UserMediaRegistry> userMediaRegistry; // Lista de registros
 
 	// Constructor que recibe el nombre del usuario
-	public User(String name) {
+	public User(String name, String password) {
+		//userId = consulta BD
 		userId = id++;           // Asigna ID único al usuario incrementando el contador global
 		this.name = name;        // Asigna el nombre al usuario
+		
+		//update BD de id,name,password
 		
 		this.userMediaRegistry = new ArrayList<UserMediaRegistry>();
 		

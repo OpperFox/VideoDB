@@ -40,19 +40,21 @@ public class UserMediaRegistry {
 
 		// Constructor que recibe userId, tipo, nombre y fav, asigna URL por defecto
 		public UserMediaRegistry(Long userId, ContentType type, String name, boolean fav) {
-			this(userId, type, name, fav, "NO_URL", Status.NO_VISTO);
+			this(userId, type, name, fav, "NO_URL");
 		}
 		
 		public UserMediaRegistry(Long userId, ContentType type, String name, boolean fav, String urlRef) {
-			this(userId, type, name, fav, "NO_URL", Status.NO_VISTO);
+			this(userId, type, name, fav, urlRef, Status.NO_VISTO);
 		}
 		
 		public UserMediaRegistry(Long userId, ContentType type, String name, boolean fav, String urlRef, Status status) {
-			this(userId, type, name, fav, "NO_URL", status, Rating.SIN_CALIFICACION);
+			this(userId, type, name, fav, urlRef, status, Rating.SIN_CALIFICACION);
 		}
 
 		// Constructor principal que inicializa todos los atributos esenciales
 		public UserMediaRegistry(Long userId, ContentType type, String name, boolean fav, String urlRef, Status status, Rating rating) {
+			
+			//id consulta DB
 			registryId = ++id; // Asigna un ID único incrementando el contador global
 			this.userId = userId;
 			this.name = name;
@@ -73,6 +75,30 @@ public class UserMediaRegistry {
 		// Métodos de acceso (getters y setters)
 
 		// Devuelve si el contenido está marcado como favorito
+		
+		
+		// Devuelve el ID único del registro
+		public Long getRegistryId() {
+			return registryId;
+		}
+
+		// Devuelve el ID del usuario asociado al registro
+		public Long getUserId() {
+			return userId;
+		}
+		
+		public ContentType getType() {
+			return type;
+		}
+		
+		public String getName() {
+			return name;
+		}
+		
+		public void setName(String name) {
+			this.name = name;
+		}
+		
 		public boolean isFav() {
 			return fav;
 		}
@@ -87,11 +113,6 @@ public class UserMediaRegistry {
 			return startDate;
 		}
 
-		// Establece la fecha de inicio
-		public void setStartDate(LocalDateTime startDate) {
-			this.startDate = startDate;
-		}
-
 		// Devuelve la URL de referencia
 		public String getUrlRef() {
 			return urlRef;
@@ -102,23 +123,21 @@ public class UserMediaRegistry {
 			this.urlRef = urlRef;
 		}
 
-		// Devuelve el ID único del registro
-		public Long getRegistryId() {
-			return registryId;
+		public String getStatus() { 
+			return status.toString(); 
 		}
-
-		// Devuelve el ID del usuario asociado al registro
-		public Long getUserId() {
-			return userId;
-		}
-
-		public String getStatus() { return status.toString(); }
 		
-		public void setStatus(Status status) { this.status = status; }
+		public void setStatus(Status status) { 
+			this.status = status; 
+		}
 
-		public float getRating() {	return rating.getRating();	}
+		public float getRating() {	
+			return rating.getRating();	
+		}
 
-		public void setRating(Rating rating) {	this.rating = rating;	}
+		public void setRating(Rating rating) {	
+			this.rating = rating;	
+		}
 
 		// Sección reservada para lógica adicional del registro
 }

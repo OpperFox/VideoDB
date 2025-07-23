@@ -17,6 +17,9 @@ public class UserVideoInfo {
 	//Constructores
 	public UserVideoInfo () {
 		
+		//videoId
+		videoId = videoId++;
+		
 	}
 	
 	public UserVideoInfo (Rating rating) {
@@ -27,7 +30,7 @@ public class UserVideoInfo {
 	
 
 	//Getters y Setters
-	public Long getVideoId() {
+	public Long getId() {
 		return videoId;
 	}
 

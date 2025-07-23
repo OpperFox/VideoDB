@@ -38,13 +38,13 @@ public class VerRegistrosGUI extends JFrame {
 
         // ComboBox para elegir calificación
         comboCalificacion = new JComboBox<>(new String[]{
-            "Todas", "Horrible", "Malo", "Regular", "Bueno", "Muy bueno", "Sublime"
+            "Todas", "Horrible", "Malo", "Regular", "Bueno", "Sublime"
         });
         comboCalificacion.setFont(fuente);
 
         // ComboBox para filtrar por estado
         comboEstado = new JComboBox<>(new String[]{
-            "Todos", "No visto", "En espera", "Re visto", "En proceso o viendo", "Completado", "Abandonado"
+            "Todos", "No visto", "En espera", "Revisto", "Viendo", "Completado", "Abandonado"
         });
         comboEstado.setFont(fuente);
 
