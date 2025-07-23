@@ -12,12 +12,12 @@ public class Java_sql {
         Connection conn = DBConnection.getConnection();
 
         if (conn == null) {
-            System.out.println("❌ No se pudo establecer conexión.");
+            System.out.println("No se pudo establecer conexión.");
             return;
         }
 
         try (Scanner scanner = new Scanner(System.in)) {
-            System.out.println("✅ Conexión exitosa.");
+            System.out.println("Conexión exitosa.");
 
             while (true) {
                 System.out.println("\n--- MENÚ ---");
@@ -40,7 +40,7 @@ public class Java_sql {
             break;
         case 3:
             conn.close();
-            System.out.println("👋 Adiós.");
+            System.out.println("Adiós.");
             return;
         case 4:
             iniciarSesion(conn, scanner);
@@ -57,12 +57,12 @@ public class Java_sql {
             UserMediaRegistry.listarRegistros(conn, usuarioId);
             break;
         default:
-            System.out.println("❌ Opción inválida.");
+            System.out.println("Opción inválida.");
     }
             }
 
         } catch (SQLException e) {
-            System.out.println("❌ Error en operación SQL: " + e.getMessage());
+            System.out.println("Error en operación SQL: " + e.getMessage());
         }
     }
 
@@ -79,7 +79,7 @@ public class Java_sql {
         stmt.executeUpdate();
         stmt.close();
 
-        System.out.println("✅ Usuario registrado correctamente.");
+        System.out.println("Usuario registrado correctamente.");
     }
 
     public static void mostrarCantidadUsuarios(Connection conn) throws SQLException {
@@ -89,7 +89,7 @@ public class Java_sql {
 
         if (rs.next()) {
             int total = rs.getInt("total");
-            System.out.println("👥 Total de usuarios: " + total);
+            System.out.println(" Total de usuarios: " + total);
         }
 
         rs.close();
@@ -97,7 +97,7 @@ public class Java_sql {
     }
 
     public static void eliminarUsuario(Connection conn, Scanner sc) throws SQLException {
-        System.out.print("🔒 Ingresa el nombre de usuario a eliminar: ");
+        System.out.print("Ingresa el nombre de usuario a eliminar: ");
         String nombre = sc.nextLine();
 
         String sql = "DELETE FROM Usuario WHERE nombre = ?";
@@ -106,9 +106,9 @@ public class Java_sql {
 
         int filasAfectadas = stmt.executeUpdate();
         if (filasAfectadas > 0) {
-            System.out.println("✅ Usuario eliminado exitosamente.");
+            System.out.println("Usuario eliminado exitosamente.");
         } else {
-            System.out.println("⚠️ No se encontró el usuario.");
+            System.out.println("No se encontró el usuario.");
         }
 
         stmt.close();
@@ -132,9 +132,9 @@ public class Java_sql {
         stmt.close();
 
         if (count > 0) {
-            System.out.println("✅ Inicio de sesión exitoso. Bienvenido, " + nombre + "!");
+            System.out.println("Inicio de sesión exitoso. Bienvenido, " + nombre + "!");
         } else {
-            System.out.println("❌ Usuario o contraseña incorrectos.");
+            System.out.println("Usuario o contraseña incorrectos.");
         }
     }
 }
