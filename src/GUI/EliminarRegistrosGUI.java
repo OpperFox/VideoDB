@@ -100,7 +100,7 @@ public class EliminarRegistrosGUI extends JFrame {
     }
 
     /**
-     * Método que elimina todos los registros que fueron seleccionados con el checkbox
+     * Método que elimina todos los registros que fueron seleccionados con el checkbox.
      */
     private void eliminarSeleccionados() {
         // Muestra una confirmación antes de eliminar

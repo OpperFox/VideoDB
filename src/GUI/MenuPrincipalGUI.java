@@ -67,7 +67,7 @@ public class MenuPrincipalGUI extends JFrame {
         });
 
         botonVer.addActionListener(e -> {
-            new VerRegistrosGUI(this, usuario); // Abre ventana para ver registros
+            new VerRegistrosGUI(this, usuario); // Abre ventana para ver registros.
             setVisible(false);
         });
 

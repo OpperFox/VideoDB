@@ -143,7 +143,7 @@ public class AgregarRegistroGUI extends JFrame {
         // Acciones para los botones
         botonGuardar.addActionListener((ActionEvent e) -> {
             JOptionPane.showMessageDialog(this, "Registro guardado.");
-            // Aquí puedes agregar la lógica para guardar el registro realmente
+            // Aquí puedes agregar la lógica para guardar el registro realmente.
         });
 
         botonGuardarVolver.addActionListener((ActionEvent e) -> {

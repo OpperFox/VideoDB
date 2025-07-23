@@ -1,4 +1,4 @@
-package GUI; // El paquete donde se encuentra esta clase
+package GUI; // El paquete donde se encuentra esta clase.
 
 /**
  * Clase principal que inicia la aplicación.

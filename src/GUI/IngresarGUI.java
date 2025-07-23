@@ -31,7 +31,7 @@ public class IngresarGUI extends JFrame {
         // Creamos un panel para los campos de usuario y clave
         JPanel panelCampos = new JPanel(new GridLayout(2, 2, 10, 10)); // 2 filas y 2 columnas
         panelCampos.setBackground(new Color(150,0,0)); // Fondo rojo
-        panelCampos.setBorder(BorderFactory.createEmptyBorder(10, 60, 10, 60)); // Espacios internos
+        panelCampos.setBorder(BorderFactory.createEmptyBorder(10, 60, 10, 60)); // Espacios internos.
 
         // Etiqueta y campo para el nombre de usuario
         JLabel lblUsuario = new JLabel("Usuario:", JLabel.RIGHT);

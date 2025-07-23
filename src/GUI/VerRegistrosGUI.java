@@ -52,7 +52,7 @@ public class VerRegistrosGUI extends JFrame {
         JButton botonFiltrar = new JButton("Aplicar filtros");
         botonFiltrar.setFont(fuente);
 
-        // Agrega los componentes al panel de filtros
+        // Agrega los componentes al panel de filtros.
         panelFiltros.add(new JLabel("Nombre:"));
         panelFiltros.add(campoBuscarNombre);
         panelFiltros.add(new JLabel("Calificación:"));

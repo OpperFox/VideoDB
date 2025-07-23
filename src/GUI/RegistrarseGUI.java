@@ -1,4 +1,4 @@
-package GUI; // Paquete donde se encuentra esta clase
+package GUI; // Paquete donde se encuentra esta clase.
 
 // Importación de las librerías necesarias para crear la interfaz gráfica
 import javax.swing.*;  // Componentes de Swing como JFrame, JButton, JTextField, etc.
