@@ -1,13 +1,14 @@
+package Logica;
 
-public class Saga extends MediaContent{
+public class Temporada extends MediaContent{
 	
-	public Saga () {
+	public Temporada() {
 		super();
 	}
 
 	@Override
 	public MediaContent addMediaContent(int numMediaContent) {
-		
+		// TODO Auto-generated method stub
 		return null;
 	}
 

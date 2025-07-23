@@ -1,8 +1,12 @@
+package Logica;
 
 public enum ContentType { // Define un enumerado que representa tipos de contenido multimedia
 
 	// Cada constante representa un MediaContent diferente
-	TEMPORADA(new Temporada(), "Temporada"), SERIE(new Serie(), "Serie"), PLAYLIST(new Playlist(), "Playlist"), SAGA(new Saga(), "Saga");// # # # # # mejorar y verificar que se creen correctamente las clases 
+	TEMPORADA(new Temporada(), "Temporada"), 
+	SERIE(new Serie(), "Serie"), 
+	PLAYLIST(new Playlist(), "Playlist"), 
+	SAGA(new Saga(), "Saga");// # # # # # mejorar y verificar que se creen correctamente las clases 
 
 	// Campo que almacena la instancia asociada a cada tipo
 	public final MediaContent type;
@@ -18,4 +22,5 @@ public enum ContentType { // Define un enumerado que representa tipos de conteni
 	public MediaContent getType() {
 		return type;
 	}
+	
 }

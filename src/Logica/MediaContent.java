@@ -1,3 +1,4 @@
+package Logica;
 import java.util.ArrayList;
 // Importación del módulo ArrayList para manejar colecciones dinámicas de objetos
 
@@ -33,11 +34,11 @@ public abstract class MediaContent {
 
 	// Constructor que permite establecer nombre y número de elementos subordinados
 	public MediaContent (String name, int entryNum) {
-		this(name, entryNum, 6,  false); // Por defecto asigna capacidad para 6 videos
+		this(name, entryNum, 6); // Por defecto asigna capacidad para 6 videos
 	}
 
 	// Constructor principal con todos los parámetros
-	public MediaContent (String name, int entryNum, int videoNum, boolean container) {
+	public MediaContent (String name, int entryNum, int videoNum) {
 		// Asigna ID global único incrementando el contador compartido
 		this.id_g = ++idGlob;
 
@@ -46,8 +47,6 @@ public abstract class MediaContent {
 
 		// Asigna el nombre del contenido
 		this.name = name;
-		
-		this.container = container;
 
 		// Inicializa la lista de contenidos con capacidad inicial
 		if(container = true) mediaContent = new ArrayList<MediaContent>(entryNum);

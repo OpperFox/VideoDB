@@ -1,3 +1,4 @@
+package Logica;
 import java.util.ArrayList;
 // Importa ArrayList para manejar una colección dinámica de URLs asociadas al video
 
