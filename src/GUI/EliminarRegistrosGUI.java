@@ -23,7 +23,7 @@ public class EliminarRegistrosGUI extends JFrame {
     public EliminarRegistrosGUI(MenuPrincipalGUI menuPrincipal, String usuario) {
         this.menuPrincipal = menuPrincipal;
 
-        setTitle("🗑️ Eliminar Registros"); // Título de la ventana
+        setTitle("Eliminar Registros"); // Título de la ventana
         setDefaultCloseOperation(EXIT_ON_CLOSE); // Al cerrar esta ventana, se termina el programa
         setLayout(new BorderLayout()); // Usa un diseño con zonas (NORTE, CENTRO, SUR, etc.)
         getContentPane().setBackground(new Color(255, 102, 102)); // Fondo rojo pastel
@@ -58,12 +58,12 @@ public class EliminarRegistrosGUI extends JFrame {
         panelBotones.setBackground(new Color(255, 102, 102)); // Mismo fondo pastel
 
         // Botón para eliminar registros seleccionados
-        JButton botonEliminar = new JButton("🗑️ Eliminar seleccionados");
+        JButton botonEliminar = new JButton("Eliminar seleccionados");
         botonEliminar.setFont(fuente);
         botonEliminar.addActionListener((ActionEvent e) -> eliminarSeleccionados());
 
         // Botón para volver al menú principal
-        JButton botonVolver = new JButton("🔙 Volver al menú");
+        JButton botonVolver = new JButton("Volver al menú");
         botonVolver.setFont(fuente);
         botonVolver.addActionListener(e -> {
             dispose(); // Cierra esta ventana
@@ -122,7 +122,7 @@ public class EliminarRegistrosGUI extends JFrame {
             }
 
             // Muestra un mensaje de éxito
-            JOptionPane.showMessageDialog(this, "✅ Registros eliminados correctamente.");
+            JOptionPane.showMessageDialog(this, "Registros eliminados correctamente.");
         }
     }
 }

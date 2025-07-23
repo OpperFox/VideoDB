@@ -42,7 +42,7 @@ public class AgregarRegistroGUI extends JFrame {
         Font fuenteTitulo = new Font("Comic Sans MS", Font.BOLD, 22);
 
         // Título superior
-        JLabel etiquetaTitulo = new JLabel("📄 Agregar nuevo registro");
+        JLabel etiquetaTitulo = new JLabel("Agregar nuevo registro");
         etiquetaTitulo.setFont(fuenteTitulo);
         etiquetaTitulo.setHorizontalAlignment(SwingConstants.CENTER);
         etiquetaTitulo.setBorder(BorderFactory.createEmptyBorder(20, 10, 20, 10));
@@ -126,9 +126,9 @@ public class AgregarRegistroGUI extends JFrame {
         JPanel panelBotones = new JPanel(new FlowLayout());
         panelBotones.setBackground(new Color(255, 102, 102));
 
-        JButton botonGuardar = new JButton("💾 Guardar");
-        JButton botonGuardarVolver = new JButton("💾 Guardar y volver al menú");
-        JButton botonCancelar = new JButton("🔙 Volver al menú sin guardar");
+        JButton botonGuardar = new JButton("Guardar");
+        JButton botonGuardarVolver = new JButton("Guardar y volver al menú");
+        JButton botonCancelar = new JButton("Volver al menú sin guardar");
 
         botonGuardar.setFont(fuenteGeneral);
         botonGuardarVolver.setFont(fuenteGeneral);

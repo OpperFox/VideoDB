@@ -42,10 +42,10 @@ public class MenuPrincipalGUI extends JFrame {
         panelBotones.setBorder(BorderFactory.createEmptyBorder(30, 40, 30, 40)); // Margen interno
 
         // Crear botones para las acciones
-        botonAgregar = new JButton("📄 Agregar nuevo registro");
-        botonEditar = new JButton("✏️ Editar registros");
-        botonVer = new JButton("📂 Registros existentes");
-        botonEliminar = new JButton("🗑️ Eliminar o borrar registro");
+        botonAgregar = new JButton("Agregar nuevo registro");
+        botonEditar = new JButton("Editar registros");
+        botonVer = new JButton("Registros existentes");
+        botonEliminar = new JButton("Eliminar o borrar registro");
 
         // Aplicar fuente a los botones
         botonAgregar.setFont(fuenteBoton);
@@ -91,7 +91,7 @@ public class MenuPrincipalGUI extends JFrame {
         panelInferior.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         // Botón para cerrar sesión
-        JButton botonCerrarSesion = new JButton("🚪 Cerrar sesión");
+        JButton botonCerrarSesion = new JButton("Cerrar sesión");
         botonCerrarSesion.setFont(fuenteBoton);
         panelInferior.add(botonCerrarSesion); // Añade botón al panel inferior
         add(panelInferior, BorderLayout.SOUTH); // Lo ubica abajo

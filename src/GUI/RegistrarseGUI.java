@@ -69,7 +69,7 @@ public class RegistrarseGUI extends JFrame {
         botonRegistrar.setFont(fuente); // Se le aplica la fuente
 
         // Botón para volver a la ventana principal
-        botonVolver = new JButton("🔙 Volver");
+        botonVolver = new JButton("Volver");
         botonVolver.setFont(fuente);
 
         // Evento que se ejecuta al hacer clic en "Volver"

@@ -44,7 +44,7 @@ public class EditarRegistroGUI extends JFrame {
         Font fuenteTitulo = new Font("Comic Sans MS", Font.BOLD, 22);
 
         // Título de la ventana
-        JLabel etiquetaTitulo = new JLabel("✏️ Editar registros existentes");
+        JLabel etiquetaTitulo = new JLabel("Editar registros existentes");
         etiquetaTitulo.setFont(fuenteTitulo);
         etiquetaTitulo.setHorizontalAlignment(SwingConstants.CENTER);
         etiquetaTitulo.setBorder(BorderFactory.createEmptyBorder(20, 10, 20, 10));
@@ -121,10 +121,10 @@ public class EditarRegistroGUI extends JFrame {
         panelBotones.setBackground(new Color(255, 102, 102));
 
         // Botones de acción
-        JButton botonGuardar = new JButton("💾 Guardar");
-        JButton botonGuardarVolver = new JButton("💾 Guardar y volver al menú");
-        JButton botonCancelar = new JButton("🔙 Volver al menú sin guardar");
-        JButton botonEliminar = new JButton("🗑️ Eliminar registro");
+        JButton botonGuardar = new JButton("Guardar");
+        JButton botonGuardarVolver = new JButton("Guardar y volver al menú");
+        JButton botonCancelar = new JButton("Volver al menú sin guardar");
+        JButton botonEliminar = new JButton("Eliminar registro");
 
         // Estilo a los botones
         botonGuardar.setFont(fuenteGeneral);
