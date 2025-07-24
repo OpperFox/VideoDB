@@ -85,13 +85,13 @@ public class Filter {
 	
 	public static ArrayList<UserVideoInfo> filterVideoInfo(ArrayList<UserVideoInfo> sVideoInfo, Status status) {
 	    return sVideoInfo.stream()
-	        .filter(t -> t.getStatus() == status.toString())
+	//        .filter(t -> t.getStatus() == status.toString())
 	        .collect(Collectors.toCollection(ArrayList::new));
 	}
 	
 	public static ArrayList<UserVideoInfo> filterVideoInfo(ArrayList<UserVideoInfo> sVideoInfo, Rating rating) {
 	    return sVideoInfo.stream()
-	        .filter(t -> t.getRating() == rating.getRating())
+	//        .filter(t -> t.getRating() == rating.getRating())
 	        .collect(Collectors.toCollection(ArrayList::new));
 	}
 	

@@ -64,11 +64,7 @@ public class UserMediaRegistry {
 			this.status = status;
 
 			this.startDate = LocalDateTime.now();
-
-			// Si el tipo no es nulo, se agrega su contenido base a la lista
-			if (this.type != null) {
-				mediaContent.add(this.type.newType());
-			}
+			
 		}
 
 		// Métodos de acceso (getters y setters)
@@ -77,6 +73,31 @@ public class UserMediaRegistry {
 		
 		
 		// Devuelve el ID único del registro
+		
+		public void newMediaContent() {
+			if (this.type != null) {
+				this.type.newType();
+			}
+		}
+		
+		public void newMediaContent(String name) {
+			if (this.type != null) {
+				this.type.newType();
+			}	
+		}
+		
+		public void newMediaContent(String name, int entryNum) {
+			if (this.type != null) {
+				this.type.newType();
+			}
+		}
+		
+		public void newMediaContent(String name, int entryNum, int  videoNum) {
+			if (this.type != null) {
+				this.type.newType();
+			}
+		}
+		
 		public Long getRegistryId() {
 			return registryId;
 		}
