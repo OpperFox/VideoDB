@@ -248,7 +248,7 @@ public class Query {
         return true;
         
     }
-<<<<<<< HEAD:src/SQL/query.java
+
     public static boolean userpassword_exists(Connection conn, String name, String password){
   
         try{
@@ -281,6 +281,5 @@ public class Query {
         
     }
 }
-=======
-}
->>>>>>> 7d5cb79040b73b90331ad3588d5a29609ae2e85b:src/SQL/Query.java
+
+
