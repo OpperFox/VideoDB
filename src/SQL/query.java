@@ -248,4 +248,35 @@ public class query {
         return true;
         
     }
+    public static boolean userpassword_exists(Connection conn, String name, String password){
+  
+        try{
+            
+            PreparedStatement statement = conn.prepareStatement("SELECT * FROM USUARIO WHERE NOMBRE = ? && password = ?");
+            statement.setString(1,name);
+            statement.setString(2, password);
+
+            ResultSet rs = statement.executeQuery();
+            if(!rs.next()){
+                rs.close();
+                System.out.println("fallo");
+                return false;
+                
+            }else{
+                rs.close();
+                System.out.println("no fallo");
+                return true;
+                
+            }           
+            
+            
+            
+        }catch(Exception e){
+            
+            System.out.println("fallo");
+            e.printStackTrace();
+        }
+        return false;         
+        
+    }
 }
