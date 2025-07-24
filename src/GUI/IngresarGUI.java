@@ -14,7 +14,7 @@ public class IngresarGUI extends JFrame {
 
     // Constructor que recibe como parámetro la ventana principal para poder volver a ella
     public IngresarGUI(PrincipalGUI ventanaPrincipal) {
-        setTitle("Iniciar Sesión 🌟"); // Título de la ventana
+        setTitle("Iniciar Sesión"); // Título de la ventana
         setDefaultCloseOperation(EXIT_ON_CLOSE); // Cierra la aplicación al cerrar la ventana
         setLayout(new BorderLayout()); // Usamos un layout para organizar los elementos
         getContentPane().setBackground(new Color(65, 105, 225)); // Establece el fondo azul
@@ -31,7 +31,7 @@ public class IngresarGUI extends JFrame {
         // Creamos un panel para los campos de usuario y clave
         JPanel panelCampos = new JPanel(new GridLayout(2, 2, 10, 10)); // 2 filas y 2 columnas
         panelCampos.setBackground(new Color(150,0,0)); // Fondo rojo
-        panelCampos.setBorder(BorderFactory.createEmptyBorder(10, 60, 10, 60)); // Espacios internos
+        panelCampos.setBorder(BorderFactory.createEmptyBorder(10, 60, 10, 60)); // Espacios internos.
 
         // Etiqueta y campo para el nombre de usuario
         JLabel lblUsuario = new JLabel("Usuario:", JLabel.RIGHT);
@@ -61,7 +61,7 @@ public class IngresarGUI extends JFrame {
         botonIngresar.setFont(fuente);
 
         // Creamos el botón para volver a la ventana principal
-        botonVolver = new JButton("🔙 Volver");
+        botonVolver = new JButton("Volver");
         botonVolver.setFont(fuente);
 
         // Acción del botón "Volver": muestra la ventana principal y cierra esta

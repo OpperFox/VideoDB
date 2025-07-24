@@ -1,6 +1,6 @@
 package GUI;
 
-// Se importan las clases necesarias para crear interfaces gráficas con Swing y manejar eventos
+// Se importan las clases necesarias para crear interfaces gráficas con Swing y manejar eventos.
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -44,7 +44,7 @@ public class EditarRegistroGUI extends JFrame {
         Font fuenteTitulo = new Font("Comic Sans MS", Font.BOLD, 22);
 
         // Título de la ventana
-        JLabel etiquetaTitulo = new JLabel("✏️ Editar registros existentes");
+        JLabel etiquetaTitulo = new JLabel("Editar registros existentes");
         etiquetaTitulo.setFont(fuenteTitulo);
         etiquetaTitulo.setHorizontalAlignment(SwingConstants.CENTER);
         etiquetaTitulo.setBorder(BorderFactory.createEmptyBorder(20, 10, 20, 10));

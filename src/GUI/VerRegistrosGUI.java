@@ -21,7 +21,7 @@ public class VerRegistrosGUI extends JFrame {
         this.menuPrincipal = menuPrincipal;
 
         // Título y configuración básica de la ventana
-        setTitle("📂 Ver Registros de " + usuario);
+        setTitle("Ver Registros de " + usuario);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE); // Cierra solo esta ventana
         setLayout(new BorderLayout());
         getContentPane().setBackground(new Color(255, 102, 102)); // Fondo rojo pastel
@@ -29,7 +29,7 @@ public class VerRegistrosGUI extends JFrame {
         // Fuente que se usará en los componentes
         Font fuente = new Font("Comic Sans MS", Font.PLAIN, 15);
 
-        // 🎯 PANEL SUPERIOR: Filtros de búsqueda
+        // PANEL SUPERIOR: Filtros de búsqueda
         JPanel panelFiltros = new JPanel(new FlowLayout()); // Usa distribución de flujo (horizontal)
         panelFiltros.setBackground(new Color(255, 102, 102)); // Mismo fondo
 
@@ -49,22 +49,22 @@ public class VerRegistrosGUI extends JFrame {
         comboEstado.setFont(fuente);
 
         // Botón que aplica los filtros seleccionados
-        JButton botonFiltrar = new JButton("🔍 Aplicar filtros");
+        JButton botonFiltrar = new JButton("Aplicar filtros");
         botonFiltrar.setFont(fuente);
 
-        // Agrega los componentes al panel de filtros
-        panelFiltros.add(new JLabel("🔠 Nombre:"));
+        // Agrega los componentes al panel de filtros.
+        panelFiltros.add(new JLabel("Nombre:"));
         panelFiltros.add(campoBuscarNombre);
-        panelFiltros.add(new JLabel("⭐ Calificación:"));
+        panelFiltros.add(new JLabel("Calificación:"));
         panelFiltros.add(comboCalificacion);
-        panelFiltros.add(new JLabel("📶 Estado:"));
+        panelFiltros.add(new JLabel("Estado:"));
         panelFiltros.add(comboEstado);
         panelFiltros.add(botonFiltrar);
 
         // Agrega el panel superior a la parte norte de la ventana
         add(panelFiltros, BorderLayout.NORTH);
 
-        // 📋 PANEL CENTRAL: Tabla con registros
+        // PANEL CENTRAL: Tabla con registros
         String[] columnas = {"Nombre", "Categoría", "Estado", "Calificación", "Favorito", "Enlace"};
         modeloTabla = new DefaultTableModel(columnas, 0); // Modelo sin filas iniciales
         tablaRegistros = new JTable(modeloTabla); // Tabla con el modelo definido
@@ -75,8 +75,8 @@ public class VerRegistrosGUI extends JFrame {
         JScrollPane scrollTabla = new JScrollPane(tablaRegistros);
         add(scrollTabla, BorderLayout.CENTER);
 
-        // 🔙 PANEL INFERIOR: Botón para volver al menú
-        JButton botonVolver = new JButton("🔙 Volver al menú");
+        // PANEL INFERIOR: Botón para volver al menú
+        JButton botonVolver = new JButton("Volver al menú");
         botonVolver.setFont(fuente);
 
         JPanel panelSur = new JPanel(); // Panel para contener el botón de volver
@@ -101,7 +101,7 @@ public class VerRegistrosGUI extends JFrame {
         setVisible(true);
     }
 
-    // 🚧 Método que simula la búsqueda de registros según los filtros
+    // Método que simula la búsqueda de registros según los filtros
     private void aplicarFiltros() {
         // Obtiene los filtros seleccionados por el usuario
         String nombre = campoBuscarNombre.getText().trim().toLowerCase();
@@ -111,7 +111,7 @@ public class VerRegistrosGUI extends JFrame {
         // Borra los registros actuales de la tabla
         modeloTabla.setRowCount(0);
 
-        // ⚠️ Simulación de registros (deberían venir de una base de datos o lista real)
+        // Simulación de registros (deberían venir de una base de datos o lista real)
         String[][] registrosSimulados = {
             {"Inception", "Película", "Completado", "Sublime", "Sí", "https://inception.example.com"},
             {"Breaking Bad", "Serie", "Re visto", "Muy bueno", "No", "https://bb.example.com"},

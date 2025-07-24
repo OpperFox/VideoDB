@@ -1,4 +1,4 @@
-package GUI; // Paquete donde se encuentra esta clase
+package GUI; // Paquete donde se encuentra esta clase.
 
 // Importación de las librerías necesarias para crear la interfaz gráfica
 import javax.swing.*;  // Componentes de Swing como JFrame, JButton, JTextField, etc.
@@ -69,7 +69,7 @@ public class RegistrarseGUI extends JFrame {
         botonRegistrar.setFont(fuente); // Se le aplica la fuente
 
         // Botón para volver a la ventana principal
-        botonVolver = new JButton("🔙 Volver");
+        botonVolver = new JButton("Volver");
         botonVolver.setFont(fuente);
 
         // Evento que se ejecuta al hacer clic en "Volver"
