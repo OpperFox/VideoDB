@@ -1,11 +1,11 @@
 //query.user_exists(DBConnection.getConnection(), "name");
 
 
-package com.mycompany.java_sql;
+package SQL;
 
 import java.sql.*;
 
-public class query {
+public class Query {
     public static boolean user_exists(Connection conn, String name){
   
         try{
@@ -248,6 +248,7 @@ public class query {
         return true;
         
     }
+<<<<<<< HEAD:src/SQL/query.java
     public static boolean userpassword_exists(Connection conn, String name, String password){
   
         try{
@@ -280,3 +281,6 @@ public class query {
         
     }
 }
+=======
+}
+>>>>>>> 7d5cb79040b73b90331ad3588d5a29609ae2e85b:src/SQL/Query.java
