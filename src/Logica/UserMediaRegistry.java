@@ -63,12 +63,14 @@ public class UserMediaRegistry {
 			this.type = type;
 			this.status = status;
 
+			this.startDate = LocalDateTime.now();
+			
 			// Inicializa la lista de contenidos
 			mediaContent = new ArrayList<>();
 
 			// Si el tipo no es nulo, se agrega su contenido base a la lista
 			if (this.type != null) {
-				mediaContent.add(this.type.getType());
+				mediaContent.add(this.type.newType());
 			}
 		}
 

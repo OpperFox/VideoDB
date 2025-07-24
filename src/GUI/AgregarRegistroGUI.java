@@ -55,7 +55,7 @@ public class AgregarRegistroGUI extends JFrame {
         panelCampos.setBorder(BorderFactory.createEmptyBorder(10, 40, 10, 40));
 
         // Combo para seleccionar la categoría del registro
-        comboCategoria = new JComboBox<>(new String[] {"Película", "Playlist", "Series"});
+        comboCategoria = new JComboBox<>(new String[] {"Saga", "Playlist", "Serie"});
         comboCategoria.setFont(fuenteGeneral);
 
         // Campos comunes para todas las categorías

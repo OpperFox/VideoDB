@@ -90,7 +90,7 @@ public class EditarRegistroGUI extends JFrame {
 
         // Combo con calificaciones posibles (preestablecidas)
         comboCalificacion = new JComboBox<>(new String[]{
-            "Horrible", "Malo", "Regular", "Bueno", "Muy bueno", "Sublime"
+            "Horrible", "Malo", "Regular", "Bueno", "Sublime"
         });
 
         // Check para marcar como favorito
