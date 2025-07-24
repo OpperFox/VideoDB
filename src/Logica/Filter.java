@@ -77,10 +77,22 @@ public class Filter {
 		        .collect(Collectors.toCollection(ArrayList::new));
 	}
 	
-	public static ArrayList<UserVideoInfo> filterVideoInfo() {
-		
-		return null;
-		
+	public static ArrayList<UserVideoInfo> filterVideoInfo(ArrayList<UserVideoInfo> sVideoInfo, Long id) {
+		return sVideoInfo.stream()
+		        .filter(t -> t.getId() == id)
+		        .collect(Collectors.toCollection(ArrayList::new));
+	}
+	
+	public static ArrayList<UserVideoInfo> filterVideoInfo(ArrayList<UserVideoInfo> sVideoInfo, Status status) {
+	    return sVideoInfo.stream()
+	        .filter(t -> t.getStatus() == status.toString())
+	        .collect(Collectors.toCollection(ArrayList::new));
+	}
+	
+	public static ArrayList<UserVideoInfo> filterVideoInfo(ArrayList<UserVideoInfo> sVideoInfo, Rating rating) {
+	    return sVideoInfo.stream()
+	        .filter(t -> t.getRating() == rating.getRating())
+	        .collect(Collectors.toCollection(ArrayList::new));
 	}
 	
 	public static ArrayList<UserVideoHistory> filterVideoHistory() {

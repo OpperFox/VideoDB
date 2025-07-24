@@ -90,7 +90,7 @@ public class EditarRegistroGUI extends JFrame {
 
         // Combo con calificaciones posibles (preestablecidas)
         comboCalificacion = new JComboBox<>(new String[]{
-            "Horrible", "Malo", "Regular", "Bueno", "Muy bueno", "Sublime"
+            "Horrible", "Malo", "Regular", "Bueno", "Sublime"
         });
 
         // Check para marcar como favorito
@@ -121,10 +121,10 @@ public class EditarRegistroGUI extends JFrame {
         panelBotones.setBackground(new Color(255, 102, 102));
 
         // Botones de acción
-        JButton botonGuardar = new JButton("💾 Guardar");
-        JButton botonGuardarVolver = new JButton("💾 Guardar y volver al menú");
-        JButton botonCancelar = new JButton("🔙 Volver al menú sin guardar");
-        JButton botonEliminar = new JButton("🗑️ Eliminar registro");
+        JButton botonGuardar = new JButton("Guardar");
+        JButton botonGuardarVolver = new JButton("Guardar y volver al menú");
+        JButton botonCancelar = new JButton("Volver al menú sin guardar");
+        JButton botonEliminar = new JButton("Eliminar registro");
 
         // Estilo a los botones
         botonGuardar.setFont(fuenteGeneral);
