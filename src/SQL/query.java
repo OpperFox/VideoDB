@@ -1,7 +1,7 @@
 //query.user_exists(DBConnection.getConnection(), "name");
 
 
-package com.mycompany.java_sql;
+package SQL;
 
 import java.sql.*;
 

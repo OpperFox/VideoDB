@@ -23,7 +23,7 @@ public class UserMediaRegistry {
 	private Status status;
 	private Rating rating;
 
-	private ArrayList <MediaContent> mediaContent; // Lista que almacena el contenido multimedia asociado
+	private MediaContent mediaContent; // Lista que almacena el contenido multimedia asociado
 
 
 	// Constructores
@@ -64,9 +64,6 @@ public class UserMediaRegistry {
 			this.status = status;
 
 			this.startDate = LocalDateTime.now();
-			
-			// Inicializa la lista de contenidos
-			mediaContent = new ArrayList<>();
 
 			// Si el tipo no es nulo, se agrega su contenido base a la lista
 			if (this.type != null) {
