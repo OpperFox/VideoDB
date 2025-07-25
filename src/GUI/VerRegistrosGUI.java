@@ -1,140 +1,148 @@
 package GUI;
 
-// Importación de librerías necesarias para la interfaz gráfica
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
+import java.awt.event.*;
 
-// Clase principal de la ventana para ver los registros
 public class VerRegistrosGUI extends JFrame {
 
-    // Componentes principales de la interfaz
     private JTextField campoBuscarNombre;
-    private JComboBox<String> comboCalificacion, comboEstado;
+    private JComboBox<String> comboCalificacion, comboEstado, comboCategoria, comboFavorito;
     private JTable tablaRegistros;
     private DefaultTableModel modeloTabla;
-    private MenuPrincipalGUI menuPrincipal; // Para regresar al menú
+    private MenuPrincipalGUI menuPrincipal;
 
-    // Constructor de la ventana, recibe como parámetro la ventana del menú principal y el nombre del usuario
     public VerRegistrosGUI(MenuPrincipalGUI menuPrincipal, String usuario) {
         this.menuPrincipal = menuPrincipal;
 
-        // Título y configuración básica de la ventana
         setTitle("Ver Registros de " + usuario);
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE); // Cierra solo esta ventana
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLayout(new BorderLayout());
-        getContentPane().setBackground(new Color(255, 102, 102)); // Fondo rojo pastel
+        getContentPane().setBackground(new Color(255, 102, 102));
 
-        // Fuente que se usará en los componentes
         Font fuente = new Font("Comic Sans MS", Font.PLAIN, 15);
 
-        // PANEL SUPERIOR: Filtros de búsqueda
-        JPanel panelFiltros = new JPanel(new FlowLayout()); // Usa distribución de flujo (horizontal)
-        panelFiltros.setBackground(new Color(255, 102, 102)); // Mismo fondo
+        // PANEL DE FILTROS
+        JPanel panelFiltros = new JPanel(new FlowLayout());
+        panelFiltros.setBackground(new Color(255, 102, 102));
 
-        campoBuscarNombre = new JTextField(12); // Campo para buscar por nombre
+        campoBuscarNombre = new JTextField(10);
         campoBuscarNombre.setFont(fuente);
 
-        // ComboBox para elegir calificación
         comboCalificacion = new JComboBox<>(new String[]{
-            "Todas", "Horrible", "Malo", "Regular", "Bueno", "Sublime"
+                "Todas", "Horrible", "Malo", "Regular", "Bueno", "Sublime"
         });
         comboCalificacion.setFont(fuente);
 
-        // ComboBox para filtrar por estado
         comboEstado = new JComboBox<>(new String[]{
-            "Todos", "No visto", "En espera", "Revisto", "Viendo", "Completado", "Abandonado"
+                "Todos", "No visto", "En espera", "Revisto", "Viendo", "Completado", "Abandonado"
         });
         comboEstado.setFont(fuente);
 
-        // Botón que aplica los filtros seleccionados
+        comboCategoria = new JComboBox<>(new String[]{
+                "Todas", "Película", "Serie", "Anime", "Música", "Playlist"
+        });
+        comboCategoria.setFont(fuente);
+
+        comboFavorito = new JComboBox<>(new String[]{
+                "Todos", "Sí", "No"
+        });
+        comboFavorito.setFont(fuente);
+
         JButton botonFiltrar = new JButton("Aplicar filtros");
         botonFiltrar.setFont(fuente);
 
-        // Agrega los componentes al panel de filtros.
         panelFiltros.add(new JLabel("Nombre:"));
         panelFiltros.add(campoBuscarNombre);
-        panelFiltros.add(new JLabel("Calificación:"));
-        panelFiltros.add(comboCalificacion);
+        panelFiltros.add(new JLabel("Categoría:"));
+        panelFiltros.add(comboCategoria);
         panelFiltros.add(new JLabel("Estado:"));
         panelFiltros.add(comboEstado);
+        panelFiltros.add(new JLabel("Calificación:"));
+        panelFiltros.add(comboCalificacion);
+        panelFiltros.add(new JLabel("Favorito:"));
+        panelFiltros.add(comboFavorito);
         panelFiltros.add(botonFiltrar);
 
-        // Agrega el panel superior a la parte norte de la ventana
         add(panelFiltros, BorderLayout.NORTH);
 
-        // PANEL CENTRAL: Tabla con registros
+        // TABLA DE REGISTROS
         String[] columnas = {"Nombre", "Categoría", "Estado", "Calificación", "Favorito", "Enlace"};
-        modeloTabla = new DefaultTableModel(columnas, 0); // Modelo sin filas iniciales
-        tablaRegistros = new JTable(modeloTabla); // Tabla con el modelo definido
+        modeloTabla = new DefaultTableModel(columnas, 0);
+        tablaRegistros = new JTable(modeloTabla);
         tablaRegistros.setFont(fuente);
-        tablaRegistros.setRowHeight(22); // Altura de las filas
+        tablaRegistros.setRowHeight(22);
 
-        // Agrega la tabla a un scroll y lo coloca en el centro
         JScrollPane scrollTabla = new JScrollPane(tablaRegistros);
         add(scrollTabla, BorderLayout.CENTER);
 
-        // PANEL INFERIOR: Botón para volver al menú
+        // PANEL INFERIOR
         JButton botonVolver = new JButton("Volver al menú");
         botonVolver.setFont(fuente);
-
-        JPanel panelSur = new JPanel(); // Panel para contener el botón de volver
+        JPanel panelSur = new JPanel();
         panelSur.setBackground(new Color(255, 102, 102));
         panelSur.add(botonVolver);
-
-        // Agrega el panel inferior al sur
         add(panelSur, BorderLayout.SOUTH);
 
-        // Acción del botón de volver: cierra esta ventana y vuelve al menú principal
+        // ACCIONES DE BOTONES
         botonVolver.addActionListener(e -> {
-            dispose(); // Cierra esta ventana
-            menuPrincipal.setVisible(true); // Muestra el menú
+            dispose();
+            menuPrincipal.setVisible(true);
         });
 
-        // Acción del botón de filtros: llama al método aplicarFiltros
-        botonFiltrar.addActionListener((ActionEvent e) -> aplicarFiltros());
+        botonFiltrar.addActionListener(e -> aplicarFiltros());
 
-        // Configuración final de la ventana
-        setSize(850, 450);
-        setLocationRelativeTo(null); // Centra la ventana
+        // LISTENERS AUTOMÁTICOS
+
+        campoBuscarNombre.getDocument().addDocumentListener(new DocumentListener() {
+            public void insertUpdate(DocumentEvent e) { aplicarFiltros(); }
+            public void removeUpdate(DocumentEvent e) { aplicarFiltros(); }
+            public void changedUpdate(DocumentEvent e) { aplicarFiltros(); }
+        });
+
+        comboCalificacion.addActionListener(e -> aplicarFiltros());
+        comboEstado.addActionListener(e -> aplicarFiltros());
+        comboCategoria.addActionListener(e -> aplicarFiltros());
+        comboFavorito.addActionListener(e -> aplicarFiltros());
+
+        // CONFIG FINAL
+        setSize(950, 500);
+        setLocationRelativeTo(null);
         setVisible(true);
     }
 
-    // Método que simula la búsqueda de registros según los filtros
+    // APLICA FILTROS COMBINADOS
     private void aplicarFiltros() {
-        // Obtiene los filtros seleccionados por el usuario
         String nombre = campoBuscarNombre.getText().trim().toLowerCase();
         String calificacion = (String) comboCalificacion.getSelectedItem();
         String estado = (String) comboEstado.getSelectedItem();
+        String categoria = (String) comboCategoria.getSelectedItem();
+        String favorito = (String) comboFavorito.getSelectedItem();
 
-        // Borra los registros actuales de la tabla
         modeloTabla.setRowCount(0);
 
-        // Simulación de registros (deberían venir de una base de datos o lista real)
-        // **************************************************************************************************************************
-        String[][] registrosSimulados = { // Este bloque simula los registros del usuario. Estos datos no provienen de una base de datos real, sino que están "quemados" directamente en el código.
-            {"Inception", "Película", "Completado", "Sublime", "Sí", "https://inception.example.com"},
-            {"Breaking Bad", "Serie", "Re visto", "Muy bueno", "No", "https://bb.example.com"},
-            {"Mi Playlist Favorita", "Playlist", "En espera", "Regular", "Sí", "https://playlist.example.com"},
-        }; //-----------------------------------------------------------------------------------------------------------------------
+        // Datos simulados
+        /*String[][] registrosSimulados = {
+                {"Inception", "Película", "Completado", "Sublime", "Sí", "https://inception.example.com"},
+                {"Breaking Bad", "Serie", "Revisto", "Bueno", "No", "https://bb.example.com"},
+                {"Mi Playlist Favorita", "Playlist", "En espera", "Regular", "Sí", "https://playlist.example.com"},
+                {"Naruto", "Anime", "Completado", "Bueno", "No", "https://naruto.example.com"},
+                {"Interstellar", "Película", "No visto", "Sublime", "Sí", "https://interstellar.example.com"},
+        };
 
-        // Recorre los registros simulados y aplica los filtros
-        // ****************************************************************************************************************************
-        for (String[] reg : registrosSimulados) { // El filtrado se hace sobre el arreglo simulado, no sobre resultados consultados desde una base SQL.	
-            boolean coincide = true; //------------------------------------------------------------------------------------------------
+        for (String[] reg : registrosSimulados) {
+            boolean coincide = true;
 
-            // Filtra por nombre si se escribió algo
             if (!nombre.isEmpty() && !reg[0].toLowerCase().contains(nombre)) coincide = false;
+            if (!"Todas".equals(calificacion) && !reg[3].equalsIgnoreCase(calificacion)) coincide = false;
+            if (!"Todos".equals(estado) && !reg[2].equalsIgnoreCase(estado)) coincide = false;
+            if (!"Todas".equals(categoria) && !reg[1].equalsIgnoreCase(categoria)) coincide = false;
+            if (!"Todos".equals(favorito) && !reg[4].equalsIgnoreCase(favorito)) coincide = false;
 
-            // Filtra por calificación si no es "Todas"
-            if (!"Todas".equals(calificacion) && !reg[3].equals(calificacion)) coincide = false;
-
-            // Filtra por estado si no es "Todos"
-            if (!"Todos".equals(estado) && !reg[2].equals(estado)) coincide = false;
-
-            // Si el registro cumple con todos los filtros, lo agrega a la tabla
             if (coincide) modeloTabla.addRow(reg);
-        }
+        }*/
     }
 }
