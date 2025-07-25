@@ -11,13 +11,16 @@ import java.time.LocalDate;
  */
 public class Main {
 	
-	static public Long 
+	static public int 
 	currentUser, 
 	currentMediaRegistry,
 	currentMediaContent,
 	currentVideo,
 	currentVideoInfo;
 
+	static Date fecha;
+	
+	static public LocalDate localDate;
     /**
      * Método main: punto de entrada del programa.
      * 
@@ -35,7 +38,7 @@ public class Main {
         
         Connection conn = SQL.DBConnection.getConnection();
         LocalDate localDate = LocalDate.now(); 
-        Date fecha = Date.valueOf(localDate);
+        fecha = Date.valueOf(localDate);
         
         SQL.Query.user_exists(conn, "name", "name");
         

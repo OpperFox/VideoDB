@@ -74,27 +74,15 @@ public class UserMediaRegistry {
 		
 		// Devuelve el ID único del registro
 		
-		public void newMediaContent() {
+		public void newMediaContent(Long id, Long idAlfa, Long registryId, int loc) {
 			if (this.type != null) {
-				this.type.newType(Long id, Long registryId, int loc);
+				this.type.newType(id, idAlfa, registryId, loc);
 			}
 		}
 		
-		public void newMediaContent(String name) {
+		public void newMediaContent(Long id, Long idAlfa, Long registryId, int loc, String name, int  videoNum) {
 			if (this.type != null) {
-				this.type.newType();
-			}	
-		}
-		
-		public void newMediaContent(String name, int entryNum) {
-			if (this.type != null) {
-				this.type.newType();
-			}
-		}
-		
-		public void newMediaContent(String name, int entryNum, int  videoNum) {
-			if (this.type != null) {
-				this.type.newType();
+				this.type.newType(registryId, registryId, registryId, videoNum);
 			}
 		}
 		

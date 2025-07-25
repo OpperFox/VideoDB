@@ -86,9 +86,10 @@ public class IngresarGUI extends JFrame {
                 if (esAdmin || existeUsuario) {
                     // Si es admin, asigna un ID fijo
                     if (esAdmin) {
-                        Main.currentUser = 0L; // Por ejemplo, admin como ID 0
+                        Main.currentUser = 0; // Por ejemplo, admin como ID 0
                     } else {
-                        Main.currentUser = Long.valueOf(usuario); // Solo si usuario es el ID (esto podría causar error si no es numérico)
+                        Main.currentUser = SQL.Query.user_exists(SQL.DBConnection.getConnection(), usuario);
+                        System.out.println("current user: "+ Main.currentUser);// Solo si usuario es el ID (esto podría causar error si no es numérico)
                     }
 
                     JOptionPane.showMessageDialog(

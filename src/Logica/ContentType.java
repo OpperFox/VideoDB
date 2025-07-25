@@ -25,13 +25,13 @@ public enum ContentType { // Define un enumerado que representa tipos de conteni
 		
 		switch(this.typeName) {
 			case "Temporada":
-				return new Temporada(id,idL);
+				return new Temporada(id,idAlfa, idL);
 			case "Serie":
 				return new Serie(id,registryId, idL);
 			case "Playlist":
 				return new Playlist(id,registryId, idL);
 			case "Saga":
-				return new Saga(id);
+				return new Saga(id,registryId, idL);
 			default:
 				return null;
 		}

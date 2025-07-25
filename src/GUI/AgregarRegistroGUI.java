@@ -18,6 +18,16 @@
 
 	    private JComboBox<Integer> comboTemporada, comboCapitulo;
 	    private JPanel panelTemporadaCapitulo;
+	    
+	    private String
+	    nombre,
+	    url,
+	    rating,
+	    status;
+	    
+	    private String seleccion;
+	    
+	    private boolean favorito;
 
 	    public AgregarRegistroGUI(JFrame ventanaAnterior, String usuario) {
 	        // Configuración básica
@@ -69,6 +79,7 @@
 	            @Override
 	            public void keyReleased(KeyEvent e) {
 	                System.out.println("Texto en nombre: " + campoNombre.getText());
+	                nombre = campoNombre.getText();
 	            }
 	        });
 
@@ -76,24 +87,36 @@
 	            @Override
 	            public void keyReleased(KeyEvent e) {
 	                System.out.println("Texto en enlace: " + campoLink.getText());
+	                
+	                url = campoLink.getText();
+	                
 	            }
 	        });
 
 	        comboEstado.addItemListener(e -> {
 	            if (e.getStateChange() == ItemEvent.SELECTED) {
 	                System.out.println("Estado seleccionado: " + comboEstado.getSelectedItem());
+	                
+	                status = (String) comboEstado.getSelectedItem();
+	                
 	            }
 	        });
 
 	        comboCalificacion.addItemListener(e -> {
 	            if (e.getStateChange() == ItemEvent.SELECTED) {
 	                System.out.println("Calificación seleccionada: " + comboCalificacion.getSelectedItem());
+	                
+	                rating = (String) comboCalificacion.getSelectedItem();
+	                
 	            }
 	        });
 
 	        checkFavorito.addActionListener(e -> {
 	            boolean favorito = checkFavorito.isSelected();
 	            System.out.println("¿Favorito? " + (favorito ? "Sí" : "No"));
+	            
+	            favorito = checkFavorito.isSelected();
+	            
 	        });
 
 	        // ------ CONTINÚA EL CÓDIGO NORMAL ------
@@ -116,7 +139,7 @@
 
 	        comboCategoria.addItemListener(e -> {
 	            if (e.getStateChange() == ItemEvent.SELECTED) {
-	                String seleccion = (String) e.getItem();
+	                seleccion = (String) e.getItem();
 	                panelTemporadaCapitulo.setVisible("Serie".equals(seleccion));
 	                pack();
 	            }
@@ -151,12 +174,18 @@
 
 	        botonGuardar.addActionListener(e -> {
 	            JOptionPane.showMessageDialog(this, "Registro guardado.");
+	            
+	            SQL.Query.usermediaregistry_registry(SQL.DBConnection.getConnection(),nombre, rating, status, seleccion, favorito, Main.fecha, url,Main.currentUser);
+	            
 	        });
 
 	        botonGuardarVolver.addActionListener(e -> {
 	            JOptionPane.showMessageDialog(this, "Registro guardado.");
 	            dispose();
 	            ventanaAnterior.setVisible(true);
+	            
+	            
+	            
 	        });
 
 	        botonCancelar.addActionListener(e -> {

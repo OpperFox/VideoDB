@@ -84,7 +84,7 @@ public class MenuPrincipalGUI extends JFrame {
     }
 
     public void abrirVentanaVer() {
-        new VerRegistrosGUI(this, usuario);
+        new VerRegistrosGUI();
         setVisible(false);
     }
 
