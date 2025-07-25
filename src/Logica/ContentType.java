@@ -29,7 +29,7 @@ public enum ContentType { // Define un enumerado que representa tipos de conteni
 			case "Serie":
 				return new Serie(id,registryId, idL);
 			case "Playlist":
-				return new Playlist(id,registryId);
+				return new Playlist(id,registryId, idL);
 			case "Saga":
 				return new Saga(id);
 			default:

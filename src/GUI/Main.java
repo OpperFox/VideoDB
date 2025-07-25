@@ -10,6 +10,13 @@ import java.time.LocalDate;
  * Desde aquí se lanza la interfaz gráfica principal del sistema de registros multimedia.
  */
 public class Main {
+	
+	static public Long 
+	currentUser, 
+	currentMediaRegistry,
+	currentMediaContent,
+	currentVideo,
+	currentVideoInfo;
 
     /**
      * Método main: punto de entrada del programa.
@@ -21,12 +28,6 @@ public class Main {
      */
     public static void main(String[] args) {
         // Se lanza la ventana principal de la aplicación (pantalla de inicio)
-    	
-    	Long currentUser;
-    	Long currentMediaRegistry;
-    	Long currentMediaContent;
-    	Long currentVideo;
-    	Long currentVideoInfo;
     	
     	//public 
     	

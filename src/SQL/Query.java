@@ -58,6 +58,30 @@ public class Query {
         return false;
     }
  
+    public static int user_exists(Connection conn, String name){
+        int id = -1;
+        try{
+            PreparedStatement statement = conn.prepareStatement(
+                "SELECT * FROM USUARIO WHERE NOMBRE = ?"
+            );
+            statement.setString(1, name);
+
+            ResultSet rs = statement.executeQuery();
+
+            if (rs.next()) {
+                id = rs.getInt("id"); // usa el nombre de la columna
+            }
+
+            rs.close();
+            return id;
+
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        return id;
+    }
+
+    
     public static boolean user_registry(Connection conn, String name, String password){
         try{
             PreparedStatement statement = conn.prepareStatement(
