@@ -29,23 +29,18 @@ public abstract class MediaContent {
 	// Constructores
 
 	// Constructor por defecto que asigna un nombre por defecto
-	public MediaContent (Long id_g, Long registryId) {
+	public MediaContent (Long id_g, Long registryId, int loc) {
 		
-		this(id_g, registryId, "NO_NAME");
+		this(id_g, registryId, loc,"NO_NAME");
 	}
 
 	// Constructor que permite establecer el nombre
-	public MediaContent (Long id_g, Long registryId, String name) {
-		this(id_g, registryId ,name, 1); // Asume por defecto 1 entrada subordinada
-	}
-
-	// Constructor que permite establecer nombre y número de elementos subordinados
-	public MediaContent (Long id_g,Long registryId, String name, int id_l) {
-		this(id_g, registryId, name, id_l, 1); // Por defecto asigna capacidad para 6 videos
+	public MediaContent (Long id_g, Long registryId, int loc, String name) {
+		this(id_g, registryId, loc, name , 1); // Asume por defecto 1 entrada subordinada
 	}
 
 	// Constructor principal con todos los parámetros
-	public MediaContent (Long id_g, Long registryId,  String name, int id_l, int videoNum) {
+	public MediaContent (Long id_g, Long registryId, int loc, String name, int videoNum) {
 		// Asigna ID global único incrementando el contador compartido
 		this.id_g = id_g;
 		this.registryId = registryId;
