@@ -34,7 +34,7 @@ public abstract class MediaContent {
 
 	// Constructor que permite establecer nombre y número de elementos subordinados
 	public MediaContent (String name, int entryNum) {
-		this(name, entryNum, 6); // Por defecto asigna capacidad para 6 videos
+		this(name, entryNum, 1); // Por defecto asigna capacidad para 6 videos
 	}
 
 	// Constructor principal con todos los parámetros
