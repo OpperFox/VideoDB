@@ -7,16 +7,30 @@ import java.sql.*;
 
 public class Query {
 
-    private static void printResultSet(ResultSet rs) throws SQLException {
-        ResultSetMetaData meta = rs.getMetaData();
-        int columnCount = meta.getColumnCount();
-
-        while (rs.next()) {
-            for (int i = 1; i <= columnCount; i++) {
-                System.out.print(rs.getString(i) + " ");
-            }
-            System.out.println();
+    private static String[] printResultSet(ResultSet rs) throws SQLException {
+    	int columnCount;
+    	String[] x;  
+    	try {    		
+    		ResultSetMetaData meta = rs.getMetaData();
+    		columnCount = meta.getColumnCount();
+        
+    		x = new String[columnCount];
+        
+    		while (rs.next()) {
+        	
+    			for (int i = 0; i <= columnCount; i++) {
+    				x[i] = (rs.getString(i) + " ");
+    				System.out.println(rs.getString(i) + " ");
+    			}
+            
+    			System.out.println();            
+    		}
+    		return x;
+    	}catch(Exception e){
+            e.printStackTrace();
+            return x;
         }
+    	
     }
 
     public static boolean user_exists(Connection conn, String name, String password){
@@ -28,12 +42,19 @@ public class Query {
             statement.setString(2, password);
 
             ResultSet rs = statement.executeQuery();
-            printResultSet(rs);
+            String[] y = printResultSet(rs);
             rs.close();
+            
+            if (y[0] != null) {
+            	return true;
+            }else {
+            	return false;
+            }
+            
         } catch(Exception e){
             e.printStackTrace();
         }
-        return true;
+        return false;
     }
 
     public static boolean usermediaregistry_exists(Connection conn, String nombre, String rating, String status, boolean favorito, Date fecha_comienzo, String reference_url, int usuario_id){
