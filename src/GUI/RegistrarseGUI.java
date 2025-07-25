@@ -56,6 +56,49 @@ public class RegistrarseGUI extends JFrame {
         botonVolver.setFont(fuente);
         botonVolver.addActionListener(e -> volverAPrincipal());
 
+<<<<<<< HEAD
+=======
+        // Evento que se ejecuta al hacer clic en "Volver"
+        botonVolver.addActionListener(e -> {
+            ventanaPrincipal.setVisible(true); // Vuelve a mostrar la ventana principal
+            dispose();                         // Cierra la ventana actual
+        });
+
+        // Evento que se ejecuta al hacer clic en "Registrar"
+        botonRegistrar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Se obtiene el texto ingresado por el usuario
+                String usuario = campoUsuario.getText();
+                String clave = new String(campoClave.getPassword()); // Se convierte el arreglo de caracteres en String
+
+                // Se valida que ambos campos no estén vacíos
+                if (!usuario.isEmpty() && !clave.isEmpty() && ! SQL.Query.user_exists(SQL.DBConnection.getConnection(),usuario,clave))  {
+                    // Muestra mensaje de éxito
+                	
+                	//Logica.User x = new Logica.User(usuario, clave);
+                	SQL.Query.user_registry(SQL.DBConnection.getConnection(), usuario, clave);
+                    JOptionPane.showMessageDialog(
+                        RegistrarseGUI.this,
+                        "Usuario creado con éxito",
+                        "Registro exitoso",
+                        JOptionPane.INFORMATION_MESSAGE
+                    );
+                    ventanaPrincipal.setVisible(true); // Muestra la ventana principal
+                    dispose();                         // Cierra la ventana de registro
+                } else {
+                    // Si algún campo está vacío, se muestra un mensaje de error
+                    JOptionPane.showMessageDialog(
+                        RegistrarseGUI.this,
+                        "Por favor completa todos los campos",
+                        "Error de registro",
+                        JOptionPane.ERROR_MESSAGE
+                    );
+                }
+            }
+        });
+
+        // Añade los botones al panel
+>>>>>>> 7464460f052d067c9ea6605a8f7aa62f07884d04
         panelBotones.add(botonRegistrar);
         panelBotones.add(botonVolver);
 

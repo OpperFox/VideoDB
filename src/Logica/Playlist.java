@@ -2,18 +2,13 @@ package Logica;
 
 public class Playlist extends MediaContent{
 
-	public Playlist(Long id) {
-		super(id);
+	public Playlist(Long id_g, Long registryId, int loc) {
+		super(id_g, registryId, loc);
 		
 		this.container = false;
 		
 	}
 
-	@Override
-	public MediaContent addMediaContent(int numMediaContent) {
-		
-		return null;//reutilizar el constructor de usermediaregistry para poder elegir correctamente el tipo de mediacontent a agregar (a exepcion de playlist)
-	}
 
 	@Override
 	public MediaContent removeMediaContent() {
@@ -29,6 +24,13 @@ public class Playlist extends MediaContent{
 
 	@Override
 	public MediaContent setMediaContentName(String newName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public MediaContent addMediaContent(Long id, Long registryId, int numMediaContent) {
 		// TODO Auto-generated method stub
 		return null;
 	}
