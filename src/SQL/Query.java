@@ -7,14 +7,10 @@ import java.sql.*;
 
 public class Query {
 
-    private static String[] printResultSet(ResultSet rs) throws SQLException {
-    	int columnCount;
-    	String[] x;  
+    private static String[] printResultSet(ResultSet rs, int col) throws SQLException {
+    	int columnCount = col;
+    	String[] x = new String[columnCount];  
     	try {    		
-    		ResultSetMetaData meta = rs.getMetaData();
-    		columnCount = meta.getColumnCount();
-        
-    		x = new String[columnCount];
         
     		while (rs.next()) {
         	
@@ -42,7 +38,10 @@ public class Query {
             statement.setString(2, password);
 
             ResultSet rs = statement.executeQuery();
-            String[] y = printResultSet(rs);
+            ResultSetMetaData meta = rs.getMetaData();
+    		int columnCount = meta.getColumnCount();
+    		
+            String[] y = printResultSet(rs, columnCount );
             rs.close();
             
             if (y[0] != null) {
