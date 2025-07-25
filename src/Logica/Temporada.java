@@ -2,8 +2,12 @@ package Logica;
 
 public class Temporada extends MediaContent{
 	
-	public Temporada() {
-		super();
+	public Temporada(Long id, int loc) {
+		super(id);
+		
+		this.container = false;
+		this.id_l = loc;
+		
 	}
 
 	@Override

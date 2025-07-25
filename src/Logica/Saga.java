@@ -2,8 +2,11 @@ package Logica;
 
 public class Saga extends MediaContent{
 	
-	public Saga () {
-		super();
+	public Saga(Long id) {
+		super(id);
+		
+		this.container = false;
+		
 	}
 
 	@Override

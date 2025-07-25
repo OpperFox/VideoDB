@@ -81,7 +81,7 @@ public class IngresarGUI extends JFrame {
                  clave = new String(campoClave.getPassword()); // Convertimos la clave a texto
 
                 // Validación simple de usuario y contraseña
-                if (SQL.Query.userpassword_exists(SQL.DBConnection.getConnection(),usuario,clave)) {
+                if (SQL.Query.user_exists(SQL.DBConnection.getConnection(),usuario,clave)) {
                     // Si es correcto, muestra un mensaje de bienvenida
                     JOptionPane.showMessageDialog(
                         IngresarGUI.this,

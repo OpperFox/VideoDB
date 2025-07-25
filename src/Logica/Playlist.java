@@ -2,8 +2,11 @@ package Logica;
 
 public class Playlist extends MediaContent{
 
-	public Playlist() {
-		super();
+	public Playlist(Long id) {
+		super(id);
+		
+		this.container = false;
+		
 	}
 
 	@Override

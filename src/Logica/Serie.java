@@ -3,15 +3,18 @@ package Logica;
 
 public class Serie extends MediaContent {
 	// Constructor por defecto que llama al constructor de la clase padre
-	public Serie() {
-		super();
+	public Serie(Long id, int loc) {
+		super(id);
+		
+		this.container = false;
+		
 	}
 
 	// Implementación del método abstracto para agregar contenido subordinado (Temporada)
 	@Override
-	public MediaContent addMediaContent(int numMediaContent) {
+	public MediaContent addMediaContent(Long id, int numMediaContent) {
 		// Agrega una nueva instancia de Temporada a la lista de contenidos de la serie
-		mediaContent.add(new Temporada());
+		mediaContent.add(new Temporada(id, numMediaContent));
 
 		// Por ahora devuelve null, se puede mejorar para devolver la temporada creada
 		return null;

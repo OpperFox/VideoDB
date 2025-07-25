@@ -16,33 +16,27 @@ public class Video {
 	private int position = 0;     // Posición del video dentro de su lista o secuencia
 	private String name = null; // Nombre del video
 	
-	private Status status;
-	
 	private ArrayList<VideoURL> videoURL; // Lista de URLs asociadas al video
 
 	// Constructores
 	
-	public Video () {
+	public Video (Long sigma, Long alfa, Long id, int position) {
 		// Constructor por defecto
 		// Llama al constructor que recibe un nombre
-		this(""); // El nombre será una combinación del contenido superior (sigma + alfa) si el usuario no lo llena
+		this(sigma, alfa,id, position, "Video "+ position); // El nombre será una combinación del contenido superior (sigma + alfa) si el usuario no lo llena
 	}
 	
 	// # # # # # implementar correctamente los constructores como en las clases anteriores 
 	
-	public Video (String name) {
+	public Video (Long sigma, Long alfa, Long id, int position, String name) {
 		// Constructor que recibe un nombre y genera automáticamente el ID del video
-		
-		id++;                // Incrementa el contador global
+		                // Incrementa el contador global
 		this.videoId = id;   // Asigna el nuevo ID al video
 		this.position += position;
-	}
-	
-	public Video (int position, String name) {
-		// Constructor que permite establecer explícitamente la posición y el nombre del video
+		this.name = name;
 		
-		this.position = position; // Asigna la posición en la lista o secuencia
-		this.name = name;         // Asigna el nombre del video
+		this.alfaMediaContent = alfa;
+		this.sigmaMediaContent = sigma;
 	}
 
 	// Getters y Setters

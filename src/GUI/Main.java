@@ -20,6 +20,15 @@ public class Main {
      */
     public static void main(String[] args) {
         // Se lanza la ventana principal de la aplicación (pantalla de inicio)
+    	
+    	Long currentUser;
+    	Long currentMediaRegistry;
+    	Long currentMediaContent;
+    	Long currentVideo;
+    	Long currentVideoInfo;
+    	
+    	//public 
+    	
         new PrincipalGUI();
         
         Connection conn = SQL.DBConnection.getConnection();

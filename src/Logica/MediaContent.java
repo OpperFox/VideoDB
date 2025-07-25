@@ -14,6 +14,9 @@ public abstract class MediaContent {
 
 	protected ArrayList<MediaContent> mediaContent; // Lista de MediaContent subordinados (ej. temporadas dentro de una serie)
 	protected ArrayList<Video> videos;              // Lista de objetos Video asociados a este contenido
+	
+	protected String alfa;
+	protected String beta;
 
 	protected String name; // Nombre del contenido (serie, temporada, etc.)
 
@@ -22,28 +25,28 @@ public abstract class MediaContent {
 	// Constructores
 
 	// Constructor por defecto que asigna un nombre por defecto
-	public MediaContent () {
+	public MediaContent (Long id_g) {
 		
-		this("NO_NAME");
+		this(id_g, "NO_NAME");
 	}
 
 	// Constructor que permite establecer el nombre
-	public MediaContent (String name) {
+	public MediaContent (Long id_g, String name) {
 		this(name, 1); // Asume por defecto 1 entrada subordinada
 	}
 
 	// Constructor que permite establecer nombre y número de elementos subordinados
-	public MediaContent (String name, int entryNum) {
+	public MediaContent (Long id_g, String name, int entryNum) {
 		this(name, entryNum, 1); // Por defecto asigna capacidad para 6 videos
 	}
 
 	// Constructor principal con todos los parámetros
-	public MediaContent (String name, int entryNum, int videoNum) {
+	public MediaContent (Long id_g, String name, int entryNum, int videoNum) {
 		// Asigna ID global único incrementando el contador compartido
-		this.id_g = ++idGlob;
-
+		this.id_g = 
 		// Asigna ID local único incrementando el contador compartido
-		this.id_l = ++idLoc;
+		if()
+				this.id_l = ++idLoc;
 
 		// Asigna el nombre del contenido
 		this.name = name;
@@ -94,6 +97,52 @@ public abstract class MediaContent {
 	public void getVideo() {
 		// Lógica pendiente para recuperar un video (por índice o criterio)
 	}
+	
+	public static String alfa_betaCreator (Long id, int limit) {
+		
+		String x = "";
+		
+		for(int i = 0; i < limit; i++) {
+			
+			x += 'a'+String.valueOf(id+i);
+			
+		}
+		
+		return x;
+	}
+	
+	public static Long[] alfa_betaReader(String alfa_beta) {
+		
+	    String[] list = alfa_beta.split("a");
+
+	    // Filtrar vacíos y contar cuántos números válidos hay
+	    int count = 0;
+	    for (String s : list) {
+	        if (!s.isEmpty()) count++;
+	    }
+
+	    Long[] listf = new Long[count];
+	    int x = 0;
+	    
+	    for (String i : list) {
+	        if (!i.isEmpty()) {
+	            listf[x] = Long.valueOf(i);
+	            x++;
+	        }
+	    }
+
+	    return listf;
+	}
+
+	public static int alfa_betaAsigner(Long[] list, Long id) {
+		
+		for(int i = 0; i < list.length;i++) {
+			if(list[i] == id) return i;
+		}
+		
+		return -1;
+	}
+	
 
 	// Métodos abstractos a ser implementados
 
