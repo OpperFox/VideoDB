@@ -57,20 +57,38 @@ public class Query {
         }
         return false;
     }
-
-    public static boolean usermediaregistry_exists(Connection conn, String nombre, String rating, String status, boolean favorito, Date fecha_comienzo, String reference_url, int usuario_id){
+ 
+    public static boolean user_registry(Connection conn, String name, String password){
         try{
             PreparedStatement statement = conn.prepareStatement(
-                "SELECT * FROM usermediaregistry WHERE nombre = ? AND rating = ? AND status = ? AND favorito = ? AND fecha_comienzo = ? AND reference_url = ? AND usuario_id = ?"
+                "INSERT INTO usuario (nombre, password) VALUES (?,?)"
+            );
+            statement.setString(1, name);
+            statement.setString(2, password);
+
+            statement.executeUpdate();
+            
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
+
+    public static boolean usermediaregistry_exists(Connection conn, String nombre, String rating, String status, String tipo, boolean favorito,Date fecha_comienzo, String reference_url, int usuario_id){
+        try{
+            PreparedStatement statement = conn.prepareStatement(
+                "SELECT * FROM usermediaregistry WHERE nombre = ? AND rating = ? AND status = ? AND favorito = ? AND fecha_comienzo = ? AND tipo = ? AND reference_url = ? AND usuario_id = ?"
             );
 
             statement.setString(1, nombre);
             statement.setString(2, rating);
             statement.setString(3, status);
-            statement.setBoolean(4, favorito);
-            statement.setDate(5, fecha_comienzo);
-            statement.setString(6, reference_url);
-            statement.setInt(7, usuario_id);
+            statement.setString(4, tipo);
+            statement.setBoolean(5, favorito);
+            statement.setDate(6, fecha_comienzo);
+            statement.setString(7, reference_url);
+            statement.setInt(8, usuario_id);
 
             ResultSet rs = statement.executeQuery();
             ResultSetMetaData meta = rs.getMetaData();
@@ -78,6 +96,28 @@ public class Query {
     		
             String[] y = printResultSet(rs, columnCount );
             rs.close();
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+    public static boolean usermediaregistry_registry(Connection conn, String nombre, String rating, String status, String tipo, boolean favorito,Date fecha_comienzo, String reference_url, int usuario_id){
+        try{
+            PreparedStatement statement = conn.prepareStatement(
+                "INSERT INTO USARMEDIAREGISTRY (nombre,rating, status, tipo, favorito, Fecha_comienzo, reference_url, usuario_id)"
+                + "VALUES (?,?,?,?,?,?,?,?)"
+            );
+
+            statement.setString(1, nombre);
+            statement.setString(2, rating);
+            statement.setString(3, status);
+            statement.setString(4, tipo);
+            statement.setBoolean(5, favorito);
+            statement.setDate(6, fecha_comienzo);
+            statement.setString(7, reference_url);
+            statement.setInt(8, usuario_id);
+
+            statement.executeUpdate();
         } catch(Exception e){
             e.printStackTrace();
         }
