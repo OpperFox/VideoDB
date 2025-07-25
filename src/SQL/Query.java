@@ -38,18 +38,20 @@ public class Query {
             statement.setString(2, password);
 
             ResultSet rs = statement.executeQuery();
-            ResultSetMetaData meta = rs.getMetaData();
-    		int columnCount = meta.getColumnCount();
-    		
-            String[] y = printResultSet(rs, columnCount );
-            rs.close();
-            
-            if (y[0] != null) {
-            	return true;
-            }else {
-            	return false;
+            boolean existe = rs.next(); // Solo chequea si hay al menos un resultado
+
+            if (existe) {
+                // Opcional: imprimir contenido
+                ResultSetMetaData meta = rs.getMetaData();
+                int columnCount = meta.getColumnCount();
+                for (int i = 1; i <= columnCount; i++) {
+                    System.out.println(rs.getString(i) + " ");
+                }
             }
-            
+
+            rs.close();
+            return existe;
+
         } catch(Exception e){
             e.printStackTrace();
         }
