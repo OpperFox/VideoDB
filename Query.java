@@ -1,4 +1,4 @@
-//query.user_exists(DBConnection.getConnection(), "name");
+//query.user_exists(DBConnection.getConnection(), "name");  
 
 
 package SQL;
