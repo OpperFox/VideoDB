@@ -1,4 +1,4 @@
-//query.user_exists(DBConnection.getConnection(), "name");
+//query.user_exists(DBConnection.getConnection(), "name");  
 
 
 package SQL;
@@ -6,280 +6,157 @@ package SQL;
 import java.sql.*;
 
 public class Query {
-    public static boolean user_exists(Connection conn, String name){
-  
-        try{
-            
-            PreparedStatement statement = conn.prepareStatement("SELECT * FROM USUARIO WHERE NOMBRE = ?");
-            statement.setString(1,name);
 
-            ResultSet rs = statement.executeQuery();
-            
-            
-            while(rs.next()){
-                System.out.println(rs.getString(1) + " "+ rs.getString(2)+ " "+ rs.getString(3));
-            }
-            rs.close();
-            
-            
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        
-         
-        return true;
-        
-    }
-    
-    
-    public static boolean usermediaregistry_exists(Connection conn, int usuarioid){
-  
-        try{
-            
-            PreparedStatement statement = conn.prepareStatement("SELECT * FROM usermediaregistry WHERE usuario_id = ?");
-            statement.setInt(1,usuarioid);
+    private static void printResultSet(ResultSet rs) throws SQLException {
+        ResultSetMetaData meta = rs.getMetaData();
+        int columnCount = meta.getColumnCount();
 
-            ResultSet rs = statement.executeQuery();
-            
-            
-            while(rs.next()){
-                System.out.println(rs.getString(1) + " "+ rs.getString(2)+ " "+ rs.getString(3)+ " " + rs.getString(3)+ " " + rs.getString(4)+ " " + rs.getString(5)+ " " + rs.getString(7)+ " " );
+        while (rs.next()) {
+            for (int i = 1; i <= columnCount; i++) {
+                System.out.print(rs.getString(i) + " ");
             }
-            rs.close();
-            
-            
-        }catch(Exception e){
-            e.printStackTrace();
+            System.out.println();
         }
-        
-         
-        return true;
-        
-    }
-    
-    public static boolean mediacontent_exists(Connection conn, int id_glob){
-  
-        try{
-            
-            PreparedStatement statement = conn.prepareStatement("SELECT * FROM mediacontent WHERE id_glob = ?");
-            statement.setInt(1,id_glob);
-
-            ResultSet rs = statement.executeQuery();
-            
-            
-            while(rs.next()){
-                System.out.println(rs.getString(2)+ " "+ rs.getString(3) +" "+ rs.getString(4));
-            }
-            rs.close();
-            
-            
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        
-         
-        return true;
-        
-    }
-    public static boolean video_exists(Connection conn, int id_glob){
-        try{
-            
-            PreparedStatement statement = conn.prepareStatement("SELECT * FROM video WHERE id_glob = ?");
-            statement.setInt(1,id_glob);
-
-            ResultSet rs = statement.executeQuery();
-            
-            
-            while(rs.next()){
-                System.out.println(rs.getString(2)+ " "+ rs.getString(3));
-            }
-            rs.close();
-            
-            
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        
-         
-        return true;
-        
-    }
-    public static boolean VideoUrl_exists(Connection conn, int id_glob){
-  
-        try{
-            
-            PreparedStatement statement = conn.prepareStatement("SELECT * FROM VideoURL WHERE video_id_glob = ?");
-            statement.setInt(1,id_glob);
-
-            ResultSet rs = statement.executeQuery();
-            
-            
-            while(rs.next()){
-                System.out.println(rs.getString(2)+ " "+ rs.getString(3));
-            }
-            rs.close();
-            
-            
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        
-         
-        return true;
-        
-    }
-    public static boolean uservideoinfo_exists(Connection conn, int id_glob){
-  
-        try{
-            
-            PreparedStatement statement = conn.prepareStatement("SELECT * FROM uservideoinfo WHERE video_id_glob = ?");
-            statement.setInt(1,id_glob);
-
-            ResultSet rs = statement.executeQuery();
-            
-            
-            while(rs.next()){
-                System.out.println(rs.getString(1) + " "+ rs.getString(2)+ " "+ rs.getString(3)+ " " + rs.getString(3)+ " " + rs.getString(4)+ " " + rs.getString(5)+ " " + rs.getString(7)+ " " );
-            }
-            rs.close();
-            
-            
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        
-         
-        return true;
-        
-    }
-    public static boolean uservideohistory_exists(Connection conn, int user_video_info_id){
-  
-        try{
-            
-            PreparedStatement statement = conn.prepareStatement("SELECT * FROM uservideohistory WHERE user_video_info = ?");
-            statement.setInt(1,user_video_info_id);
-
-            ResultSet rs = statement.executeQuery();
-            
-            
-            while(rs.next()){
-                System.out.println(rs.getString(1)+ " "+ rs.getString(2)+ " "+ rs.getString(3));
-            }
-            rs.close();
-            
-            
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        
-         
-        return true;
-        
-    }
-    public static boolean series_exists(Connection conn, int id){
-  
-        try{
-            
-            PreparedStatement statement = conn.prepareStatement("SELECT * FROM serie WHERE id = ?");
-            statement.setInt(1,id);
-
-            ResultSet rs = statement.executeQuery();
-            
-            
-            while(rs.next()){
-                System.out.println(rs.getString(1)+ " ");
-            }
-            rs.close();
-            
-            
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        
-         
-        return true;
-        
-    }
-    public static boolean playlist_exists(Connection conn, int id){
-  
-        try{
-            
-            PreparedStatement statement = conn.prepareStatement("SELECT * FROM playlist WHERE id = ?");
-            statement.setInt(1,id);
-
-            ResultSet rs = statement.executeQuery();
-            
-            
-            while(rs.next()){
-                System.out.println(rs.getString(1));
-            }
-            rs.close();
-            
-            
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        
-         
-        return true;
-        
-    }
-    public static boolean saga_exists(Connection conn, int id){
-  
-        try{
-            
-            PreparedStatement statement = conn.prepareStatement("SELECT * FROM saga WHERE id = ?");
-            statement.setInt(1,id);
-
-            ResultSet rs = statement.executeQuery();
-            
-            
-            while(rs.next()){
-                System.out.println(rs.getString(1)+ " ");
-            }
-            rs.close();
-            
-            
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        
-         
-        return true;
-        
     }
 
-    public static boolean userpassword_exists(Connection conn, String name, String password){
-  
+    public static boolean user_exists(Connection conn, String name, String password){
         try{
-            
-            PreparedStatement statement = conn.prepareStatement("SELECT * FROM USUARIO WHERE NOMBRE = ? && password = ?");
-            statement.setString(1,name);
+            PreparedStatement statement = conn.prepareStatement(
+                "SELECT * FROM USUARIO WHERE NOMBRE = ? AND password = ?"
+            );
+            statement.setString(1, name);
             statement.setString(2, password);
 
             ResultSet rs = statement.executeQuery();
-            if(!rs.next()){
-                rs.close();
-                System.out.println("fallo");
-                return false;
-                
-            }else{
-                rs.close();
-                System.out.println("no fallo");
-                return true;
-                
-            }           
-            
-            
-            
-        }catch(Exception e){
-            
-            System.out.println("fallo");
+            printResultSet(rs);
+            rs.close();
+        } catch(Exception e){
             e.printStackTrace();
         }
-        return false;         
-        
+        return true;
+    }
+
+    public static boolean usermediaregistry_exists(Connection conn, String nombre, String rating, String status, boolean favorito, Date fecha_comienzo, String reference_url, int usuario_id){
+        try{
+            PreparedStatement statement = conn.prepareStatement(
+                "SELECT * FROM usermediaregistry WHERE nombre = ? AND rating = ? AND status = ? AND favorito = ? AND fecha_comienzo = ? AND reference_url = ? AND usuario_id = ?"
+            );
+
+            statement.setString(1, nombre);
+            statement.setString(2, rating);
+            statement.setString(3, status);
+            statement.setBoolean(4, favorito);
+            statement.setDate(5, fecha_comienzo);
+            statement.setString(6, reference_url);
+            statement.setInt(7, usuario_id);
+
+            ResultSet rs = statement.executeQuery();
+            printResultSet(rs);
+            rs.close();
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public static boolean mediacontent_exists(Connection conn, int id_glob, int id_loc, String alfa, String beta, String nombre, String tipo){
+        try{
+            PreparedStatement statement = conn.prepareStatement(
+                "SELECT * FROM MediaContent WHERE id_glob = ? AND id_loc = ? AND alfa = ? AND beta = ? AND nombre = ? AND tipo = ?"
+            );
+
+            statement.setInt(1, id_glob);
+            statement.setInt(2, id_loc);
+            statement.setString(3, alfa);
+            statement.setString(4, beta);
+            statement.setString(5, nombre);
+            statement.setString(6, tipo);
+
+            ResultSet rs = statement.executeQuery();
+            printResultSet(rs);
+            rs.close();
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        return true;
+    }
+
+    public static boolean video_exists(Connection conn, int id_glob, int id_loc, String nombre){
+        try{
+            PreparedStatement statement = conn.prepareStatement(
+                "SELECT * FROM video WHERE id_glob = ? AND id_loc = ? AND nombre = ?"
+            );
+
+            statement.setInt(1, id_glob);
+            statement.setInt(2, id_loc);
+            statement.setString(3, nombre);
+
+            ResultSet rs = statement.executeQuery();
+            printResultSet(rs);
+            rs.close();
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        return true;
+    }
+
+    public static boolean VideoUrl_exists(Connection conn, int video_id_glob, int video_id_loc, String enlace){
+        try{
+            PreparedStatement statement = conn.prepareStatement(
+                "SELECT * FROM VideoURL WHERE video_id_glob = ? AND video_id_loc = ? AND enlace = ?"
+            );
+
+            statement.setInt(1, video_id_glob);
+            statement.setInt(2, video_id_loc);
+            statement.setString(3, enlace);
+
+            ResultSet rs = statement.executeQuery();
+            printResultSet(rs);
+            rs.close();
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        return true;
+    }
+
+    public static boolean uservideoinfo_exists(Connection conn, boolean favorito, String rating, String status, int video_id_glob, int video_id_loc, int usuario_id){
+        try{
+            PreparedStatement statement = conn.prepareStatement(
+                "SELECT * FROM uservideoinfo WHERE favorito = ? AND rating = ? AND status = ? AND video_id_glob = ? AND video_id_loc = ? AND usuario_id = ?"
+            );
+
+            statement.setBoolean(1, favorito);
+            statement.setString(2, rating);
+            statement.setString(3, status);
+            statement.setInt(4, video_id_glob);
+            statement.setInt(5, video_id_loc);
+            statement.setInt(6, usuario_id);
+
+            ResultSet rs = statement.executeQuery();
+            printResultSet(rs);
+            rs.close();
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        return true;
+    }
+
+    public static boolean uservideohistory_exists(Connection conn, Date fecha, int user_video_info_id){
+        try{
+            PreparedStatement statement = conn.prepareStatement(
+                "SELECT * FROM uservideohistory WHERE fecha = ? AND user_video_info_id = ?"
+            );
+
+            statement.setDate(1, fecha);
+            statement.setInt(2, user_video_info_id);
+
+            ResultSet rs = statement.executeQuery();
+            printResultSet(rs);
+            rs.close();
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        return true;
     }
 }
-
 
