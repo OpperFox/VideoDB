@@ -9,12 +9,12 @@ public class Query {
 
     private static String[] printResultSet(ResultSet rs, int col) throws SQLException {
     	int columnCount = col;
-    	String[] x = new String[columnCount];  
+    	String[] x = new String[columnCount+1];  
     	try {    		
         
     		while (rs.next()) {
         	
-    			for (int i = 0; i <= columnCount; i++) {
+    			for (int i = 1; i <= columnCount; i++) {
     				x[i] = (rs.getString(i) + " ");
     				System.out.println(rs.getString(i) + " ");
     			}
@@ -71,7 +71,10 @@ public class Query {
             statement.setInt(7, usuario_id);
 
             ResultSet rs = statement.executeQuery();
-            printResultSet(rs);
+            ResultSetMetaData meta = rs.getMetaData();
+    		int columnCount = meta.getColumnCount();
+    		
+            String[] y = printResultSet(rs, columnCount );
             rs.close();
         } catch(Exception e){
             e.printStackTrace();
@@ -93,7 +96,10 @@ public class Query {
             statement.setString(6, tipo);
 
             ResultSet rs = statement.executeQuery();
-            printResultSet(rs);
+            ResultSetMetaData meta = rs.getMetaData();
+    		int columnCount = meta.getColumnCount();
+    		
+            String[] y = printResultSet(rs, columnCount );
             rs.close();
         } catch(Exception e){
             e.printStackTrace();
@@ -112,7 +118,10 @@ public class Query {
             statement.setString(3, nombre);
 
             ResultSet rs = statement.executeQuery();
-            printResultSet(rs);
+            ResultSetMetaData meta = rs.getMetaData();
+    		int columnCount = meta.getColumnCount();
+    		
+            String[] y = printResultSet(rs, columnCount );
             rs.close();
         } catch(Exception e){
             e.printStackTrace();
@@ -131,7 +140,10 @@ public class Query {
             statement.setString(3, enlace);
 
             ResultSet rs = statement.executeQuery();
-            printResultSet(rs);
+            ResultSetMetaData meta = rs.getMetaData();
+    		int columnCount = meta.getColumnCount();
+    		
+            String[] y = printResultSet(rs, columnCount );
             rs.close();
         } catch(Exception e){
             e.printStackTrace();
@@ -153,7 +165,10 @@ public class Query {
             statement.setInt(6, usuario_id);
 
             ResultSet rs = statement.executeQuery();
-            printResultSet(rs);
+            ResultSetMetaData meta = rs.getMetaData();
+    		int columnCount = meta.getColumnCount();
+    		
+            String[] y = printResultSet(rs, columnCount );
             rs.close();
         } catch(Exception e){
             e.printStackTrace();
@@ -171,7 +186,10 @@ public class Query {
             statement.setInt(2, user_video_info_id);
 
             ResultSet rs = statement.executeQuery();
-            printResultSet(rs);
+            ResultSetMetaData meta = rs.getMetaData();
+    		int columnCount = meta.getColumnCount();
+    		
+            String[] y = printResultSet(rs, columnCount );
             rs.close();
         } catch(Exception e){
             e.printStackTrace();

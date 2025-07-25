@@ -63,5 +63,6 @@ public class Main {
         SQL.Query.uservideoinfo_exists(conn, true, "SUBLIME", "COMPLETADO", 1, 203, 1);
 
         SQL.Query.uservideohistory_exists(conn, fecha, 1);
+        
     }
 }
