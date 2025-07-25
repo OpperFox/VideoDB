@@ -43,7 +43,8 @@ public class Main {
         	    "Dark",
         	    "SUBLIME",
         	    "VIENDO",
-        	    true,
+        	    "Serie",
+        	    true,        	    
         	    fecha,
         	    "https://www.netflix.com/title/80100172",
         	    1
