@@ -112,15 +112,17 @@ public class VerRegistrosGUI extends JFrame {
         modeloTabla.setRowCount(0);
 
         // Simulación de registros (deberían venir de una base de datos o lista real)
-        String[][] registrosSimulados = {
+        // **************************************************************************************************************************
+        String[][] registrosSimulados = { // Este bloque simula los registros del usuario. Estos datos no provienen de una base de datos real, sino que están "quemados" directamente en el código.
             {"Inception", "Película", "Completado", "Sublime", "Sí", "https://inception.example.com"},
             {"Breaking Bad", "Serie", "Re visto", "Muy bueno", "No", "https://bb.example.com"},
             {"Mi Playlist Favorita", "Playlist", "En espera", "Regular", "Sí", "https://playlist.example.com"},
-        };
+        }; //-----------------------------------------------------------------------------------------------------------------------
 
         // Recorre los registros simulados y aplica los filtros
-        for (String[] reg : registrosSimulados) {
-            boolean coincide = true;
+        // ****************************************************************************************************************************
+        for (String[] reg : registrosSimulados) { // El filtrado se hace sobre el arreglo simulado, no sobre resultados consultados desde una base SQL.	
+            boolean coincide = true; //------------------------------------------------------------------------------------------------
 
             // Filtra por nombre si se escribió algo
             if (!nombre.isEmpty() && !reg[0].toLowerCase().contains(nombre)) coincide = false;

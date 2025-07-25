@@ -26,8 +26,9 @@ public class EditarRegistroGUI extends JFrame {
     private JFrame ventanaAnterior;
 
     // Nombre de usuario actual (se puede usar para cargar registros personalizados)
-    private String usuario;
-
+    //******************************************************************************************************************************
+    private String usuario; // ❌ Aunque el nombre del usuario se recibe, no se usa para filtrar los registros mostrados ni se conecta a ningún dato en SQL (por ejemplo, no hay WHERE usuario_id = ?).
+//--------------------------------------------------------------------------------------------------------------------------------
     // Constructor que recibe la ventana anterior y el nombre del usuario
     public EditarRegistroGUI(JFrame ventanaAnterior, String usuario) {
         this.ventanaAnterior = ventanaAnterior;
@@ -59,7 +60,8 @@ public class EditarRegistroGUI extends JFrame {
         etiquetaSeleccion.setFont(fuenteGeneral);
 
         // Se agregan registros de ejemplo (puedes cambiarlos por registros reales)
-        modeloLista = new DefaultListModel<>();
+//**********************************************************************************************************************************
+        modeloLista = new DefaultListModel<>(); // ❌ Aquí los registros se cargan de forma manual, no se consultan desde una base SQL (SELECT * FROM registros WHERE usuario = ?). Se usa DefaultListModel, pero no representa datos reales persistidos.
         modeloLista.addElement("Película: Inception");
         modeloLista.addElement("Serie: Dark");
         modeloLista.addElement("Playlist: Mi Top 10 2025");
@@ -83,15 +85,16 @@ public class EditarRegistroGUI extends JFrame {
         campoNombre = new JTextField();
         campoLink = new JTextField();
 
-        // Combo con estados posibles (preestablecidos)
-        comboEstado = new JComboBox<>(new String[]{
+        // Combo con estados posibles (preestablecidos) //**************************************************************************
+        comboEstado = new JComboBox<>(new String[]{ // ✅ Esto es válido pero simulado. Si usas una base SQL, podrías tener una tabla calificaciones o estados y llenarlos dinámicamente con un SELECT.
             "No visto", "Re visto", "En proceso o viendo", "Completado", "Abandonado", "En espera"
-        });
+        }); //----------------------------------------------------------------------------------------------------------------------------
 
         // Combo con calificaciones posibles (preestablecidas)
-        comboCalificacion = new JComboBox<>(new String[]{
+        //*************************************************************************************************************************
+        comboCalificacion = new JComboBox<>(new String[]{ // ✅ Esto es válido pero simulado. Si usas una base SQL, podrías tener una tabla calificaciones o estados y llenarlos dinámicamente con un SELECT.
             "Horrible", "Malo", "Regular", "Bueno", "Sublime"
-        });
+        }); //----------------------------------------------------------------------------------------------------------------------
 
         // Check para marcar como favorito
         checkFavorito = new JCheckBox("Marcar como favorito");
@@ -140,15 +143,17 @@ public class EditarRegistroGUI extends JFrame {
 
         add(panelBotones, BorderLayout.SOUTH);
 
-        // Acción al presionar "Guardar"
-        botonGuardar.addActionListener((ActionEvent e) -> {
+        // Acción al presionar "Guardar" 
+        //***************************************************************************************************************************
+        botonGuardar.addActionListener((ActionEvent e) -> { // ❌ No actualiza registros en una tabla (UPDATE registros SET ... WHERE id = ?). ✅ Solo muestra un JOptionPane como si los datos se hubieran actualizado.
             if (validarEntrada()) {
                 JOptionPane.showMessageDialog(this, "Cambios guardados correctamente.");
             }
         });
 
         // Acción al presionar "Guardar y volver"
-        botonGuardarVolver.addActionListener((ActionEvent e) -> {
+        //**************************************************************************************************************************
+        botonGuardarVolver.addActionListener((ActionEvent e) -> { // ❌ No actualiza registros en una tabla (UPDATE registros SET ... WHERE id = ?). ✅ Solo muestra un JOptionPane como si los datos se hubieran actualizado.
             if (validarEntrada()) {
                 JOptionPane.showMessageDialog(this, "Cambios guardados correctamente.");
                 volverAlMenu();
@@ -166,7 +171,8 @@ public class EditarRegistroGUI extends JFrame {
             } else {
                 int confirm = JOptionPane.showConfirmDialog(this, "¿Estás seguro de que deseas eliminar este registro?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
                 if (confirm == JOptionPane.YES_OPTION) {
-                    modeloLista.remove(index);
+      //***************************************************************************************************************************              
+                	modeloLista.remove(index); // ❌ Esto solo elimina el registro del modelo de la lista visual, no borra ningún dato real de una base de datos. No hay lógica con DELETE FROM registros WHERE id = ?.
                     JOptionPane.showMessageDialog(this, "Registro eliminado exitosamente.");
                 }
             }

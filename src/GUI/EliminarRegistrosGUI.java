@@ -86,18 +86,20 @@ public class EliminarRegistrosGUI extends JFrame {
     /**
      * Método que carga datos ficticios para visualizar cómo se verían los registros
      */
-    private void cargarDatosSimulados() {
+    
+    //********************************************************************************************************************************
+    private void cargarDatosSimulados() { // Simula registros cargados desde una base de datos. En un entorno real, esta información debería provenir de una fuente externa (ej: base de datos SQL o archivo persistente).
         Object[][] datos = {
             {false, "Inception", "Película", "Completado", "Sublime", "Sí", "https://inception.example.com"},
             {false, "Breaking Bad", "Serie", "Re visto", "Muy bueno", "No", "https://bb.example.com"},
             {false, "Mi Playlist", "Música", "En espera", "Regular", "Sí", "https://playlist.example.com"}
-        };
+        }; 
 
         // Agrega cada fila al modelo de la tabla
         for (Object[] fila : datos) {
             modeloTabla.addRow(fila);
         }
-    }
+    } //----------------------------------------------------------------------------------------------------------------------
 
     /**
      * Método que elimina todos los registros que fueron seleccionados con el checkbox.
