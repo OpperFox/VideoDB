@@ -78,24 +78,30 @@ public class IngresarGUI extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 // Tomamos el texto escrito por el usuario
                 usuario = campoUsuario.getText();
-                 clave = new String(campoClave.getPassword()); // Convertimos la clave a texto
+                clave = new String(campoClave.getPassword());
 
-                // Validación simple de usuario y contraseña
-                if ((usuario == "admin" && clave == "admin") || (SQL.Query.user_exists(SQL.DBConnection.getConnection(),usuario,clave))) {
-                    // Si es correcto, muestra un mensaje de bienvenida
-                	
-                	Main.currentUser = Long.valueOf(usuario);
-                	
+                boolean esAdmin = usuario.equals("admin") && clave.equals("admin");
+                boolean existeUsuario = SQL.Query.user_exists(SQL.DBConnection.getConnection(), usuario, clave);
+
+                if (esAdmin || existeUsuario) {
+                    // Si es admin, asigna un ID fijo
+                    if (esAdmin) {
+                        Main.currentUser = 0L; // Por ejemplo, admin como ID 0
+                    } else {
+                        Main.currentUser = Long.valueOf(usuario); // Solo si usuario es el ID (esto podría causar error si no es numérico)
+                    }
+
                     JOptionPane.showMessageDialog(
                         IngresarGUI.this,
                         "Inicio de sesión exitoso",
                         "Bienvenido",
                         JOptionPane.INFORMATION_MESSAGE
                     );
-                    new MenuPrincipalGUI(usuario); // Crea la siguiente ventana y le pasa el nombre del usuario
-                    dispose(); // Cierra la ventana de inicio de sesión
+
+                    new MenuPrincipalGUI(usuario); // Abre la siguiente ventana
+                    dispose(); // Cierra la ventana de login
+
                 } else {
-                    // Si los datos están mal, muestra un mensaje de error
                     JOptionPane.showMessageDialog(
                         IngresarGUI.this,
                         "Datos incorrectos. Inténtelo de nuevo.",
@@ -105,6 +111,7 @@ public class IngresarGUI extends JFrame {
                 }
             }
         });
+
 
         // Añadimos los botones al panel
         panelBotones.add(botonIngresar);
