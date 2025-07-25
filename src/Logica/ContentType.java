@@ -21,7 +21,7 @@ public enum ContentType { // Define un enumerado que representa tipos de conteni
 		return typeName;
 	}
 	
-	public MediaContent newType(Long id, Long registryId ,int idL) {
+	public MediaContent newType(Long id, Long idAlfa,Long registryId ,int idL) {
 		
 		switch(this.typeName) {
 			case "Temporada":
