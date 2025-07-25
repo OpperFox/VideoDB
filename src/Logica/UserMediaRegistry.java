@@ -76,7 +76,7 @@ public class UserMediaRegistry {
 		
 		public void newMediaContent() {
 			if (this.type != null) {
-				this.type.newType();
+				this.type.newType(Long id, Long registryId, int loc);
 			}
 		}
 		

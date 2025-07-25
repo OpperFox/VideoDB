@@ -21,15 +21,15 @@ public enum ContentType { // Define un enumerado que representa tipos de conteni
 		return typeName;
 	}
 	
-	public MediaContent newType(Long id) {
+	public MediaContent newType(Long id, Long registryId ,int idL) {
 		
 		switch(this.typeName) {
 			case "Temporada":
-				return new Temporada();
+				return new Temporada(id,idL);
 			case "Serie":
-				return new Serie(id);
+				return new Serie(id,registryId, idL);
 			case "Playlist":
-				return new Playlist(id);
+				return new Playlist(id,registryId);
 			case "Saga":
 				return new Saga(id);
 			default:

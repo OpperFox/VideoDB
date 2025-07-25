@@ -1,6 +1,7 @@
 package GUI; // El paquete donde se encuentra esta clase.
 
 import java.sql.*;
+import java.time.LocalDate;
 
 /**
  * Clase principal que inicia la aplicación.
@@ -32,7 +33,8 @@ public class Main {
         new PrincipalGUI();
         
         Connection conn = SQL.DBConnection.getConnection();
-        Date fecha = Date.valueOf("2022-05-15");
+        LocalDate localDate = LocalDate.now(); 
+        Date fecha = Date.valueOf(localDate);
         
         SQL.Query.user_exists(conn, "name", "name");
         

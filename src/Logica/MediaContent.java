@@ -11,6 +11,8 @@ public abstract class MediaContent {
 	// Atributos de instancia
 	protected Long id_g; // ID global único de este objeto
 	protected int id_l = -1;  // ID local relativo dentro de su jerarquía o grupo
+	
+	protected Long registryId;
 
 	protected ArrayList<MediaContent> mediaContent; // Lista de MediaContent subordinados (ej. temporadas dentro de una serie)
 	protected ArrayList<Video> videos;              // Lista de objetos Video asociados a este contenido
@@ -27,25 +29,26 @@ public abstract class MediaContent {
 	// Constructores
 
 	// Constructor por defecto que asigna un nombre por defecto
-	public MediaContent (Long id_g) {
+	public MediaContent (Long id_g, Long registryId) {
 		
-		this(id_g, "NO_NAME");
+		this(id_g, registryId, "NO_NAME");
 	}
 
 	// Constructor que permite establecer el nombre
-	public MediaContent (Long id_g, String name) {
-		this(id_g,name, 1); // Asume por defecto 1 entrada subordinada
+	public MediaContent (Long id_g, Long registryId, String name) {
+		this(id_g, registryId ,name, 1); // Asume por defecto 1 entrada subordinada
 	}
 
 	// Constructor que permite establecer nombre y número de elementos subordinados
-	public MediaContent (Long id_g, String name, int id_l) {
-		this(id_g,name, id_l, 1); // Por defecto asigna capacidad para 6 videos
+	public MediaContent (Long id_g,Long registryId, String name, int id_l) {
+		this(id_g, registryId, name, id_l, 1); // Por defecto asigna capacidad para 6 videos
 	}
 
 	// Constructor principal con todos los parámetros
-	public MediaContent (Long id_g, String name, int id_l, int videoNum) {
+	public MediaContent (Long id_g, Long registryId,  String name, int id_l, int videoNum) {
 		// Asigna ID global único incrementando el contador compartido
 		this.id_g = id_g;
+		this.registryId = registryId;
 		// Asigna ID local único incrementando el contador compartido
 		if(container == false) {
 			this.id_l = id_l;
@@ -145,7 +148,7 @@ public abstract class MediaContent {
 	// Métodos abstractos a ser implementados
 
 	// Permite agregar uno o más contenidos a este contenido
-	public abstract MediaContent addMediaContent(Long id, int numMediaContent);
+	public abstract MediaContent addMediaContent(Long id, Long registryId ,int numMediaContent);
 
 	/*
 		- Serie debe contener al menos 1 temporada
