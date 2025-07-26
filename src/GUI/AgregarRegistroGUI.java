@@ -14,7 +14,7 @@ public class AgregarRegistroGUI extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	// Componentes principales
-    private JComboBox<String> comboCategoria;
+    private JComboBox<ContentType> comboCategoria;
     private JTextField campoNombre, campoLink;
     private JComboBox<String> comboEstado, comboCalificacion;
     private JCheckBox checkFavorito;
@@ -53,7 +53,7 @@ public class AgregarRegistroGUI extends JFrame {
         panelCampos.setBackground(new Color(255, 102, 102));
         panelCampos.setBorder(BorderFactory.createEmptyBorder(10, 40, 10, 40));
 
-        comboCategoria = new JComboBox(ContentType.values());
+        comboCategoria = new JComboBox<ContentType>(new ContentType[] {ContentType.SAGA, ContentType.SERIE, ContentType.PLAYLIST}	);
         comboCategoria.setFont(fuenteGeneral);
 
         campoNombre = new JTextField();
@@ -139,8 +139,8 @@ public class AgregarRegistroGUI extends JFrame {
         comboCategoria.addItemListener(e -> {
             if (e.getStateChange() == ItemEvent.SELECTED) {
             	categoria = (ContentType) comboCategoria.getSelectedItem();
-                System.out.println("Categoria Seleccionada: " + categoria);
-                panelTemporadaCapitulo.setVisible("Serie".equals(categoria));
+                System.out.println("Categoria Seleccionada: " + categoria.toString());
+                panelTemporadaCapitulo.setVisible("Serie".equals(categoria.toString()));
                 pack();
             }
         });
@@ -183,7 +183,8 @@ public class AgregarRegistroGUI extends JFrame {
             JOptionPane.showMessageDialog(this, "Registro guardado.");
             dispose();
             ventanaAnterior.setVisible(true);
-            
+   
+
             
             
         });

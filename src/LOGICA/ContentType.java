@@ -3,10 +3,10 @@ package LOGICA;
 public enum ContentType { // Define un enumerado que representa tipos de contenido multimedia
 
 	// Cada constante representa un MediaContent diferente
-	TEMPORADA("Temporada"), 
-	SERIE("Serie"), 
-	PLAYLIST("Playlist"), 
-	SAGA("Saga");// # # # # # mejorar y verificar que se creen correctamente las clases 
+	TEMPORADA("TEMPORADA"), 
+	SERIE("SERIE"), 
+	PLAYLIST("PLAYLIST"), 
+	SAGA("SAGA");// # # # # # mejorar y verificar que se creen correctamente las clases 
 
 	// Campo que almacena la instancia asociada a cada tipo
 	public final String typeName;
