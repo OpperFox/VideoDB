@@ -1,4 +1,4 @@
-package Logica;
+package LOGICA;
 
 public enum ContentType { // Define un enumerado que representa tipos de contenido multimedia
 
@@ -17,7 +17,8 @@ public enum ContentType { // Define un enumerado que representa tipos de conteni
 	}
 
 	// Método público para acceder a la instancia asociada al tipo
-	public String getType() {
+	@Override
+	public String toString() {	
 		return typeName;
 	}
 	

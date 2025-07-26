@@ -1,4 +1,4 @@
-package Logica;
+package LOGICA;
 import java.util.ArrayList;
 // Importa ArrayList para poder manejar una lista dinámica de registros multimedia asociados al usuario
 

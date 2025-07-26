@@ -1,4 +1,4 @@
-package Logica;
+package LOGICA;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 

@@ -1,18 +1,20 @@
-package Logica;
+package LOGICA;
 
 public enum Rating {
 	
-	SIN_CALIFICACION(null), HORRIBLE(0), MALO(1), PESIMO(2), REGULAR(3), BUENO(4), SUBLIME(5);
+	SIN_CALIFICACION(null, "SIN CALIFICACION"), HORRIBLE(0 , "HORRIBLE"), MALO(1, "MALO"), PESIMO(2, "PESIMO"), REGULAR(3, "REGULAR"), BUENO(4, "BUENO"), SUBLIME(5 , "SUBLIME");
 		
-	private Rating (String nul){
-		
+	private Rating (String nul, String comboValue){
+		this.comboValue = comboValue;
 	}
 	
-	private Rating (int rating) {
+	private Rating (int rating, String comboValue) {
 		this.rating = rating;
+		this.comboValue = comboValue;
 	}
 
 	float rating;
+	public final String comboValue;
 
 	public float getRating() {
 		return rating;
@@ -20,6 +22,11 @@ public enum Rating {
 
 	public void setRating(int rating) {
 		this.rating = rating;
+	}
+	
+	@Override
+	public String toString() {	
+		return comboValue;
 	}
 	
 	public float calcRating(Long id) {
