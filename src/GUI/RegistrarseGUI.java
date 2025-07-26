@@ -87,8 +87,10 @@ public class RegistrarseGUI extends JFrame {
 
                 // Se valida que ambos campos no estén vacíos
                 if (!usuario.isEmpty() && !clave.isEmpty()) {
-                    // Muestra mensaje de éxito
+                    
+                	SQL.Query.user_registry(SQL.DBConnection.getConnection(), usuario, clave);
                 	
+                	// Muestra mensaje de éxito                	
                 	
                     JOptionPane.showMessageDialog(
                         RegistrarseGUI.this,
