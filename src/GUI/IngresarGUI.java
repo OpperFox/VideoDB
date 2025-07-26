@@ -5,8 +5,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class IngresarGUI extends JFrame {
-    // Campos de texto para que el usuario escriba su nombre de usuario y clave
+	public class IngresarGUI extends JFrame {
+	    /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+	// Campos de texto para que el usuario escriba su nombre de usuario y clave
     private JTextField campoUsuario;
     private JPasswordField campoClave;
     // Botones para ingresar al sistema y para volver a la ventana anterior
@@ -64,7 +68,7 @@ public class IngresarGUI extends JFrame {
         botonIngresar.setFont(fuente);
 
         // Creamos el botón para volver a la ventana principal
-        botonVolver = new JButton("🔙 Volver");
+        botonVolver = new JButton("Volver");
         botonVolver.setFont(fuente);
 
         // Acción del botón "Volver": muestra la ventana principal y cierra esta
@@ -86,7 +90,7 @@ public class IngresarGUI extends JFrame {
                 if (esAdmin || existeUsuario) {
                     // Si es admin, asigna un ID fijo
                     if (esAdmin) {
-                        Main.currentUser = 0; // Por ejemplo, admin como ID 0
+                        Main.currentUser = -1; // Por ejemplo, admin como ID 0
                     } else {
                         Main.currentUser = SQL.Query.user_exists(SQL.DBConnection.getConnection(), usuario);
                         System.out.println("current user: "+ Main.currentUser);// Solo si usuario es el ID (esto podría causar error si no es numérico)
