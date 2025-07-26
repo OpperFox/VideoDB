@@ -47,21 +47,24 @@ public class UserMediaRegistry {
 
 		// Métodos de acceso (getters y setters)
 
-		// Devuelve si el contenido está marcado como favorito
-		
-		
-		// Devuelve el ID único del registro
-		
 		public void newMediaContent(Long id, Long idAlfa, Long registryId, int loc) {
-			if (this.type != null) {
-				this.type.newType(id, idAlfa, registryId, loc);
+			
+			switch (type) {
+				case SERIE:
+					mediaContent = new Serie(registryId, registryId, loc);
+					break;
+				case PLAYLIST:
+					mediaContent = new Playlist(registryId, registryId, loc);
+					break;
+				case SAGA:
+					mediaContent = new Saga(registryId, registryId, loc);
+					break; 
 			}
+			
 		}
 		
 		public void newMediaContent(Long id, Long idAlfa, Long registryId, int loc, String name, int  videoNum) {
-			if (this.type != null) {
-				this.type.newType(registryId, registryId, registryId, videoNum);
-			}
+			
 		}
 		
 		public Long getRegistryId() {
