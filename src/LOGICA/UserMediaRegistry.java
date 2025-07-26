@@ -7,9 +7,6 @@ import java.util.ArrayList;
 
 public class UserMediaRegistry {
 
-	// Atributos de clase compartidos por todas las instancias
-	private static Long id; // Contador estático para generar IDs únicos de registros
-
 	// Atributos de instancia
 	private Long registryId; // ID único del registro de contenido
 	private Long userId;     // ID del usuario al que pertenece este registro
@@ -25,37 +22,18 @@ public class UserMediaRegistry {
 
 	private MediaContent mediaContent; // Lista que almacena el contenido multimedia asociado
 
-
-	// Constructores
-
-		// Constructor que recibe solo el userId y tipo de contenido, asigna nombre por defecto
-		public UserMediaRegistry(Long userId, ContentType type) {
-			this(userId, type, "NO_NAME");
-		}
-
-		// Constructor que recibe userId, tipo y nombre, y asigna valor falso a fav
-		public UserMediaRegistry(Long userId, ContentType type, String name) {
-			this(userId, type, name, false);
-		}
-
-		// Constructor que recibe userId, tipo, nombre y fav, asigna URL por defecto
-		public UserMediaRegistry(Long userId, ContentType type, String name, boolean fav) {
-			this(userId, type, name, fav, "NO_URL");
-		}
-		
-		public UserMediaRegistry(Long userId, ContentType type, String name, boolean fav, String urlRef) {
-			this(userId, type, name, fav, urlRef, Status.NO_VISTO);
-		}
-		
-		public UserMediaRegistry(Long userId, ContentType type, String name, boolean fav, String urlRef, Status status) {
-			this(userId, type, name, fav, urlRef, status, Rating.SIN_CALIFICACION);
-		}
-
 		// Constructor principal que inicializa todos los atributos esenciales
-		public UserMediaRegistry(Long userId, ContentType type, String name, boolean fav, String urlRef, Status status, Rating rating) {
+		public UserMediaRegistry(
+				Long userId,
+				ContentType type,
+				String name,				
+			    Status status,
+			    String urlRef,
+			    Rating rating,
+				boolean fav			   			    			    			   
+			) {
 			
 			//id consulta DB
-			registryId = ++id; // Asigna un ID único incrementando el contador global
 			this.userId = userId;
 			this.name = name;
 			this.fav = fav;
@@ -63,7 +41,7 @@ public class UserMediaRegistry {
 			this.type = type;
 			this.status = status;
 
-			this.startDate = LocalDateTime.now();
+			this.startDate = LocalDateTime.now(); //cambiar para que la hora sea ingresada por la base de datos
 			
 		}
 
