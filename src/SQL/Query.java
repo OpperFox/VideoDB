@@ -5,6 +5,7 @@ package SQL;
 
 import java.sql.*;
 
+
 public class Query {
 
     private static String[] printResultSet(ResultSet rs, int col) throws SQLException {
@@ -128,7 +129,7 @@ public class Query {
     public static boolean usermediaregistry_registry(Connection conn, String nombre, String rating, String status, String tipo, boolean favorito,Date fecha_comienzo, String reference_url, int usuario_id){
         try{
             PreparedStatement statement = conn.prepareStatement(
-                "INSERT INTO USARMEDIAREGISTRY (nombre,rating, status, tipo, favorito, Fecha_comienzo, reference_url, usuario_id)"
+                "INSERT INTO usermediaregistry (nombre,rating, status, tipo, favorito, Fecha_comienzo, reference_url, usuario_id)"
                 + "VALUES (?,?,?,?,?,?,?,?)"
             );
 
@@ -142,6 +143,8 @@ public class Query {
             statement.setInt(8, usuario_id);
 
             statement.executeUpdate();
+            
+           
         } catch(Exception e){
             e.printStackTrace();
         }

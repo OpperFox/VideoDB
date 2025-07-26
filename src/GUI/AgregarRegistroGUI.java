@@ -173,13 +173,14 @@ public class AgregarRegistroGUI extends JFrame {
         add(panelBotones, BorderLayout.SOUTH);
 
         botonGuardar.addActionListener(e -> {
+        	Query.usermediaregistry_registry(DBConnection.getConnection(),nombre, rating.toString(), status.toString(), categoria.toString(), favorito, Main.fecha, url, Main.currentUser);
             JOptionPane.showMessageDialog(this, "Registro guardado.");
             
-            Query.usermediaregistry_registry(DBConnection.getConnection(),nombre, rating.toString(), status.toString(), categoria.toString(), favorito, Main.fecha, url, Main.currentUser);
-            
+                       
         });
 
         botonGuardarVolver.addActionListener(e -> {
+        	Query.usermediaregistry_registry(DBConnection.getConnection(),nombre, rating.toString(), status.toString(), categoria.toString(), favorito, Main.fecha, url, Main.currentUser);
             JOptionPane.showMessageDialog(this, "Registro guardado.");
             dispose();
             ventanaAnterior.setVisible(true);
