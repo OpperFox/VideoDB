@@ -1,4 +1,4 @@
-package Logica;
+package LOGICA;
 
 import java.util.stream.*;
 import java.util.ArrayList;

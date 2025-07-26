@@ -1,4 +1,4 @@
-package Logica;
+package LOGICA;
 import java.util.ArrayList;
 // Importación del módulo ArrayList para manejar colecciones dinámicas de objetos
 

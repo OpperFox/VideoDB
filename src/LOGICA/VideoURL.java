@@ -1,4 +1,4 @@
-package Logica;
+package LOGICA;
 public class VideoURL {
 	
 	//Atributos de clase

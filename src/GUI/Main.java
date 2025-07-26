@@ -3,6 +3,8 @@ package GUI; // El paquete donde se encuentra esta clase.
 import java.sql.*;
 import java.time.LocalDate;
 
+import SQL.*;
+
 /**
  * Clase principal que inicia la aplicación.
  * 
@@ -36,7 +38,7 @@ public class Main {
     	
         new PrincipalGUI();
         
-        Connection conn = SQL.DBConnection.getConnection();
+        Connection conn = DBConnection.getConnection();
         LocalDate localDate = LocalDate.now(); 
         fecha = Date.valueOf(localDate);
         

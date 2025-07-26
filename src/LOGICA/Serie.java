@@ -1,5 +1,5 @@
 // Clase Serie que hereda de MediaContent
-package Logica;
+package LOGICA;
 
 public class Serie extends MediaContent {
 	// Constructor por defecto que llama al constructor de la clase padre
