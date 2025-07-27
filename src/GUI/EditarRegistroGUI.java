@@ -145,16 +145,32 @@ public class EditarRegistroGUI extends JFrame {
 
         // Acción al presionar "Guardar" 
         //***************************************************************************************************************************
-        botonGuardar.addActionListener((ActionEvent e) -> { // ❌ No actualiza registros en una tabla (UPDATE registros SET ... WHERE id = ?). ✅ Solo muestra un JOptionPane como si los datos se hubieran actualizado.
+        botonGuardar.addActionListener((ActionEvent e) -> {
             if (validarEntrada()) {
+                // Mostrar datos en consola
+                System.out.println("Registro seleccionado: " + listaRegistros.getSelectedValue());
+                System.out.println("Nuevo nombre: " + campoNombre.getText());
+                System.out.println("Nuevo enlace: " + campoLink.getText());
+                System.out.println("Nuevo estado: " + comboEstado.getSelectedItem());
+                System.out.println("Nueva calificación: " + comboCalificacion.getSelectedItem());
+                System.out.println("¿Favorito? " + (checkFavorito.isSelected() ? "Sí" : "No"));
+
                 JOptionPane.showMessageDialog(this, "Cambios guardados correctamente.");
             }
         });
 
         // Acción al presionar "Guardar y volver"
         //**************************************************************************************************************************
-        botonGuardarVolver.addActionListener((ActionEvent e) -> { // ❌ No actualiza registros en una tabla (UPDATE registros SET ... WHERE id = ?). ✅ Solo muestra un JOptionPane como si los datos se hubieran actualizado.
+        botonGuardarVolver.addActionListener((ActionEvent e) -> {
             if (validarEntrada()) {
+                // Mostrar datos en consola
+                System.out.println("Registro seleccionado: " + listaRegistros.getSelectedValue());
+                System.out.println("Nuevo nombre: " + campoNombre.getText());
+                System.out.println("Nuevo enlace: " + campoLink.getText());
+                System.out.println("Nuevo estado: " + comboEstado.getSelectedItem());
+                System.out.println("Nueva calificación: " + comboCalificacion.getSelectedItem());
+                System.out.println("¿Favorito? " + (checkFavorito.isSelected() ? "Sí" : "No"));
+
                 JOptionPane.showMessageDialog(this, "Cambios guardados correctamente.");
                 volverAlMenu();
             }
@@ -171,8 +187,11 @@ public class EditarRegistroGUI extends JFrame {
             } else {
                 int confirm = JOptionPane.showConfirmDialog(this, "¿Estás seguro de que deseas eliminar este registro?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
                 if (confirm == JOptionPane.YES_OPTION) {
-      //***************************************************************************************************************************              
-                	modeloLista.remove(index); // ❌ Esto solo elimina el registro del modelo de la lista visual, no borra ningún dato real de una base de datos. No hay lógica con DELETE FROM registros WHERE id = ?.
+                    // Mostrar dato eliminado en consola
+                    String eliminado = modeloLista.getElementAt(index);
+                    System.out.println("Registro eliminado: " + eliminado);
+
+                    modeloLista.remove(index);
                     JOptionPane.showMessageDialog(this, "Registro eliminado exitosamente.");
                 }
             }

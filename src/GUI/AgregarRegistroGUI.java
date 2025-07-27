@@ -1,210 +1,247 @@
-	package GUI;
-	
-	import javax.swing.*;
-	import java.awt.*;
-	import java.awt.event.ActionEvent;
-	import java.awt.event.ItemEvent;
-	
-	// ... mismo paquete e importaciones que ya tenías
-	import java.awt.event.*;
+package GUI;
 
-	public class AgregarRegistroGUI extends JFrame {
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 
-	    // Componentes principales
-	    private JComboBox<String> comboCategoria;
-	    private JTextField campoNombre, campoLink;
-	    private JComboBox<String> comboEstado, comboCalificacion;
-	    private JCheckBox checkFavorito;
+public class AgregarRegistroGUI extends JFrame {
 
-	    private JComboBox<Integer> comboTemporada, comboCapitulo;
-	    private JPanel panelTemporadaCapitulo;
-	    
-	    private String
-	    nombre,
-	    url,
-	    rating,
-	    status;
-	    
-	    private String seleccion;
-	    
-	    private boolean favorito;
+    // Componentes principales
+    private JComboBox<String> comboCategoria;
+    private JTextField campoNombre, campoLink;
+    private JComboBox<String> comboEstado, comboCalificacion;
+    private JCheckBox checkFavorito;            
+    private JComboBox<String> comboTemporadas;     
+    private JComboBox<String> comboCapitulos;    
+    private JComboBox<String> comboCapitulosPlaylistSaga;    
 
-	    public AgregarRegistroGUI(JFrame ventanaAnterior, String usuario) {
-	        // Configuración básica
-	        setTitle("Agregar nuevo registro");
-	        setDefaultCloseOperation(EXIT_ON_CLOSE);
-	        setLayout(new BorderLayout());
-	        getContentPane().setBackground(new Color(255, 102, 102));
+    private String nombre, url, rating, status;    
+    private String seleccion;      
+    private boolean favorito;      
 
-	        Font fuenteGeneral = new Font("Comic Sans MS", Font.PLAIN, 17);
-	        Font fuenteTitulo = new Font("Comic Sans MS", Font.BOLD, 22);
+    public AgregarRegistroGUI(JFrame ventanaAnterior, String usuario) {
+        // Configuración básica
+        setTitle("Agregar nuevo registro");
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setLayout(new BorderLayout());
+        getContentPane().setBackground(new Color(255, 102, 102));
 
-	        JLabel etiquetaTitulo = new JLabel("Agregar nuevo registro");
-	        etiquetaTitulo.setFont(fuenteTitulo);
-	        etiquetaTitulo.setHorizontalAlignment(SwingConstants.CENTER);
-	        etiquetaTitulo.setBorder(BorderFactory.createEmptyBorder(20, 10, 20, 10));
-	        add(etiquetaTitulo, BorderLayout.NORTH);
+        Font fuenteGeneral = new Font("Comic Sans MS", Font.PLAIN, 17);
+        Font fuenteTitulo = new Font("Comic Sans MS", Font.BOLD, 22);
 
-	        JPanel panelCampos = new JPanel();
-	        panelCampos.setLayout(new BoxLayout(panelCampos, BoxLayout.Y_AXIS));
-	        panelCampos.setBackground(new Color(255, 102, 102));
-	        panelCampos.setBorder(BorderFactory.createEmptyBorder(10, 40, 10, 40));
+        JLabel etiquetaTitulo = new JLabel("Agregar nuevo registro");
+        etiquetaTitulo.setFont(fuenteTitulo);
+        etiquetaTitulo.setHorizontalAlignment(SwingConstants.CENTER);
+        etiquetaTitulo.setBorder(BorderFactory.createEmptyBorder(20, 10, 20, 10));
+        add(etiquetaTitulo, BorderLayout.NORTH);
 
-	        comboCategoria = new JComboBox<>(new String[] {"Saga", "Playlist", "Serie"});
-	        comboCategoria.setFont(fuenteGeneral);
+        JPanel panelCampos = new JPanel();
+        panelCampos.setLayout(new BoxLayout(panelCampos, BoxLayout.Y_AXIS));
+        panelCampos.setBackground(new Color(255, 102, 102));
+        panelCampos.setBorder(BorderFactory.createEmptyBorder(10, 40, 10, 40));
 
-	        campoNombre = new JTextField();
-	        campoNombre.setFont(fuenteGeneral);
+        comboCategoria = new JComboBox<>(new String[]{"Saga", "Playlist", "Serie"});
+        comboCategoria.setFont(fuenteGeneral);
 
-	        campoLink = new JTextField();
-	        campoLink.setFont(fuenteGeneral);
+        campoNombre = new JTextField();
+        campoNombre.setFont(fuenteGeneral);
 
-	        comboEstado = new JComboBox<>(new String[] {
-	            "No visto", "Re visto", "En proceso o viendo", "Completado", "Abandonado", "En espera"
-	        });
-	        comboEstado.setFont(fuenteGeneral);
+        campoLink = new JTextField();
+        campoLink.setFont(fuenteGeneral);
 
-	        comboCalificacion = new JComboBox<>(new String[] {
-	            "Horrible", "Malo", "Regular", "Bueno", "Sublime"
-	        });
-	        comboCalificacion.setFont(fuenteGeneral);
+        comboEstado = new JComboBox<>(new String[]{
+            "No visto", "Re visto", "En proceso o viendo", "Completado", "Abandonado", "En espera"
+        });
+        comboEstado.setFont(fuenteGeneral);
 
-	        checkFavorito = new JCheckBox("Marcar como favorito");
-	        checkFavorito.setFont(fuenteGeneral);
-	        checkFavorito.setBackground(new Color(255, 102, 102));
+        comboCalificacion = new JComboBox<>(new String[]{
+            "Horrible", "Malo", "Regular", "Bueno", "Sublime"
+        });
+        comboCalificacion.setFont(fuenteGeneral);
 
-	        // ------ LISTENERS AÑADIDOS ------
+        // Inicializar combos de temporadas y capítulos (para "Serie")
+        comboTemporadas = new JComboBox<>();
+        for (int i = 1; i <= 50; i++) comboTemporadas.addItem("Temporada " + i);
+        comboTemporadas.setFont(fuenteGeneral);
+        comboTemporadas.setVisible(false);
 
-	        campoNombre.addKeyListener(new KeyAdapter() {
-	            @Override
-	            public void keyReleased(KeyEvent e) {
-	                System.out.println("Texto en nombre: " + campoNombre.getText());
-	                nombre = campoNombre.getText();
-	            }
-	        });
+        comboCapitulos = new JComboBox<>();
+        for (int i = 1; i <=100; i++) comboCapitulos.addItem("Capítulo " + i);
+        comboCapitulos.setFont(fuenteGeneral);
+        comboCapitulos.setVisible(false);
 
-	        campoLink.addKeyListener(new KeyAdapter() {
-	            @Override
-	            public void keyReleased(KeyEvent e) {
-	                System.out.println("Texto en enlace: " + campoLink.getText());
-	                
-	                url = campoLink.getText();
-	                
-	            }
-	        });
+        // Inicializar combo para Playlist/Saga
+        comboCapitulosPlaylistSaga = new JComboBox<>();
+        for (int i = 1; i <=100; i++) comboCapitulosPlaylistSaga.addItem("Capítulo " + i);
+        comboCapitulosPlaylistSaga.setFont(fuenteGeneral);
+        comboCapitulosPlaylistSaga.setVisible(false);
 
-	        comboEstado.addItemListener(e -> {
-	            if (e.getStateChange() == ItemEvent.SELECTED) {
-	                System.out.println("Estado seleccionado: " + comboEstado.getSelectedItem());
-	                
-	                status = (String) comboEstado.getSelectedItem();
-	                
-	            }
-	        });
+        checkFavorito = new JCheckBox("Marcar como favorito");
+        checkFavorito.setFont(fuenteGeneral);
+        checkFavorito.setBackground(new Color(255, 102, 102));
 
-	        comboCalificacion.addItemListener(e -> {
-	            if (e.getStateChange() == ItemEvent.SELECTED) {
-	                System.out.println("Calificación seleccionada: " + comboCalificacion.getSelectedItem());
-	                
-	                rating = (String) comboCalificacion.getSelectedItem();
-	                
-	            }
-	        });
+        // ------ LISTENERS AÑADIDOS ------
 
-	        checkFavorito.addActionListener(e -> {
-	            boolean favorito = checkFavorito.isSelected();
-	            System.out.println("¿Favorito? " + (favorito ? "Sí" : "No"));
-	            
-	            favorito = checkFavorito.isSelected();
-	            
-	        });
+        comboCategoria.addItemListener(new ItemListener() {
+            public void itemStateChanged(ItemEvent e) {
+                String seleccion = (String) comboCategoria.getSelectedItem();
+                boolean esSerie = seleccion.equalsIgnoreCase("Serie");
+                boolean esPlaylistOSaga = seleccion.equalsIgnoreCase("Playlist") || seleccion.equalsIgnoreCase("Saga");
+                
+                comboCategoria.addItemListener(new ItemListener() {
+                    @Override
+                    public void itemStateChanged(ItemEvent e) {
+                        if (e.getStateChange() == ItemEvent.SELECTED) {
+                            String categoriaSeleccionada = (String) comboCategoria.getSelectedItem();
+                            System.out.println("Categoría seleccionada: " + categoriaSeleccionada);
+                        }
+                    }
+                });
 
-	        // ------ CONTINÚA EL CÓDIGO NORMAL ------
 
-	        panelTemporadaCapitulo = new JPanel(new GridLayout(2, 2, 10, 10));
-	        panelTemporadaCapitulo.setBackground(new Color(255, 102, 102));
-	        panelTemporadaCapitulo.setVisible(false);
+                comboTemporadas.setVisible(esSerie);
+                comboCapitulos.setVisible(esSerie);
+                comboCapitulosPlaylistSaga.setVisible(esPlaylistOSaga);
+            }
+        });
 
-	        comboTemporada = new JComboBox<>();
-	        comboCapitulo = new JComboBox<>();
-	        for (int i = 1; i <= 50; i++) comboTemporada.addItem(i);
-	        for (int i = 1; i <= 100; i++) comboCapitulo.addItem(i);
-	        comboTemporada.setFont(fuenteGeneral);
-	        comboCapitulo.setFont(fuenteGeneral);
+        comboTemporadas.addItemListener(e -> {
+            if (e.getStateChange() == ItemEvent.SELECTED) {
+                System.out.println("Temporada seleccionada: " + comboTemporadas.getSelectedItem());
+            }
+        });
 
-	        panelTemporadaCapitulo.add(new JLabel("Temporada:"));
-	        panelTemporadaCapitulo.add(comboTemporada);
-	        panelTemporadaCapitulo.add(new JLabel("Capítulo:"));
-	        panelTemporadaCapitulo.add(comboCapitulo);
+        comboCapitulos.addItemListener(e -> {
+            if (e.getStateChange() == ItemEvent.SELECTED) {
+                System.out.println("Capítulo (Series) seleccionado: " + comboCapitulos.getSelectedItem());
+            }
+        });
 
-	        comboCategoria.addItemListener(e -> {
-	            if (e.getStateChange() == ItemEvent.SELECTED) {
-	                seleccion = (String) e.getItem();
-	                panelTemporadaCapitulo.setVisible("Serie".equals(seleccion));
-	                pack();
-	            }
-	        });
+        comboCapitulosPlaylistSaga.addItemListener(e -> {
+            if (e.getStateChange() == ItemEvent.SELECTED) {
+                System.out.println("Capítulo (Playlist/Saga) seleccionado: " + comboCapitulosPlaylistSaga.getSelectedItem());
+            }
+        });
 
-	        panelCampos.add(crearFila("Categoría:", comboCategoria));
-	        panelCampos.add(crearFila("Nombre:", campoNombre));
-	        panelCampos.add(panelTemporadaCapitulo);
-	        panelCampos.add(crearFila("Estado:", comboEstado));
-	        panelCampos.add(crearFila("Enlace o link:", campoLink));
-	        panelCampos.add(crearFila("Calificación:", comboCalificacion));
-	        panelCampos.add(checkFavorito);
+        
 
-	        add(panelCampos, BorderLayout.CENTER);
+        comboEstado.addItemListener(e -> {
+            if (e.getStateChange() == ItemEvent.SELECTED) {
+                status = (String) comboEstado.getSelectedItem();
+                System.out.println("Estado seleccionado: " + status);
+            }
+        });
 
-	        JPanel panelBotones = new JPanel(new FlowLayout());
-	        panelBotones.setBackground(new Color(255, 102, 102));
+        comboCalificacion.addItemListener(e -> {
+            if (e.getStateChange() == ItemEvent.SELECTED) {
+                rating = (String) comboCalificacion.getSelectedItem();
+                System.out.println("Calificación seleccionada: " + rating);
+            }
+        });
 
-	        JButton botonGuardar = new JButton("Guardar");
-	        JButton botonGuardarVolver = new JButton("Guardar y volver al menú");
-	        JButton botonCancelar = new JButton("Volver al menú sin guardar");
+        checkFavorito.addActionListener(e -> {
+            favorito = checkFavorito.isSelected();
+            System.out.println("¿Favorito? " + (favorito ? "Sí" : "No"));
+        });
 
-	        botonGuardar.setFont(fuenteGeneral);
-	        botonGuardarVolver.setFont(fuenteGeneral);
-	        botonCancelar.setFont(fuenteGeneral);
+        // ------ CONTINÚA EL CÓDIGO NORMAL ------
 
-	        panelBotones.add(botonGuardar);
-	        panelBotones.add(botonGuardarVolver);
-	        panelBotones.add(botonCancelar);
+        panelCampos.add(crearFila("Categoría:", comboCategoria));
+        panelCampos.add(crearFila("Nombre:", campoNombre));
+        panelCampos.add(crearFila("Temporadas:", comboTemporadas));
+        panelCampos.add(crearFila("Capítulos (Series):", comboCapitulos));
+        panelCampos.add(crearFila("Capítulo (Playlist/Saga):", comboCapitulosPlaylistSaga));
+        panelCampos.add(crearFila("Estado:", comboEstado));
+        panelCampos.add(crearFila("Enlace o link:", campoLink));
+        panelCampos.add(crearFila("Calificación:", comboCalificacion));
+        panelCampos.add(checkFavorito);
 
-	        add(panelBotones, BorderLayout.SOUTH);
+        add(panelCampos, BorderLayout.CENTER);
 
-	        botonGuardar.addActionListener(e -> {
-	            JOptionPane.showMessageDialog(this, "Registro guardado.");
-	            
-	            SQL.Query.usermediaregistry_registry(SQL.DBConnection.getConnection(),nombre, rating, status, seleccion, favorito, Main.fecha, url,Main.currentUser);
-	            
-	        });
+        JPanel panelBotones = new JPanel(new FlowLayout());
+        panelBotones.setBackground(new Color(255, 102, 102));
 
-	        botonGuardarVolver.addActionListener(e -> {
-	            JOptionPane.showMessageDialog(this, "Registro guardado.");
-	            dispose();
-	            ventanaAnterior.setVisible(true);
-	            
-	            
-	            
-	        });
+        JButton botonGuardar = new JButton("Guardar");
+       JButton botonGuardarVolver = new JButton("Guardar y volver al menú");
+        JButton botonCancelar = new JButton("Volver al menú sin guardar");
 
-	        botonCancelar.addActionListener(e -> {
-	            dispose();
-	            ventanaAnterior.setVisible(true);
-	        });
+        botonGuardar.setFont(fuenteGeneral);
+        botonGuardarVolver.setFont(fuenteGeneral);
+        botonCancelar.setFont(fuenteGeneral);
 
-	        pack();
-	        setLocationRelativeTo(null);
-	        setVisible(true);
-	    }
+        panelBotones.add(botonGuardar);
+       panelBotones.add(botonGuardarVolver);
+        panelBotones.add(botonCancelar);
 
-	    private JPanel crearFila(String etiqueta, JComponent componente) {
-	        JPanel panel = new JPanel(new GridLayout(1, 2, 10, 10));
-	        panel.setBackground(new Color(255, 102, 102));
-	        JLabel label = new JLabel(etiqueta);
-	        label.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
-	        panel.add(label);
-	        panel.add(componente);
-	        return panel;
-	    }
-	}
+        add(panelBotones, BorderLayout.SOUTH);
+
+        botonGuardar.addActionListener(e -> {
+            // Captura de datos en el momento de guardar
+            nombre = campoNombre.getText();
+            url = campoLink.getText();
+            rating = (String) comboCalificacion.getSelectedItem();
+            status = (String) comboEstado.getSelectedItem();
+            seleccion = (String) comboCategoria.getSelectedItem();
+            favorito = checkFavorito.isSelected();
+
+            // Mostrar en consola
+            System.out.println("Nombre ingresado: " + nombre);
+            System.out.println("Enlace ingresado: " + url);
+            System.out.println("Estado seleccionado: " + status);
+            System.out.println("Calificación seleccionada: " + rating);
+            System.out.println("Categoría seleccionada: " + seleccion);
+            System.out.println("¿Favorito? " + (favorito ? "Sí" : "No"));
+
+            JOptionPane.showMessageDialog(this, "Registro guardado.");
+            SQL.Query.usermediaregistry_registry(SQL.DBConnection.getConnection(),
+                    nombre, rating, status, seleccion, favorito, Main.fecha, url, Main.currentUser);
+        });
+
+        botonGuardarVolver.addActionListener(e -> {
+            // Captura de datos
+            nombre = campoNombre.getText();
+            url = campoLink.getText();
+            rating = (String) comboCalificacion.getSelectedItem();
+            status = (String) comboEstado.getSelectedItem();
+            seleccion = (String) comboCategoria.getSelectedItem();
+            favorito = checkFavorito.isSelected();
+
+            // Mostrar en consola
+            System.out.println("Nombre ingresado: " + nombre);
+            System.out.println("Enlace ingresado: " + url);
+            System.out.println("Estado seleccionado: " + status);
+            System.out.println("Calificación seleccionada: " + rating);
+            System.out.println("Categoría seleccionada: " + seleccion);
+            System.out.println("¿Favorito? " + (favorito ? "Sí" : "No"));
+
+            // Guardar en base de datos
+            SQL.Query.usermediaregistry_registry(SQL.DBConnection.getConnection(),
+                    nombre, rating, status, seleccion, favorito, Main.fecha, url, Main.currentUser);
+
+            // Confirmación y volver
+            JOptionPane.showMessageDialog(this, "Registro guardado.");
+            dispose();
+            ventanaAnterior.setVisible(true);
+        });
+
+
+        botonCancelar.addActionListener(e -> {
+            dispose();
+            ventanaAnterior.setVisible(true);
+        });
+
+        pack();
+        setLocationRelativeTo(null);
+        setVisible(true);
+    }
+
+    private JPanel crearFila(String etiqueta, JComponent componente) {
+        JPanel panel = new JPanel(new GridLayout(1, 2, 10, 10));
+        panel.setBackground(new Color(255, 102, 102));
+        JLabel label = new JLabel(etiqueta);
+        label.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
+        panel.add(label);
+        panel.add(componente);
+        return panel;
+    }
+}
