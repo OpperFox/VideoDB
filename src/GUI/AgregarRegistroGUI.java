@@ -171,8 +171,22 @@ public class AgregarRegistroGUI extends JFrame {
         panelBotones.add(botonCancelar);
 
         add(panelBotones, BorderLayout.SOUTH);
-
         botonGuardar.addActionListener(e -> {
+        	
+        	status = (Status) comboEstado.getSelectedItem();
+        	categoria = (ContentType) comboCategoria.getSelectedItem();
+        	rating = (Rating) comboCalificacion.getSelectedItem();
+        	
+        	System.out.println("-----------------");
+        	System.out.println("Datos Guardados: ");
+        	
+        	System.out.println("Estado Seleccionada: " + status.toString());
+        	System.out.println("Texto en nombre: " + campoNombre.getText());
+        	System.out.println("Categoria Seleccionada: " + categoria.toString());
+        	System.out.println("Texto en enlace: " + campoLink.getText());
+        	System.out.println("Calificación seleccionada: " + comboCalificacion.getSelectedItem().toString());
+        	System.out.println("¿Favorito? " + (favorito ? "Sí" : "No"));
+        	
         	Query.usermediaregistry_registry(DBConnection.getConnection(),nombre, rating.toString(), status.toString(), categoria.toString(), favorito, Main.fecha, url, Main.currentUser);
             JOptionPane.showMessageDialog(this, "Registro guardado.");
             
@@ -180,6 +194,21 @@ public class AgregarRegistroGUI extends JFrame {
         });
 
         botonGuardarVolver.addActionListener(e -> {
+        	
+        	status = (Status) comboEstado.getSelectedItem();
+        	categoria = (ContentType) comboCategoria.getSelectedItem();
+        	status = (Status) comboEstado.getSelectedItem();
+        	
+        	System.out.println("-----------------");
+        	System.out.println("Datos Guardados: ");
+        	
+        	System.out.println("Estado Seleccionada: " + status.toString());
+        	System.out.println("Texto en nombre: " + campoNombre.getText());
+        	System.out.println("Categoria Seleccionada: " + categoria.toString());
+        	System.out.println("Texto en enlace: " + campoLink.getText());
+        	System.out.println("Calificación seleccionada: " + comboCalificacion.getSelectedItem().toString());
+        	System.out.println("¿Favorito? " + (favorito ? "Sí" : "No"));
+        	
         	Query.usermediaregistry_registry(DBConnection.getConnection(),nombre, rating.toString(), status.toString(), categoria.toString(), favorito, Main.fecha, url, Main.currentUser);
             JOptionPane.showMessageDialog(this, "Registro guardado.");
             dispose();
