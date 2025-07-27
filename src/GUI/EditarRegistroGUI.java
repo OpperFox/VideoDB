@@ -2,8 +2,13 @@ package GUI;
 
 // Se importan las clases necesarias para crear interfaces gráficas con Swing y manejar eventos.
 import javax.swing.*;
+
+import SQL.DBConnection;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.util.List;
+import java.util.ArrayList;
 
 // Clase que representa la ventana para editar registros guardados por el usuario
 public class EditarRegistroGUI extends JFrame {
@@ -27,12 +32,24 @@ public class EditarRegistroGUI extends JFrame {
 
     // Nombre de usuario actual (se puede usar para cargar registros personalizados)
     //******************************************************************************************************************************
-    private String usuario; // ❌ Aunque el nombre del usuario se recibe, no se usa para filtrar los registros mostrados ni se conecta a ningún dato en SQL (por ejemplo, no hay WHERE usuario_id = ?).
+    
+    private String usuario;
+    private int usuario_id;
+    
+    
+    
 //--------------------------------------------------------------------------------------------------------------------------------
     // Constructor que recibe la ventana anterior y el nombre del usuario
     public EditarRegistroGUI(JFrame ventanaAnterior, String usuario) {
         this.ventanaAnterior = ventanaAnterior;
         this.usuario = usuario;
+        this.usuario_id = SQL.Query.mostrar_id_usuario(SQL.DBConnection.getConnection(), usuario);
+        
+        if (usuario_id == -1) {
+            JOptionPane.showMessageDialog(this, "Usuario no encontrado.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
 
         // Configuración básica de la ventana
         setTitle("Editar registro");
@@ -59,12 +76,14 @@ public class EditarRegistroGUI extends JFrame {
         JLabel etiquetaSeleccion = new JLabel("Seleccione un registro para editar:");
         etiquetaSeleccion.setFont(fuenteGeneral);
 
-        // Se agregan registros de ejemplo (puedes cambiarlos por registros reales)
+        // 
 //**********************************************************************************************************************************
-        modeloLista = new DefaultListModel<>(); // ❌ Aquí los registros se cargan de forma manual, no se consultan desde una base SQL (SELECT * FROM registros WHERE usuario = ?). Se usa DefaultListModel, pero no representa datos reales persistidos.
-        modeloLista.addElement("Película: Inception");
-        modeloLista.addElement("Serie: Dark");
-        modeloLista.addElement("Playlist: Mi Top 10 2025");
+        modeloLista = new DefaultListModel<>();
+        List<String> nombreytipo = SQL.Query.obtenerNombreTipo_media(SQL.DBConnection.getConnection(), usuario_id);
+
+        for (String tipo : nombreytipo) {
+            modeloLista.addElement(tipo + " ");
+        }
 
         // Lista gráfica con scroll
         listaRegistros = new JList<>(modeloLista);
@@ -86,14 +105,14 @@ public class EditarRegistroGUI extends JFrame {
         campoLink = new JTextField();
 
         // Combo con estados posibles (preestablecidos) //**************************************************************************
-        comboEstado = new JComboBox<>(new String[]{ // ✅ Esto es válido pero simulado. Si usas una base SQL, podrías tener una tabla calificaciones o estados y llenarlos dinámicamente con un SELECT.
-            "No visto", "Re visto", "En proceso o viendo", "Completado", "Abandonado", "En espera"
+        comboEstado = new JComboBox<>(new String[]{ 
+            "VIENDO", "COMPLETADO", "PENDIENTE", "ABANDONADO", "PLANIFICADO", "REVISTO", "NO VISTO"
         }); //----------------------------------------------------------------------------------------------------------------------------
 
         // Combo con calificaciones posibles (preestablecidas)
         //*************************************************************************************************************************
-        comboCalificacion = new JComboBox<>(new String[]{ // ✅ Esto es válido pero simulado. Si usas una base SQL, podrías tener una tabla calificaciones o estados y llenarlos dinámicamente con un SELECT.
-            "Horrible", "Malo", "Regular", "Bueno", "Sublime"
+        comboCalificacion = new JComboBox<>(new String[]{
+            "SIN CALIFICACION", "Horrible", "Malo", "Regular", "Bueno", "Sublime"
         }); //----------------------------------------------------------------------------------------------------------------------
 
         // Check para marcar como favorito
@@ -147,6 +166,7 @@ public class EditarRegistroGUI extends JFrame {
         //***************************************************************************************************************************
         botonGuardar.addActionListener((ActionEvent e) -> {
             if (validarEntrada()) {
+<<<<<<< HEAD
                 // Mostrar datos en consola
                 System.out.println("Registro seleccionado: " + listaRegistros.getSelectedValue());
                 System.out.println("Nuevo nombre: " + campoNombre.getText());
@@ -156,6 +176,41 @@ public class EditarRegistroGUI extends JFrame {
                 System.out.println("¿Favorito? " + (checkFavorito.isSelected() ? "Sí" : "No"));
 
                 JOptionPane.showMessageDialog(this, "Cambios guardados correctamente.");
+=======
+                // Nuevos valores del formulario
+                String nuevoNombre = campoNombre.getText();
+                String rating = (String) comboCalificacion.getSelectedItem();
+                String status = (String) comboEstado.getSelectedItem();
+                boolean favorito = checkFavorito.isSelected();
+                String referenceUrl = campoLink.getText();
+
+                // Obtener el registro seleccionado
+                String seleccionado = listaRegistros.getSelectedValue(); // Ej: "Tipo: SERIE | Nombre: BREAKING BAD"
+                
+                if (seleccionado != null && seleccionado.contains("|")) {
+                    // Extraer tipo y nombre original
+                    String[] partes = seleccionado.split("\\|");
+                    String tipo = partes[0].split(":")[1].trim();
+                    String nombreAnterior = partes[1].split(":")[1].trim();
+
+                    // Llamar al método SQL con nombreAnterior y tipo
+                    SQL.Query.usermediaregistry_edit(
+                        SQL.DBConnection.getConnection(),
+                        usuario,
+                        tipo,
+                        nombreAnterior,
+                        nuevoNombre,
+                        rating,
+                        status,
+                        favorito,
+                        referenceUrl
+                    );
+
+                    JOptionPane.showMessageDialog(this, "Cambios guardados correctamente.");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Error al interpretar el registro seleccionado.");
+                }
+>>>>>>> 3c3a233b0abc76cc3ead879361e56971a7ba013f
             }
         });
 
@@ -163,6 +218,7 @@ public class EditarRegistroGUI extends JFrame {
         //**************************************************************************************************************************
         botonGuardarVolver.addActionListener((ActionEvent e) -> {
             if (validarEntrada()) {
+<<<<<<< HEAD
                 // Mostrar datos en consola
                 System.out.println("Registro seleccionado: " + listaRegistros.getSelectedValue());
                 System.out.println("Nuevo nombre: " + campoNombre.getText());
@@ -171,6 +227,44 @@ public class EditarRegistroGUI extends JFrame {
                 System.out.println("Nueva calificación: " + comboCalificacion.getSelectedItem());
                 System.out.println("¿Favorito? " + (checkFavorito.isSelected() ? "Sí" : "No"));
 
+=======
+            	if (validarEntrada()) {
+                    // Nuevos valores del formulario
+                    String nuevoNombre = campoNombre.getText();
+                    String rating = (String) comboCalificacion.getSelectedItem();
+                    String status = (String) comboEstado.getSelectedItem();
+                    boolean favorito = checkFavorito.isSelected();
+                    String referenceUrl = campoLink.getText();
+
+                    // Obtener el registro seleccionado
+                    String seleccionado = listaRegistros.getSelectedValue(); // Ej: "Tipo: SERIE | Nombre: BREAKING BAD"
+                    
+                    if (seleccionado != null && seleccionado.contains("|")) {
+                        // Extraer tipo y nombre original
+                        String[] partes = seleccionado.split("\\|");
+                        String tipo = partes[0].split(":")[1].trim();
+                        String nombreAnterior = partes[1].split(":")[1].trim();
+
+                        // Llamar al método SQL con nombreAnterior y tipo
+                        SQL.Query.usermediaregistry_edit(
+                            SQL.DBConnection.getConnection(),
+                            usuario,
+                            tipo,
+                            nombreAnterior,
+                            nuevoNombre,
+                            rating,
+                            status,
+                            favorito,
+                            referenceUrl
+                        );
+
+                        JOptionPane.showMessageDialog(this, "Cambios guardados correctamente.");
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Error al interpretar el registro seleccionado.");
+                    }
+                }
+            	            	
+>>>>>>> 3c3a233b0abc76cc3ead879361e56971a7ba013f
                 JOptionPane.showMessageDialog(this, "Cambios guardados correctamente.");
                 volverAlMenu();
             }
@@ -187,15 +281,40 @@ public class EditarRegistroGUI extends JFrame {
             } else {
                 int confirm = JOptionPane.showConfirmDialog(this, "¿Estás seguro de que deseas eliminar este registro?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
                 if (confirm == JOptionPane.YES_OPTION) {
+<<<<<<< HEAD
                     // Mostrar dato eliminado en consola
                     String eliminado = modeloLista.getElementAt(index);
                     System.out.println("Registro eliminado: " + eliminado);
 
                     modeloLista.remove(index);
                     JOptionPane.showMessageDialog(this, "Registro eliminado exitosamente.");
+=======
+                    
+                    String entrada = nombreytipo.get(index); // Ej: "Tipo: SERIE | Nombre: BREAKING BAD"
+                    if (entrada != null && entrada.contains("|")) {
+                        String[] partes = entrada.split("\\|");
+                        String tipo = partes[0].split(":")[1].trim();
+                        String nombre = partes[1].split(":")[1].trim();
+
+                        // Llamada al método que elimina en SQL
+                        boolean eliminado = SQL.Query.usermediaregistry_delete(SQL.DBConnection.getConnection(), nombre, tipo, usuario_id);
+
+                        if (eliminado) {
+                            modeloLista.remove(index); 
+                            nombreytipo.remove(index); 
+                            JOptionPane.showMessageDialog(this, "Registro eliminado exitosamente.");
+                        } else {
+                            JOptionPane.showMessageDialog(this, "No se pudo eliminar el registro de la base de datos.");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Formato de registro inválido.");
+                    }
+>>>>>>> 3c3a233b0abc76cc3ead879361e56971a7ba013f
                 }
             }
         });
+
+
 
         // Tamaño y ubicación de la ventana
         setSize(850, 450);

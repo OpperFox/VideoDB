@@ -1,14 +1,14 @@
-package Logica;
+package LOGICA;
 
 public enum Status {
 	
+	NO_VISTO("NO VISTO"),
 	VIENDO("VIENDO"), 
 	COMPLETADO("COMPLETADO"), 
 	PENDIENTE("PENDIENTE"), 
 	ABANDONADO("ABANDONADO"), 
 	PLANIFICADO("PLANIFICADO"), 
-	REVISTO("REVISTO"), 
-	NO_VISTO("NO_VISTO");
+	REVISTO("REVISTO");
 
 	private Status(String status) {
 		
@@ -19,11 +19,8 @@ public enum Status {
 	String status;
 
 	@Override
-	
 	public String toString() {
-		
 		return status;
-		
 	}
 	
 }

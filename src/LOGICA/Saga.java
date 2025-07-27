@@ -1,4 +1,4 @@
-package Logica;
+package LOGICA;
 
 public class Saga extends MediaContent{
 	

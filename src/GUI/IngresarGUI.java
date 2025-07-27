@@ -9,7 +9,7 @@ import java.awt.event.*;
 	    /**
 		 * 
 		 */
-		private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 	// Campos de texto para que el usuario escriba su nombre de usuario y clave
     private JTextField campoUsuario;
     private JPasswordField campoClave;
