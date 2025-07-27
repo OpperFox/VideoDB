@@ -194,7 +194,7 @@ public class Query {
     }
     
     
-    public static List<String> obtenerNombreTipo(Connection conn, int usuario_id) {
+    public static List<String> obtenerNombreTipo_media(Connection conn, int usuario_id) {
         List<String> tipoynombre = new ArrayList<>();
 
         try {
@@ -257,8 +257,25 @@ public class Query {
     	    }
     	}
 
+    public static boolean usermediaregistry_delete(Connection conn, String nombre, String tipo, int usuario_id){
+        try {
+            PreparedStatement statement = conn.prepareStatement(
+                "DELETE FROM usermediaregistry WHERE nombre = ? AND tipo = ? AND usuario_id = ?"
+            );
 
+            statement.setString(1, nombre);
+            statement.setString(2, tipo);
+            statement.setInt(3, usuario_id);
 
+            int rowsAffected = statement.executeUpdate();
+            
+            return rowsAffected > 0; 
+        } catch(Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
     public static boolean mediacontent_exists(Connection conn, int id_glob, int id_loc, String alfa, String beta, String nombre, String tipo){
         try{
             PreparedStatement statement = conn.prepareStatement(

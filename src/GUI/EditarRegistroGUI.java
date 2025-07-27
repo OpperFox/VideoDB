@@ -2,6 +2,9 @@ package GUI;
 
 // Se importan las clases necesarias para crear interfaces gráficas con Swing y manejar eventos.
 import javax.swing.*;
+
+import SQL.DBConnection;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.List;
@@ -76,7 +79,7 @@ public class EditarRegistroGUI extends JFrame {
         // 
 //**********************************************************************************************************************************
         modeloLista = new DefaultListModel<>();
-        List<String> nombreytipo = SQL.Query.obtenerNombreTipo(SQL.DBConnection.getConnection(), usuario_id);
+        List<String> nombreytipo = SQL.Query.obtenerNombreTipo_media(SQL.DBConnection.getConnection(), usuario_id);
 
         for (String tipo : nombreytipo) {
             modeloLista.addElement(tipo + " ");
@@ -255,12 +258,31 @@ public class EditarRegistroGUI extends JFrame {
             } else {
                 int confirm = JOptionPane.showConfirmDialog(this, "¿Estás seguro de que deseas eliminar este registro?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
                 if (confirm == JOptionPane.YES_OPTION) {
-      //***************************************************************************************************************************              
-                	modeloLista.remove(index); // ❌ Esto solo elimina el registro del modelo de la lista visual, no borra ningún dato real de una base de datos. No hay lógica con DELETE FROM registros WHERE id = ?.
-                    JOptionPane.showMessageDialog(this, "Registro eliminado exitosamente.");
+                    
+                    String entrada = nombreytipo.get(index); // Ej: "Tipo: SERIE | Nombre: BREAKING BAD"
+                    if (entrada != null && entrada.contains("|")) {
+                        String[] partes = entrada.split("\\|");
+                        String tipo = partes[0].split(":")[1].trim();
+                        String nombre = partes[1].split(":")[1].trim();
+
+                        // Llamada al método que elimina en SQL
+                        boolean eliminado = SQL.Query.usermediaregistry_delete(SQL.DBConnection.getConnection(), nombre, tipo, usuario_id);
+
+                        if (eliminado) {
+                            modeloLista.remove(index); 
+                            nombreytipo.remove(index); 
+                            JOptionPane.showMessageDialog(this, "Registro eliminado exitosamente.");
+                        } else {
+                            JOptionPane.showMessageDialog(this, "No se pudo eliminar el registro de la base de datos.");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Formato de registro inválido.");
+                    }
                 }
             }
         });
+
+
 
         // Tamaño y ubicación de la ventana
         setSize(850, 450);
