@@ -4,6 +4,8 @@
 package SQL;
 
 import java.sql.*;
+import java.util.List;
+import java.util.ArrayList;
 
 
 public class Query {
@@ -126,6 +128,9 @@ public class Query {
         }
         return false;
     }
+    
+    
+    
     public static boolean usermediaregistry_registry(Connection conn, String nombre, String rating, String status, String tipo, boolean favorito,Date fecha_comienzo, String reference_url, int usuario_id){
         try{
             PreparedStatement statement = conn.prepareStatement(
@@ -150,6 +155,109 @@ public class Query {
         }
         return false;
     }
+    public static int mostrar_id_usuario(Connection conn, String nombre) {
+        int id = -1; // valor por defecto si no se encuentra
+        try {
+            PreparedStatement statement = conn.prepareStatement(
+                "SELECT id FROM usuario WHERE nombre = ?"
+            );
+            statement.setString(1, nombre);
+
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                id = rs.getInt("id");
+            }
+            rs.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return id;
+    }
+    
+    public static int mostrar_id_media(Connection conn, String nombre) {
+        int id = -1; // valor por defecto si no se encuentra
+        try {
+            PreparedStatement statement = conn.prepareStatement(
+                "SELECT id FROM usermediaregistry WHERE nombre = ?"
+            );
+            statement.setString(1, nombre);
+
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                id = rs.getInt("id");
+            }
+            rs.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return id;
+    }
+    
+    
+    public static List<String> obtenerNombreTipo(Connection conn, int usuario_id) {
+        List<String> tipoynombre = new ArrayList<>();
+
+        try {
+            PreparedStatement statement = conn.prepareStatement(
+                "SELECT nombre, tipo FROM usermediaregistry WHERE usuario_id = ?"
+            );
+            statement.setInt(1, usuario_id);
+
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                // Puedes elegir qué concatenar o devolver según tu necesidad
+                String nombre = rs.getString("nombre");
+                String tipo = rs.getString("tipo");
+
+                String combinado = "Tipo: " + tipo + " | Nombre: " + nombre;
+                tipoynombre.add(combinado);
+            }
+            rs.close();
+            statement.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return tipoynombre;
+    }
+    
+   
+    
+    public static boolean usermediaregistry_edit(Connection conn,String usuario,String tipo,String nombreAnterior,String nuevoNombre,String rating,String status,boolean favorito,String reference_url) {
+    	    try {
+    	        // Obtener el ID del usuario por nombre
+    	        int usuario_id = mostrar_id_usuario(conn, usuario);
+    	        if (usuario_id == -1) {
+    	            System.out.println("Usuario no encontrado: " + usuario);
+    	            return false;
+    	        }
+
+    	        // Ejecutar el UPDATE con base en el nombre anterior y tipo
+    	        PreparedStatement statement = conn.prepareStatement(
+    	            "UPDATE usermediaregistry SET nombre = ?, rating = ?, status = ?, favorito = ?, reference_url = ? " +
+    	            "WHERE usuario_id = ? AND tipo = ? AND nombre = ?"
+    	        );
+
+    	        statement.setString(1, nuevoNombre);
+    	        statement.setString(2, rating);
+    	        statement.setString(3, status);
+    	        statement.setBoolean(4, favorito);
+    	        statement.setString(5, reference_url);
+    	        statement.setInt(6, usuario_id);
+    	        statement.setString(7, tipo);
+    	        statement.setString(8, nombreAnterior);
+
+    	        int filasActualizadas = statement.executeUpdate();
+    	        statement.close();
+
+    	        return filasActualizadas > 0;
+    	    } catch (Exception e) {
+    	        e.printStackTrace();
+    	        return false;
+    	    }
+    	}
+
+
 
     public static boolean mediacontent_exists(Connection conn, int id_glob, int id_loc, String alfa, String beta, String nombre, String tipo){
         try{
