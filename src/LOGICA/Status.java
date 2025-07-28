@@ -2,7 +2,7 @@ package LOGICA;
 
 public enum Status {
 	
-	NO_VISTO("NO VISTO"),
+	NO_VISTO("NO_VISTO"),
 	VIENDO("VIENDO"), 
 	COMPLETADO("COMPLETADO"), 
 	PENDIENTE("PENDIENTE"), 
