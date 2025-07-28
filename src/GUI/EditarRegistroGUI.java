@@ -166,7 +166,7 @@ public class EditarRegistroGUI extends JFrame {
         //***************************************************************************************************************************
         botonGuardar.addActionListener((ActionEvent e) -> {
             if (validarEntrada()) {
-<<<<<<< HEAD
+
                 // Mostrar datos en consola
                 System.out.println("Registro seleccionado: " + listaRegistros.getSelectedValue());
                 System.out.println("Nuevo nombre: " + campoNombre.getText());
@@ -176,7 +176,7 @@ public class EditarRegistroGUI extends JFrame {
                 System.out.println("¿Favorito? " + (checkFavorito.isSelected() ? "Sí" : "No"));
 
                 JOptionPane.showMessageDialog(this, "Cambios guardados correctamente.");
-=======
+
                 // Nuevos valores del formulario
                 String nuevoNombre = campoNombre.getText();
                 String rating = (String) comboCalificacion.getSelectedItem();
@@ -210,7 +210,7 @@ public class EditarRegistroGUI extends JFrame {
                 } else {
                     JOptionPane.showMessageDialog(this, "Error al interpretar el registro seleccionado.");
                 }
->>>>>>> 3c3a233b0abc76cc3ead879361e56971a7ba013f
+
             }
         });
 
@@ -218,7 +218,7 @@ public class EditarRegistroGUI extends JFrame {
         //**************************************************************************************************************************
         botonGuardarVolver.addActionListener((ActionEvent e) -> {
             if (validarEntrada()) {
-<<<<<<< HEAD
+
                 // Mostrar datos en consola
                 System.out.println("Registro seleccionado: " + listaRegistros.getSelectedValue());
                 System.out.println("Nuevo nombre: " + campoNombre.getText());
@@ -227,7 +227,7 @@ public class EditarRegistroGUI extends JFrame {
                 System.out.println("Nueva calificación: " + comboCalificacion.getSelectedItem());
                 System.out.println("¿Favorito? " + (checkFavorito.isSelected() ? "Sí" : "No"));
 
-=======
+
             	if (validarEntrada()) {
                     // Nuevos valores del formulario
                     String nuevoNombre = campoNombre.getText();
@@ -264,7 +264,7 @@ public class EditarRegistroGUI extends JFrame {
                     }
                 }
             	            	
->>>>>>> 3c3a233b0abc76cc3ead879361e56971a7ba013f
+
                 JOptionPane.showMessageDialog(this, "Cambios guardados correctamente.");
                 volverAlMenu();
             }
@@ -281,14 +281,13 @@ public class EditarRegistroGUI extends JFrame {
             } else {
                 int confirm = JOptionPane.showConfirmDialog(this, "¿Estás seguro de que deseas eliminar este registro?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
                 if (confirm == JOptionPane.YES_OPTION) {
-<<<<<<< HEAD
+                	
                     // Mostrar dato eliminado en consola
                     String eliminado = modeloLista.getElementAt(index);
                     System.out.println("Registro eliminado: " + eliminado);
 
                     modeloLista.remove(index);
                     JOptionPane.showMessageDialog(this, "Registro eliminado exitosamente.");
-=======
                     
                     String entrada = nombreytipo.get(index); // Ej: "Tipo: SERIE | Nombre: BREAKING BAD"
                     if (entrada != null && entrada.contains("|")) {
@@ -297,9 +296,9 @@ public class EditarRegistroGUI extends JFrame {
                         String nombre = partes[1].split(":")[1].trim();
 
                         // Llamada al método que elimina en SQL
-                        boolean eliminado = SQL.Query.usermediaregistry_delete(SQL.DBConnection.getConnection(), nombre, tipo, usuario_id);
+                        boolean eliminado1 = SQL.Query.usermediaregistry_delete(SQL.DBConnection.getConnection(), nombre, tipo, usuario_id);
 
-                        if (eliminado) {
+                        if (eliminado1) {
                             modeloLista.remove(index); 
                             nombreytipo.remove(index); 
                             JOptionPane.showMessageDialog(this, "Registro eliminado exitosamente.");
@@ -309,7 +308,6 @@ public class EditarRegistroGUI extends JFrame {
                     } else {
                         JOptionPane.showMessageDialog(this, "Formato de registro inválido.");
                     }
->>>>>>> 3c3a233b0abc76cc3ead879361e56971a7ba013f
                 }
             }
         });

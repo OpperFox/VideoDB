@@ -102,7 +102,6 @@ public class EliminarRegistrosGUI extends JFrame {
         );
 
         if (confirmacion == JOptionPane.YES_OPTION) {
-<<<<<<< HEAD
 
             // Recorre la tabla de abajo hacia arriba para evitar errores al eliminar filas
             for (int i = modeloTabla.getRowCount() - 1; i >= 0; i--) {
@@ -125,11 +124,11 @@ public class EliminarRegistrosGUI extends JFrame {
             }
 
             JOptionPane.showMessageDialog(this, "Registros eliminados correctamente.");
-        }
-    }
+        	}  
 
-}
-=======
+
+
+
             // Recorre la tabla desde el final hacia el inicio
             for (int i = modeloTabla.getRowCount() - 1; i >= 0; i--) {
                 Boolean seleccionado = (Boolean) modeloTabla.getValueAt(i, 0);
@@ -152,6 +151,5 @@ public class EliminarRegistrosGUI extends JFrame {
             // Mensaje de confirmación
             JOptionPane.showMessageDialog(this, "Registros eliminados correctamente.");
         }
-    }}
+    }
 
->>>>>>> d3b125286d3d6c5d64445f7345b4bdf9c0fd99c1
