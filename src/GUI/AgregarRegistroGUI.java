@@ -3,10 +3,6 @@ package GUI;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-<<<<<<< HEAD
-=======
-
->>>>>>> f2e82b50690db1c6c93807baf798a3c3ef747295
 import LOGICA.*;
 import SQL.*;
 
@@ -179,6 +175,7 @@ public class AgregarRegistroGUI extends JFrame {
         	status = (Status) comboEstado.getSelectedItem();
         	categoria = (ContentType) comboCategoria.getSelectedItem();
         	rating = (Rating) comboCalificacion.getSelectedItem();
+        	favorito = checkFavorito.isSelected();
         	
         	System.out.println("-----------------");
         	System.out.println("Datos Guardados: ");
@@ -200,7 +197,8 @@ public class AgregarRegistroGUI extends JFrame {
         	
         	status = (Status) comboEstado.getSelectedItem();
         	categoria = (ContentType) comboCategoria.getSelectedItem();
-        	rating = (Rating) comboCalificacion.getSelectedItem();
+        	status = (Status) comboEstado.getSelectedItem();
+        	favorito = checkFavorito.isSelected();
         	
         	System.out.println("-----------------");
         	System.out.println("Datos Guardados: ");
