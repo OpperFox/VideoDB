@@ -3,6 +3,8 @@ package GUI;
 // Se importan las clases necesarias para crear interfaces gráficas con Swing y manejar eventos.
 import javax.swing.*;
 
+import LOGICA.Rating;
+import LOGICA.Status;
 import SQL.DBConnection;
 
 import java.awt.*;
@@ -105,16 +107,12 @@ public class EditarRegistroGUI extends JFrame {
         campoLink = new JTextField();
 
         // Combo con estados posibles (preestablecidos) //**************************************************************************
-        comboEstado = new JComboBox<>(new String[]{ 
-            "VIENDO", "COMPLETADO", "PENDIENTE", "ABANDONADO", "PLANIFICADO", "REVISTO", "NO VISTO"
-        }); //----------------------------------------------------------------------------------------------------------------------------
+        comboEstado = new JComboBox(Status.values());
+        comboEstado.setFont(fuenteGeneral);
 
-        // Combo con calificaciones posibles (preestablecidas)
-        //*************************************************************************************************************************
-        comboCalificacion = new JComboBox<>(new String[]{
-            "SIN CALIFICACION", "Horrible", "Malo", "Regular", "Bueno", "Sublime"
-        }); //----------------------------------------------------------------------------------------------------------------------
-
+        comboCalificacion = new JComboBox(Rating.values());
+        comboCalificacion.setFont(fuenteGeneral);
+        
         // Check para marcar como favorito
         checkFavorito = new JCheckBox("Marcar como favorito");
         checkFavorito.setBackground(new Color(255, 102, 102));
@@ -171,16 +169,16 @@ public class EditarRegistroGUI extends JFrame {
                 System.out.println("Registro seleccionado: " + listaRegistros.getSelectedValue());
                 System.out.println("Nuevo nombre: " + campoNombre.getText());
                 System.out.println("Nuevo enlace: " + campoLink.getText());
-                System.out.println("Nuevo estado: " + comboEstado.getSelectedItem());
-                System.out.println("Nueva calificación: " + comboCalificacion.getSelectedItem());
+                System.out.println("Nuevo estado: " + comboEstado.getSelectedItem().toString());
+                System.out.println("Nueva calificación: " + comboCalificacion.getSelectedItem().toString());
                 System.out.println("¿Favorito? " + (checkFavorito.isSelected() ? "Sí" : "No"));
 
                 JOptionPane.showMessageDialog(this, "Cambios guardados correctamente.");
 
                 // Nuevos valores del formulario
                 String nuevoNombre = campoNombre.getText();
-                String rating = (String) comboCalificacion.getSelectedItem();
-                String status = (String) comboEstado.getSelectedItem();
+                String rating = (String) comboCalificacion.getSelectedItem().toString();
+                String status = (String) comboEstado.getSelectedItem().toString();
                 boolean favorito = checkFavorito.isSelected();
                 String referenceUrl = campoLink.getText();
 
@@ -223,16 +221,16 @@ public class EditarRegistroGUI extends JFrame {
                 System.out.println("Registro seleccionado: " + listaRegistros.getSelectedValue());
                 System.out.println("Nuevo nombre: " + campoNombre.getText());
                 System.out.println("Nuevo enlace: " + campoLink.getText());
-                System.out.println("Nuevo estado: " + comboEstado.getSelectedItem());
-                System.out.println("Nueva calificación: " + comboCalificacion.getSelectedItem());
+                System.out.println("Nuevo estado: " + comboEstado.getSelectedItem().toString());
+                System.out.println("Nueva calificación: " + comboCalificacion.getSelectedItem().toString());
                 System.out.println("¿Favorito? " + (checkFavorito.isSelected() ? "Sí" : "No"));
 
 
             	if (validarEntrada()) {
                     // Nuevos valores del formulario
                     String nuevoNombre = campoNombre.getText();
-                    String rating = (String) comboCalificacion.getSelectedItem();
-                    String status = (String) comboEstado.getSelectedItem();
+                    String rating = (String) comboCalificacion.getSelectedItem().toString();
+                    String status = (String) comboEstado.getSelectedItem().toString();
                     boolean favorito = checkFavorito.isSelected();
                     String referenceUrl = campoLink.getText();
 
