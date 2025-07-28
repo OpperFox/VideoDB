@@ -40,7 +40,7 @@ public class User {
 
 	// Agrega un nuevo registro multimedia vacío al usuario
 	public void new_registry() {
-		userMediaRegistry.add(new UserMediaRegistry(userId, null)); 
+		userMediaRegistry.add(new UserMediaRegistry(userId, null, null, null, null, null, false)); 
 		//Se crea un nuevo registro con el userId actual, se debe implementar una solucion para que el usuario elija un tipo de MediaContent indicado en el Enum... 
 		//ContentType
 	}
