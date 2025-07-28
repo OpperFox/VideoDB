@@ -1,122 +1,155 @@
 package GUI;
 
 import javax.swing.*;
-import javax.swing.event.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.*;
+import java.util.ArrayList;
 
 public class VerRegistrosGUI extends JFrame {
-    private JTextField campoBuscarNombre;
-    private JTextField campoBuscarEnlace;
-    private JComboBox<String> comboEstado;
-    private JComboBox<String> comboCalificacion;
-    private JComboBox<String> comboCategoria;
-    private JCheckBox checkFavorito;
-
-    private JPanel panelRegistros;
+    private JTextField campoNombre;
+    private JComboBox<String> comboCalificacion, comboEstado;
+    private JButton botonAplicar, botonVolver;
+    private JTable tablaRegistros;
+    private DefaultTableModel modeloTabla;
+    private ArrayList<String[]> registros; // Simulación de los registros
 
     public VerRegistrosGUI() {
-        setTitle("Registros Existentes");
-        setSize(600, 400);
+        setTitle("📂 Ver Registros de admin");
+        setSize(800, 500);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLayout(new BorderLayout());
 
-        JPanel panelFiltros = new JPanel(new GridLayout(3, 2));
+        // Estilo: fondo pastel y fuente Comic Sans
+        Color fondoRojoPastel = new Color(255, 153, 153);
+        Color fondoCeleste = new Color(204, 229, 255);
+        Font fuenteComic = new Font("Comic Sans MS", Font.PLAIN, 14);
+        Font fuenteNegrita = new Font("Comic Sans MS", Font.BOLD, 14);
 
-        campoBuscarNombre = new JTextField();
-        campoBuscarEnlace = new JTextField();
+        // Panel de filtros
+        JPanel panelFiltros = new JPanel();
+        panelFiltros.setBackground(fondoRojoPastel);
+        panelFiltros.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
 
-        comboEstado = new JComboBox<>(new String[]{"", "Visto", "Pendiente"});
-        comboCalificacion = new JComboBox<>(new String[]{"", "1", "2", "3", "4", "5"});
-        comboCategoria = new JComboBox<>(new String[]{"", "Series", "Playlist" , "Saga"});
+        JLabel etiquetaNombre = new JLabel("🖊️ Nombre:");
+        etiquetaNombre.setFont(fuenteNegrita);
+        campoNombre = new JTextField(10);
+        campoNombre.setFont(fuenteComic);
 
-        checkFavorito = new JCheckBox("Solo favoritos");
+        JLabel etiquetaCalificacion = new JLabel("★ Calificación:");
+        etiquetaCalificacion.setFont(fuenteNegrita);
+        comboCalificacion = new JComboBox<>(new String[]{"Todas", "Sublime", "Bueno", "Regular", "Malo", "Horrible"});
+        comboCalificacion.setFont(fuenteComic);
+        comboCalificacion.setBackground(fondoCeleste);
 
-        panelFiltros.add(new JLabel("Buscar por nombre:"));
-        panelFiltros.add(campoBuscarNombre);
-        panelFiltros.add(new JLabel("Buscar por enlace:"));
-        panelFiltros.add(campoBuscarEnlace);
-        panelFiltros.add(new JLabel("Estado:"));
-        panelFiltros.add(comboEstado);
-        panelFiltros.add(new JLabel("Calificación:"));
+        JLabel etiquetaEstado = new JLabel("☑️ Estado:");
+        etiquetaEstado.setFont(fuenteNegrita);
+        comboEstado = new JComboBox<>(new String[]{"Todos", "Completado", "En proceso o viendo", "No visto", "Abandonado", "Re visto", "En espera"});
+        comboEstado.setFont(fuenteComic);
+        comboEstado.setBackground(fondoCeleste);
+
+        botonAplicar = new JButton("🔎 Aplicar filtros");
+        botonAplicar.setFont(fuenteComic);
+        botonAplicar.setBackground(fondoCeleste);
+
+        panelFiltros.add(etiquetaNombre);
+        panelFiltros.add(campoNombre);
+        panelFiltros.add(etiquetaCalificacion);
         panelFiltros.add(comboCalificacion);
-        panelFiltros.add(new JLabel("Categoría:"));
-        panelFiltros.add(comboCategoria);
-        panelFiltros.add(new JLabel("Favorito:"));
-        panelFiltros.add(checkFavorito);
+        panelFiltros.add(etiquetaEstado);
+        panelFiltros.add(comboEstado);
+        panelFiltros.add(botonAplicar);
 
-        add(panelFiltros, BorderLayout.NORTH);
+        // Tabla de registros
+        String[] columnas = {"Nombre", "Categoría", "Estado", "Calificación", "Favorito", "Enlace"};
+        modeloTabla = new DefaultTableModel(columnas, 0);
+        tablaRegistros = new JTable(modeloTabla);
+        tablaRegistros.setFont(fuenteComic);
+        tablaRegistros.setRowHeight(24);
+        tablaRegistros.getTableHeader().setFont(fuenteNegrita);
+        JScrollPane scrollTabla = new JScrollPane(tablaRegistros);
 
-        panelRegistros = new JPanel();
-        add(new JScrollPane(panelRegistros), BorderLayout.CENTER);
+        // Panel inferior
+        JPanel panelInferior = new JPanel();
+        panelInferior.setBackground(fondoRojoPastel);
+        botonVolver = new JButton("🔙 Volver al menú");
+        botonVolver.setFont(fuenteComic);
+        botonVolver.setBackground(fondoCeleste);
+        panelInferior.add(botonVolver);
 
-        // Listeners de texto
-        campoBuscarNombre.getDocument().addDocumentListener(new DocumentListener() {
-            public void insertUpdate(DocumentEvent e) { aplicarFiltros(); }
-            public void removeUpdate(DocumentEvent e) { aplicarFiltros(); }
-            public void changedUpdate(DocumentEvent e) { aplicarFiltros(); }
-        });
+        // Layout principal
+        setLayout(new BorderLayout());
+        JScrollPane scrollFiltros = new JScrollPane(panelFiltros);
+        scrollFiltros.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrollFiltros.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+        add(scrollFiltros, BorderLayout.NORTH);
+        add(scrollTabla, BorderLayout.CENTER);
+        add(panelInferior, BorderLayout.SOUTH);
 
-        campoBuscarEnlace.getDocument().addDocumentListener(new DocumentListener() {
-            public void insertUpdate(DocumentEvent e) { aplicarFiltros(); }
-            public void removeUpdate(DocumentEvent e) { aplicarFiltros(); }
-            public void changedUpdate(DocumentEvent e) { aplicarFiltros(); }
-        });
+        // Datos simulados con valores corregidos
+        registros = new ArrayList<>();
+        registros.add(new String[]{"Naruto", "Anime", "Completado", "Sublime", "Sí", "https://naruto.com"});
+        registros.add(new String[]{"One Piece", "Anime", "En proceso o viendo", "Bueno", "No", "https://onepiece.com"});
+        registros.add(new String[]{"Breaking Bad", "Serie", "Completado", "Sublime", "Sí", "https://breakingbad.com"});
+        registros.add(new String[]{"Interstellar", "Película", "Completado", "Sublime", "No", "https://interstellar.com"});
+        registros.add(new String[]{"Stranger Things", "Serie", "Abandonado", "Malo", "No", "https://strangerthings.com"});
 
-        // Listeners de selección
-        comboEstado.addItemListener(new ItemListener() {
-            public void itemStateChanged(ItemEvent e) {
-                if (e.getStateChange() == ItemEvent.SELECTED) {
-                    aplicarFiltros();
-                }
-            }
-        });
-
-        comboCalificacion.addItemListener(new ItemListener() {
-            public void itemStateChanged(ItemEvent e) {
-                if (e.getStateChange() == ItemEvent.SELECTED) {
-                    aplicarFiltros();
-                }
-            }
-        });
-
-        comboCategoria.addItemListener(new ItemListener() {
-            public void itemStateChanged(ItemEvent e) {
-                if (e.getStateChange() == ItemEvent.SELECTED) {
-                    aplicarFiltros();
-                }
-            }
-        });
-
-        checkFavorito.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+        // Eventos
+        botonAplicar.addActionListener(e -> aplicarFiltros());
+        botonVolver.addActionListener(e -> volverAlMenu());
+        campoNombre.addKeyListener(new KeyAdapter() {
+            public void keyReleased(KeyEvent e) {
                 aplicarFiltros();
             }
         });
+        comboCalificacion.addItemListener(e -> aplicarFiltros());
+        comboEstado.addItemListener(e -> aplicarFiltros());
 
+        aplicarFiltros(); // Mostrar todos
         setVisible(true);
     }
 
-    // Método central que debe aplicar todos los filtros combinados
     private void aplicarFiltros() {
-        String nombre = campoBuscarNombre.getText().trim().toLowerCase();
-        String enlace = campoBuscarEnlace.getText().trim().toLowerCase();
-        String estado = (String) comboEstado.getSelectedItem();
-        String calificacion = (String) comboCalificacion.getSelectedItem();
-        String categoria = (String) comboCategoria.getSelectedItem();
-        boolean esFavorito = checkFavorito.isSelected();
+        String nombreFiltro = campoNombre.getText().toLowerCase();
+        String calificacionFiltro = (String) comboCalificacion.getSelectedItem();
+        String estadoFiltro = (String) comboEstado.getSelectedItem();
 
-        // Aquí deberías usar estos valores para filtrar tus registros (pendiente de implementar)
-        System.out.println("Filtro aplicado:");
-        System.out.println("Nombre: " + nombre);
-        System.out.println("Enlace: " + enlace);
-        System.out.println("Estado: " + estado);
-        System.out.println("Calificación: " + calificacion);
-        System.out.println("Categoría: " + categoria);
-        System.out.println("¿Favorito?: " + esFavorito);
+        // Imprimir los filtros seleccionados por consola
+        System.out.println("- Nombre: " + (nombreFiltro.isEmpty() ? "(cualquiera)" : nombreFiltro));
+        System.out.println("- Calificación: " + calificacionFiltro);
+        System.out.println("- Estado: " + estadoFiltro);
+        System.out.println("------------------------");
 
-        // Aquí iría la lógica para actualizar el panelRegistros con los resultados filtrados
+        modeloTabla.setRowCount(0); // Limpiar tabla
+
+        for (String[] registro : registros) {
+            boolean coincide = true;
+
+            if (!nombreFiltro.isEmpty() && !registro[0].toLowerCase().contains(nombreFiltro)) {
+                coincide = false;
+            }
+
+            if (!calificacionFiltro.equals("Todas") && !registro[3].equals(calificacionFiltro)) {
+                coincide = false;
+            }
+
+            if (!estadoFiltro.equals("Todos") && !registro[2].equals(estadoFiltro)) {
+                coincide = false;
+            }
+
+            if (coincide) {
+                modeloTabla.addRow(registro);
+            }
+        }
+    }
+
+    private void volverAlMenu() {
+        JOptionPane.showMessageDialog(this, "Volviendo al menú...");
+        dispose();
+        // Aquí puedes abrir MenuPrincipalGUI u otra clase si deseas
+    }
+
+    public static void main(String[] args) {
+        new VerRegistrosGUI();
     }
 }
