@@ -198,6 +198,7 @@ public class AgregarRegistroGUI extends JFrame {
         	status = (Status) comboEstado.getSelectedItem();
         	categoria = (ContentType) comboCategoria.getSelectedItem();
         	rating = (Rating) comboCalificacion.getSelectedItem();
+        	favorito = checkFavorito.isSelected();
         	
         	System.out.println("-----------------");
         	System.out.println("Datos Guardados: ");
