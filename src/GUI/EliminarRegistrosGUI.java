@@ -124,14 +124,7 @@ public class EliminarRegistrosGUI extends JFrame {
             }
 
             JOptionPane.showMessageDialog(this, "Registros eliminados correctamente.");
-<<<<<<< HEAD
-        	}  
-
-
-
-=======
         }
->>>>>>> f2e82b50690db1c6c93807baf798a3c3ef747295
 
             // Recorre la tabla desde el final hacia el inicio
             for (int i = modeloTabla.getRowCount() - 1; i >= 0; i--) {

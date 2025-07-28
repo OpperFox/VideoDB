@@ -3,10 +3,7 @@ package GUI;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-<<<<<<< HEAD
-=======
 
->>>>>>> f2e82b50690db1c6c93807baf798a3c3ef747295
 import LOGICA.*;
 import SQL.*;
 
