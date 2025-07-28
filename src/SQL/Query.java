@@ -276,6 +276,42 @@ public class Query {
         }
     }
     
+    public static List<String[]> obtenerRegistrosUsuario(Connection conn, int usuario_id) {
+        List<String[]> registros = new ArrayList<>();
+        try {
+            PreparedStatement statement = conn.prepareStatement(
+                "SELECT nombre, tipo, status, rating, favorito, reference_url FROM usermediaregistry WHERE usuario_id = ?"
+            );
+            statement.setInt(1, usuario_id);
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) {
+                String nombre = rs.getString("nombre");
+                String tipo = rs.getString("tipo");
+                String status = rs.getString("status");
+                String rating = rs.getString("rating");
+                boolean favorito = rs.getBoolean("favorito");
+                String url = rs.getString("reference_url");
+
+                registros.add(new String[]{
+                    nombre,
+                    tipo,
+                    status,
+                    rating,
+                    favorito ? "Sí" : "No",
+                    url
+                });
+            }
+
+            rs.close();
+            statement.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return registros;
+    }
+
+    
     public static boolean mediacontent_exists(Connection conn, int id_glob, int id_loc, String alfa, String beta, String nombre, String tipo){
         try{
             PreparedStatement statement = conn.prepareStatement(
