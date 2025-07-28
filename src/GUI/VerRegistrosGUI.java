@@ -5,6 +5,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class VerRegistrosGUI extends JFrame {
     private JTextField campoNombre;
@@ -85,14 +86,17 @@ public class VerRegistrosGUI extends JFrame {
         add(scrollFiltros, BorderLayout.NORTH);
         add(scrollTabla, BorderLayout.CENTER);
         add(panelInferior, BorderLayout.SOUTH);
-
-        // Datos simulados con valores corregidos
+        
         registros = new ArrayList<>();
-        registros.add(new String[]{"Naruto", "Anime", "Completado", "Sublime", "Sí", "https://naruto.com"});
-        registros.add(new String[]{"One Piece", "Anime", "En proceso o viendo", "Bueno", "No", "https://onepiece.com"});
-        registros.add(new String[]{"Breaking Bad", "Serie", "Completado", "Sublime", "Sí", "https://breakingbad.com"});
-        registros.add(new String[]{"Interstellar", "Película", "Completado", "Sublime", "No", "https://interstellar.com"});
-        registros.add(new String[]{"Stranger Things", "Serie", "Abandonado", "Malo", "No", "https://strangerthings.com"});
+        try {
+  
+            
+            List<String[]> resultados = SQL.Query.obtenerRegistrosUsuario(SQL.DBConnection.getConnection(), Main.currentUser);
+            registros.addAll(resultados);
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error al cargar los registros desde la base de datos.");
+        }
 
         // Eventos
         botonAplicar.addActionListener(e -> aplicarFiltros());

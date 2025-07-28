@@ -32,7 +32,7 @@ public class EliminarRegistrosGUI extends JFrame {
 
         Font fuente = new Font("Comic Sans MS", Font.PLAIN, 15);
 
-        String[] columnas = {"Seleccionar", "Nombre", "Categoría", "Calificación", "Favorito", "Enlace"};
+        String[] columnas = {"Seleccionar", "Nombre", "Categoría", "Estado", "Calificación", "Favorito"};
 
         modeloTabla = new DefaultTableModel(null, columnas) {
             @Override
