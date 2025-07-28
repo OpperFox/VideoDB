@@ -22,6 +22,7 @@ public enum Rating {
 
 	public void setRating(int rating) {
 		this.rating = rating;
+		
 	}
 	
 	@Override
